@@ -3,11 +3,27 @@ import { StyleSheet, Text, Button, View, Alert, TextInput } from 'react-native';
 
 export default class App extends React.Component {
 	state = {
-		inputValue: "The word can be changed!"
+		inputValue: " "
+	};
+
+	inert = {
+		inputValuer: " "
+	};
+	
+	verify = {
+		inputValuest: " "
 	};
 	
 	TextChange = inputValue => {
 		this.setState({inputValue});
+	};
+	
+	TextModify = inputValuer => {
+		this.setState({inputValuer});
+	};
+	
+	TextMutate = inputValuest => {
+		this.setState({inputValuest});
 	};
 	
 	Presser = ( ) => {
@@ -17,17 +33,36 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>ASDFQRS</Text>
-	  	<Button
-	  				title = "Press me"
-	  				onPress = {this.Presser}
-	  				/>
-					
-			<TextInput
+        <Text style = {styles.NewText}> Email </Text>
+	 	<TextInput
 					value = {this.state.inputValue}
 					onChangeText = {this.TextChange}
 					style = {{width : 120, height : 30, padding : 8}}
 					/>
+		<Text> </Text>
+					
+		<Text style = {styles.NewText}> Username </Text>
+			<TextInput
+					value = {this.inert.inputValuer}
+					onChangeText = {this.TextModify}
+					style = {{width : 120, height : 30, padding : 8}}
+					/>
+		<Text> </Text>
+					
+		<Text style = {styles.NewText}> Password </Text>
+				<TextInput
+					value = {this.verify.inputValuest}
+					onChangeText = {this.TextMutate}
+					style = {{width : 120, height : 30, padding : 8}}
+					/>
+		<Text> </Text>
+					
+	  	<Button
+	  				title = "Log In"
+	  				onPress = {this.Presser}
+	  				/>
+					
+		
       </View>
     );
   }
@@ -39,5 +74,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  NewText: {
+  	fontSize: 20,
+	fontWeight: 'bold'
   },
 });
