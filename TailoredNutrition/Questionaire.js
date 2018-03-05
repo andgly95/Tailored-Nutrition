@@ -25,6 +25,12 @@ export default class Questionaire extends Component<{}> {
                 <TextInput
                 style={styles.searchInput}
                 placeholder='Age'/>
+                <Text style={styles.description}>
+                What is your height?
+                </Text>
+                <TextInput
+                style={styles.searchInput}
+                placeholder='Height'/>
                 </View>
                 );
     }
