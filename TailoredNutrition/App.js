@@ -7,26 +7,32 @@
 import React, { Component } from 'react';
 import {
     StyleSheet,
-    NavigatorIOS
 } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import SearchPage from './SearchPage';
-
+import Questionaire from './Questionaire';
 
 
 
 type Props = {};
 
+const RootStack = StackNavigator(
+    {
+        Home: {
+            screen: SearchPage,
+        },
+        Questionaire: {
+            screen: Questionaire,
+        },
+     },
+     {
+        initialRouteName: 'Home',
+     },
+     );
 
 export default class App extends Component<{}> {
     render() {
-        return (
-                <NavigatorIOS
-                style={styles.container}
-                initialRoute={{
-                title: 'Tailored Nutrition',
-                component: SearchPage,
-                }}/>
-                );
+         return <RootStack />;
     }
 }
 
@@ -35,4 +41,5 @@ const styles = StyleSheet.create({
                                  flex: 1,
                                  },
                                  });
+
 

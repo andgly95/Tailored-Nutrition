@@ -39,10 +39,7 @@ export default class SearchPage extends Component<{}> {
     }
     _onButtonPressed = () => {
         this.setState({ isPressed: true });
-        this.props.navigator.push({
-                                  title: 'Questions',
-                                  component: Questionaire,
-                                  });
+        this.props.navigation.navigate('Questionaire');
     };
 }
 
