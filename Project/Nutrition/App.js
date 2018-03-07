@@ -37,7 +37,7 @@ export default class App extends React.Component {
 	 	<TextInput
 					value = {this.state.inputValue}
 					onChangeText = {this.TextChange}
-					style = {{width : 120, height : 30, padding : 8}}
+					style = {{width : 360, height : 30, padding : 8}}
 					/>
 		<Text> </Text>
 					
@@ -45,7 +45,7 @@ export default class App extends React.Component {
 			<TextInput
 					value = {this.inert.inputValuer}
 					onChangeText = {this.TextModify}
-					style = {{width : 120, height : 30, padding : 8}}
+					style = {{width : 360, height : 30, padding : 8}}
 					/>
 		<Text> </Text>
 					
@@ -53,12 +53,12 @@ export default class App extends React.Component {
 				<TextInput
 					value = {this.verify.inputValuest}
 					onChangeText = {this.TextMutate}
-					style = {{width : 120, height : 30, padding : 8}}
+					style = {{width : 360, height : 30, padding : 8}}
 					/>
 		<Text> </Text>
 					
 	  	<Button
-	  				title = "Log In"
+	  				title = "Sign Up"
 	  				onPress = {this.Presser}
 	  				/>
 					
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   NewText: {
-  	fontSize: 20,
+  	fontSize: 30,
 	fontWeight: 'bold'
   },
 });
