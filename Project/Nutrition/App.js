@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, Button, View, Alert, TextInput } from 'react-native';
+import { StyleSheet, Text, Button, View, Alert, TextInput, TouchableHighlight, Image } from 'react-native';
 
 export default class App extends React.Component {
 	state = {
@@ -28,7 +28,7 @@ export default class App extends React.Component {
 	
 	Presser = ( ) => {
 		Alert.alert(
-		'Button pressed',);
+		'Signed in!',);
 	};
   render() {
     return (
@@ -57,10 +57,16 @@ export default class App extends React.Component {
 					/>
 		<Text> </Text>
 					
-	  	<Button
-	  				title = "Sign Up"
-	  				onPress = {this.Presser}
-	  				/>
+	 	<TouchableHighlight 
+					onPress = {this.Presser}
+		>
+			<Image 
+					style = {styles.Button}
+					source = {require('./button_sign-in.png')}
+			/>
+		</TouchableHighlight>
+					
+		
 					
 		
       </View>
@@ -78,5 +84,9 @@ const styles = StyleSheet.create({
   NewText: {
   	fontSize: 30,
 	fontWeight: 'bold'
+  },
+  
+  Button: {
+  	alignItems: 'center'
   },
 });
