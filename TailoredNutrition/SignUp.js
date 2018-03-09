@@ -11,9 +11,9 @@ import {
     Image,
 } from 'react-native';
 
-export default class Questionaire extends Component<{}> {
+export default class SignUp extends Component<{}> {
     render() {
-        console.log('Questionaire.render');
+        console.log('SignUp.render');
         return (
                 <View style={styles.container}>
                 <Text style={styles.description}>

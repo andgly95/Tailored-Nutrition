@@ -9,8 +9,8 @@ import {
     StyleSheet,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import SearchPage from './SearchPage';
-import Questionaire from './Questionaire';
+import Welcome from './Welcome';
+import SignUp from './SignUp';
 import SignIn from './SignIn';
 
 
@@ -19,18 +19,18 @@ type Props = {};
 
 const RootStack = StackNavigator(
     {
-        Home: {
-            screen: SearchPage,
+        Welcome: {
+            screen: Welcome,
         },
-        Questionaire: {
-            screen: Questionaire,
+        SignUp: {
+            screen: SignUp,
         },
         SignIn: {
             screen: SignIn,
         },
      },
      {
-        initialRouteName: 'Home',
+        initialRouteName: 'Welcome',
      },
      );
 
