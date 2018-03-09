@@ -20,6 +20,7 @@ export default class SignIn extends Component<{}> {
   
 
   render() {
+    console.log('SignIn.render');
     return (
       <View style={styles.container}>
 
