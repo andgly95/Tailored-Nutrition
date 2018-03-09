@@ -12,11 +12,11 @@ import {
     Image,
 } from 'react-native';
 
-import Questionaire from './Questionaire'
+import SignUp from './SignUp'
 
 import SignIn from './SignIn'
 
-export default class SearchPage extends Component<{}> {
+export default class Welcome extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +24,7 @@ export default class SearchPage extends Component<{}> {
         };
     }
     render() {
-        console.log('SearchPage.render');
+        console.log('Welcome.render');
         return (
                 <View style={styles.container}>
                 <Text style={styles.description}>
@@ -54,7 +54,7 @@ export default class SearchPage extends Component<{}> {
     }
     _onButtonPressed = () => {
         this.setState({ isPressed: true });
-        this.props.navigation.navigate('Questionaire');
+        this.props.navigation.navigate('SignUp');
     };
 //////////////////////////////////////////
     _onButtonPressed1 = () => {
