@@ -67,9 +67,9 @@ const styles = StyleSheet.create({
   // styling for buttons
   signButton: {
     backgroundColor: "white",
-    height: 50,
-    width: 275,
-    marginTop: 20
+    height: 182 / 4,
+    width: 995 / 4,
+    marginTop: 20,
   },
 
   // styling for Logo
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     width: 375,
     height: 250,
     flexDirection: 'row',
-    marginTop: 45
+    marginTop: 10,
   }
 
 });
