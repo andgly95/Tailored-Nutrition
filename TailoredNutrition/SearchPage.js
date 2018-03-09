@@ -11,7 +11,10 @@ import {
     TouchableHighlight,
     Image,
 } from 'react-native';
+
 import Questionaire from './Questionaire'
+
+import SignIn from './SignIn'
 
 export default class SearchPage extends Component<{}> {
     constructor(props) {
@@ -30,16 +33,33 @@ export default class SearchPage extends Component<{}> {
                 <Text style={styles.description}>
                 Get started by answering just a few questions
                 </Text>
+                
                 <TouchableHighlight
                 onPress={this._onButtonPressed}>
                 <Image source={require('./Resources/start.png')} style={styles.image}/>
                 </TouchableHighlight>
+
+
+
+                <TouchableHighlight
+                onPress={this._onButtonPressed1}>
+                <Image source={require('./assets/Login.png')} 
+                style ={styles.image}/>
+                </TouchableHighlight>
+
+                
+                
                 </View>
                 );
     }
     _onButtonPressed = () => {
         this.setState({ isPressed: true });
         this.props.navigation.navigate('Questionaire');
+    };
+//////////////////////////////////////////
+    _onButtonPressed1 = () => {
+        this.setState({ isPressed: true });
+        this.props.navigation.navigate('SignIn');
     };
 }
 
@@ -59,5 +79,6 @@ const styles = StyleSheet.create({
                                  image: {
                                  height: 182 / 4,
                                  width: 995 / 4,
+                                 marginTop: 20,
                                  },
                                  });

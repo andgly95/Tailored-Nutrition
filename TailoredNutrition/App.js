@@ -11,6 +11,7 @@ import {
 import { StackNavigator } from 'react-navigation';
 import SearchPage from './SearchPage';
 import Questionaire from './Questionaire';
+import SignIn from './SignIn';
 
 
 
@@ -23,6 +24,9 @@ const RootStack = StackNavigator(
         },
         Questionaire: {
             screen: Questionaire,
+        },
+        SignIn: {
+            screen: SignIn,
         },
      },
      {
