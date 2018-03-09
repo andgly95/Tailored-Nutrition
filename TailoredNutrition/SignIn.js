@@ -27,7 +27,7 @@ export default class SignIn extends Component<{}> {
       <View style={styles.Logo}>
 
         <Image style={styles.Logo}
-        source={require("./assets/Logo.png")}/>
+        source={require("./Resources/Logo.png")}/>
 
 
       </View>
@@ -44,11 +44,11 @@ export default class SignIn extends Component<{}> {
             />
             
             <Image style={styles.signButton}
-            source={require("./assets/Login.png")}/>
+            source={require("./Resources/Login.png")}/>
             
             <TouchableHighlight
             onPress={this._onButtonPressed}>
-            <Image source={require('./assets/SignUp.png')}
+            <Image source={require('./Resources/SignUp.png')}
             style ={styles.signButton}/>
             </TouchableHighlight>
       </View>
