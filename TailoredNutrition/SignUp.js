@@ -36,7 +36,7 @@ export default class SignUp extends Component<{}> {
 				</Text>
 				<TextInput
 				style = {styles.searchInput}
-				placeholder = 'Sex'/>
+				placeholder = 'Gender'/>
                 </View>
                 );
     }
