@@ -12,7 +12,7 @@ import { StackNavigator } from 'react-navigation';
 import Welcome from './Welcome';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-
+import Realm from './Realm';
 
 
 type Props = {};
