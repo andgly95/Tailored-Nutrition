@@ -31,17 +31,14 @@ export default class SignIn extends Component<{}> {
 
 
       </View>
-            
             <View style={styles.buttonsContainer}>
             <TextInput style={styles.inputStyle}
             value={this.state.inputValue}
-            onChangeText={this._handleTextChange}
-            />
+            onChangeText={this._handleTextChange}/>
             
             <TextInput style={styles.inputStyle}
             value={this.state1.inputValue}
-            onChangeText={this._handleTextChange}
-            />
+            onChangeText={this._handleTextChange}/>
             
             <Image style={styles.signButton}
             source={require("./Resources/Login.png")}/>
