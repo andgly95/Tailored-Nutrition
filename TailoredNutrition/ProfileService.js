@@ -14,7 +14,7 @@ let repository = new Realm({
         properties: {
             Email: 'string',
             password: 'string',
-	    username: 'string'
+	        username: 'string'
         }
     }]
 });
@@ -29,4 +29,4 @@ let ProfileService = {
 
 }
 module.exports = ProfileService;
-//ProfileService.save(new ProfileModel('andgly95','andrewgly95@gmail.com','hunter2'));
+ProfileService.save(new ProfileModel('andgly95','andrewgly95@gmail.com','hunter2'));

@@ -7,8 +7,8 @@ import React, { Component } from 'react';
 
 class ProfileModel {
     constructor(username, email, password) {
-        this.userid = username;
-        this.email = email;
+        this.username = username;
+        this.Email = email;
         this.password = password;
     }
 }
