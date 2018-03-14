@@ -5,6 +5,7 @@
 
 import Realm from 'realm';
 import React, { Component } from 'react';
+import ProfileModel from './ProfileModel';
 
 let repository = new Realm({
     schema: [{
@@ -28,4 +29,4 @@ let ProfileService = {
 
 }
 module.exports = ProfileService;
-ProfileService.save(new ProfileModel('andgly95','andrewgly95@gmail.com','hunter2'));
+//ProfileService.save(new ProfileModel('andgly95','andrewgly95@gmail.com','hunter2'));

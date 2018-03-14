@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, TouchableHighlight } from 'react-native';
 import ProfileModel from './ProfileModel';
-//import ProfileService from './ProfileService';
+import ProfileService from './ProfileService';
 import SignUp from './SignUp';
 
 export default class SignIn extends Component<{}> {
