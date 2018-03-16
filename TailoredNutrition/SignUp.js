@@ -9,9 +9,14 @@ import {
     Button,
     ActivityIndicator,
     Image,
+    Picker,
 } from 'react-native';
 
 export default class SignUp extends Component<{}> {
+    state = {user: ''}
+    updateUser = (user) => {
+        this.setState({ user: user })
+    }
     render() {
         console.log('SignUp.render');
         return (
@@ -26,11 +31,22 @@ export default class SignUp extends Component<{}> {
                 style={styles.searchInput}
                 placeholder='Age'/>
                 <Text style={styles.description}>
+                I am a
+                </Text>
+                <View>
+                
+                <Picker selectedValue = {this.state.user} onValueChange = {this.updateUser}style={{height: 200, width: 100}}>
+                <Picker.Item label = "Male" value = "male" />
+                <Picker.Item label = "Female" value = "Female" />
+                </Picker>
+                </View>
+                <Text style={styles.description}>
                 What is your height?
                 </Text>
                 <TextInput
                 style={styles.searchInput}
                 placeholder='Height'/>
+                
                 </View>
                 );
     }
@@ -57,6 +73,7 @@ const styles = StyleSheet.create({
                                  height: 36,
                                  padding: 4,
                                  marginRight: 5,
+                                marginBottom: 10,
                                  flexGrow: 1,
                                  fontSize: 18,
                                  borderWidth: 1,
