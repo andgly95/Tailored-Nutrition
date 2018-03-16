@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, TouchableHighlight } from 'react-native';
 
 //Add realm
-import RealmSignIn from './SignUp'
+//import RealmSignUp from './RealmSignUp'
 const Realm = require('realm');
 class Person {}
 Person.schema = {
@@ -16,11 +16,11 @@ Person.schema = {
         password: 'string',
         weight: {type: 'int', default: 0},
         sex: {type:'bool',default: 1}
-    }
-}
+    },
+};
 
 
-export default class RealmSignIn extends Component<{}> {
+export default class RealmSignUp extends Component<{}> {
   state = {
     inputValue: "Username"
   };

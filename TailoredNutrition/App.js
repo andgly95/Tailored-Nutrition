@@ -12,7 +12,7 @@ import { StackNavigator } from 'react-navigation';
 import Welcome from './Welcome';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-import RealmSignIn from './RealmSignUp'
+import RealmSignUp from './RealmSignUp'
 
 
 
@@ -34,7 +34,7 @@ const RootStack = StackNavigator(
         },
      },
      {
-        initialRouteName: 'RealmSignUp',
+        initialRouteName: 'Welcome',
      },
      );
 
