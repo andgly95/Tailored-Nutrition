@@ -13,10 +13,12 @@ const Form = t.form.Form;
 
 const User = t.struct({
                       username: t.String,
+                      email: t.String,
                       password: t.String,
+                      terms: t.Boolean
                       });
 
-export default class SignIn extends Component<{}> {
+export default class NewAccount extends Component<{}> {
 
     handleSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
@@ -29,19 +31,12 @@ export default class SignIn extends Component<{}> {
     return (
             
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View style={styles.Logo}>
-
-        <Image style={styles.Logo}
-        source={require("./assets/Logo.png")}/>
-
-
-      </View>
             
-            <View style={styles.buttonsContainer}>
-            <Form
-            ref={c => this._form = c} // assign a ref
-            type={User}>
-          //Found a new form using the tutorial
+        <View style={styles.buttonsContainer}>
+        <Form
+        ref={c => this._form = c} // assign a ref
+        type={User}>
+        //Found a new form using the tutorial
             
             {/*}<TextInput style={styles.inputStyle}
             name = "username"
@@ -58,15 +53,10 @@ export default class SignIn extends Component<{}> {
             <TouchableHighlight
             onPress={this.handleSubmit}>
             <Image style={styles.signButton}
-            source={require("./assets/Login.png")}/>
+            source={require("./assets/SignUp.png")}/>
             
             </TouchableHighlight>
             
-            <TouchableHighlight
-            onPress={this._onButtonPressed}>
-            <Image source={require('./assets/SignUp.png')}
-            style ={styles.signButton}/>
-            </TouchableHighlight>
       </View>
     </KeyboardAvoidingView>
     );

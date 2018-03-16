@@ -10,12 +10,18 @@ import {
     ActivityIndicator,
     Image,
     Picker,
+    TouchableHighlight
 } from 'react-native';
+import NewAccount from './NewAccount';
+
 
 export default class SignUp extends Component<{}> {
     state = {user: ''}
     updateUser = (user) => {
         this.setState({ user: user })
+    }
+    handleSubmit = () => {
+        this.props.navigation.navigate('NewAccount');
     }
     render() {
         console.log('SignUp.render');
@@ -46,7 +52,10 @@ export default class SignUp extends Component<{}> {
                 <TextInput
                 style={styles.searchInput}
                 placeholder='Height'/>
-                
+                <TouchableHighlight
+                onPress={this.handleSubmit}>
+                <Image source={require('./Resources/start.png')} style={styles.image}/>
+                </TouchableHighlight>
                 </View>
                 );
     }
