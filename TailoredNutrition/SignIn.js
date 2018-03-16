@@ -1,30 +1,32 @@
 'use strict';
 
+//Use https://medium.com/react-native-development/easily-build-forms-in-react-native-9006fcd2a73b
+
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Image, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import ProfileModel from './ProfileModel';
 //import ProfileService from './ProfileService';
 import SignUp from './SignUp';
+import t from 'tcomb-form-native';
+
+const Form = t.form.Form;
+
+const User = t.struct({
+                      username: t.String,
+                      password: t.String,
+                      terms: t.Boolean
+                      });
 
 export default class SignIn extends Component<{}> {
-  state = {
-    inputValue: "Username"
-  };
 
-  state1 = {
-    inputValue: "Password"
-  };
 
-  _handleTextChange = inputValue => {
-    this.setState({ inputValue });
-  };
   
 
   render() {
     console.log('SignIn.render');
     return (
             
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.Logo}>
 
         <Image style={styles.Logo}
@@ -34,16 +36,21 @@ export default class SignIn extends Component<{}> {
       </View>
             
             <View style={styles.buttonsContainer}>
-            <TextInput style={styles.inputStyle}
-            value={this.state.inputValue}
+            <Form type={User}>
+          //Found a new form using the tutorial
+            
+            {/*}<TextInput style={styles.inputStyle}
+            name = "username"
+            placeholder = 'Username'
             onChangeText={this._handleTextChange}
             />
             
             <TextInput style={styles.inputStyle}
-            value={this.state1.inputValue}
+            name = "password"
+            placeholder = 'Password'
             onChangeText={this._handleTextChange}
-            />
-            
+              />*/}
+            //</Form>
             <Image style={styles.signButton}
             source={require("./assets/Login.png")}/>
             
@@ -53,7 +60,7 @@ export default class SignIn extends Component<{}> {
             style ={styles.signButton}/>
             </TouchableHighlight>
       </View>
-    </View>
+    </KeyboardAvoidingView>
     );
   }
   _onButtonPressed = () => {
