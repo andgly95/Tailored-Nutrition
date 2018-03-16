@@ -12,7 +12,8 @@ let repository = new Realm({
         primaryKey: 'Email',
         properties: {
             Email: 'string',
-            password: 'string'
+            password: 'string',
+	    username: 'string'
         }
     }]
 });
@@ -20,8 +21,6 @@ let repository = new Realm({
 let Realm = {
     save: function(profile){
         repository.write(() => {
-            profile.Email = new (WTF GOES HERE)  // on example person wrote new Date()
-            profile.password = new (WTF GOES HERE) // on example person wrote new Date()
             repository.create('Profile', profile);
         })
     }
