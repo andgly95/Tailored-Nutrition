@@ -46,7 +46,16 @@ export default class SignUp extends Component<{}> {
                 <TextInput
                 style={styles.searchInput}
                 placeholder='Height'/>
+<<<<<<< HEAD
                 
+=======
+				<Text style = {styles.description}>
+				What is your gender?
+				</Text>
+				<TextInput
+				style = {styles.searchInput}
+				placeholder = 'Gender'/>
+>>>>>>> refs/remotes/origin/master
                 </View>
                 );
     }
