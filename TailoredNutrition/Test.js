@@ -6,7 +6,7 @@ import { StyleSheet, View, Image, TextInput, TouchableHighlight } from 'react-na
 const db = SQLite.openDatabase('db.db');
 
 
-import Test from './Test'
+//import Test from './Test'
 
 export default class Test extends Component<{}> {
   state = {
