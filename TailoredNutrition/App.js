@@ -19,8 +19,8 @@ type Props = {};
 
 const RootStack = StackNavigator(
     {
-        Test: {
-            screen:Test,
+        Test:{
+            screen: Test,
         },
         Welcome: {
             screen: Welcome,
