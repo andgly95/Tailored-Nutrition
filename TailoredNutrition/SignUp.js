@@ -77,7 +77,7 @@ export default class SignUp extends Component<{}> {
          <TouchableHighlight
             onPress={this.handleSubmit}>
             <Image style={styles.signButton}
-            source={require("./assets/SignUp.png")}/>
+            source={require("./Resources/SignUp.png")}/>
             </TouchableHighlight>
             </View>
 

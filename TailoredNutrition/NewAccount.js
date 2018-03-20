@@ -38,22 +38,11 @@ export default class NewAccount extends Component<{}> {
         type={User}>
         //Found a new form using the tutorial
             
-            {/*}<TextInput style={styles.inputStyle}
-            name = "username"
-            placeholder = 'Username'
-            onChangeText={this._handleTextChange}
-            />
-            
-            <TextInput style={styles.inputStyle}
-            name = "password"
-            placeholder = 'Password'
-            onChangeText={this._handleTextChange}
-              />*/}
             //</Form>
             <TouchableHighlight
             onPress={this.handleSubmit}>
             <Image style={styles.signButton}
-            source={require("./assets/SignUp.png")}/>
+            source={require("./Resources/SignUp.png")}/>
             
             </TouchableHighlight>
             
