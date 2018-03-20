@@ -29,6 +29,18 @@ var Person = t.struct({
     birthDate: t.Date,
   });
 
+  const options = {
+    fields: {
+      birthDate: {
+        label: 'Birth Date',
+        mode: 'date',
+        config: {
+          //format: (date) => moment(date).format('YYYY-mm-d'),
+        },
+      },
+    },
+  };
+
 export default class SignUp extends Component<{}> {
     state = {user: ''}
     updateUser = (user) => {
@@ -43,7 +55,8 @@ export default class SignUp extends Component<{}> {
 
             <View style={styles.container}>
             <Form ref={f => this._form = f} // assign a ref
-        type={Person}/>
+        type={Person} 
+        options = {options}/>
             {/*<Text style={styles.description}>
             Please answer the following questions
             </Text>
@@ -95,7 +108,7 @@ const styles = StyleSheet.create({
     },
     container: {
         padding: 30,
-        marginTop: 65,
+        marginTop: 30,
         alignItems: 'center'
     },
     // styling for buttons
