@@ -69,38 +69,43 @@ export default class NewAccount extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-                                 
-  buttonsContainer: {
-    flex: 2,
-    backgroundColor: '#ffffff',
-    justifyContent: 'center',
-  },
+container: {
+  flex: 1,
+  //backgroundColor: '#ffffff',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+                               
+buttonsContainer: {
+  flex: 2,
+  //backgroundColor: '#ffffff',
+  justifyContent: 'center',
+},
 
-  // styling for buttons
-  signButton: {
-    backgroundColor: "white",
-    height: 182 / 4,
-    width: 995 / 4,
-    marginTop: 20,
-  },
-      
-                                 inputStyle: {
-                                 width: 375, height: 44, padding: 8, borderWidth: 1, borderRadius: 8, borderColor: '#48BBEC', marginBottom: 4,
-                                 },
-  // styling for Logo
-  Logo: {
-    backgroundColor: "white",
-    width: 375,
-    height: 250,
-    flexDirection: 'row',
-    marginTop: 0,
-  }
-
+// styling for buttons
+signButton: {
+ // backgroundColor: "white",
+  height: 182 / 4,
+  width: 995 / 4,
+  marginTop: 20,
+},
+    
+inputStyle: {
+  width: 375, 
+  height: 44, 
+  padding: 8, 
+  borderWidth: 1, 
+  borderRadius: 8, 
+  borderColor: '#48BBEC', 
+  marginBottom: 4,
+},
+// styling for Logo
+Logo: {
+  //backgroundColor: "white",
+  width: 375,
+  height: 250,
+  flexDirection: 'row',
+  marginTop: 0,
+}
 });
 
