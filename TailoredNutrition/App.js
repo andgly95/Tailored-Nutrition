@@ -19,9 +19,6 @@ type Props = {};
 
 const RootStack = StackNavigator(
     {
-        Test: {
-            screen:Test,
-        },
         Welcome: {
             screen: Welcome,
         },
@@ -37,7 +34,7 @@ const RootStack = StackNavigator(
 
      },
      {
-        initialRouteName: 'Test',
+        initialRouteName: 'Welcome',
      },
      );
 
