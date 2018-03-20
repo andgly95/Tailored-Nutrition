@@ -48,6 +48,7 @@ export default class SignIn extends Component<{}> {
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View style={styles.Logo}>
 
+
           <Image style={styles.Logo}
           source={require("./assets/Logo.png")}/>
 
@@ -63,13 +64,14 @@ export default class SignIn extends Component<{}> {
           <TouchableHighlight
           onPress={this.handleSubmit}>
             <Image style={styles.signButton}
-            source={require("./assets/Login.png")}/>
+            source={require("./Resources/Login.png")}/>
             
           </TouchableHighlight>
             
           <TouchableHighlight
           onPress={this._onButtonPressed}>
             <Image source={require('./assets/SignUp.png')}
+
             style ={styles.signButton}/>
           </TouchableHighlight>
         </View>

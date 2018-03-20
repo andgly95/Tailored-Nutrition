@@ -15,11 +15,13 @@ import SignIn from './SignIn';
 import NewAccount from './NewAccount';
 
 
-
 type Props = {};
 
 const RootStack = StackNavigator(
     {
+        Test: {
+            screen:Test,
+        },
         Welcome: {
             screen: Welcome,
         },
@@ -32,9 +34,10 @@ const RootStack = StackNavigator(
         SignIn: {
             screen: SignIn,
         },
+
      },
      {
-        initialRouteName: 'Welcome',
+        initialRouteName: 'Test',
      },
      );
 

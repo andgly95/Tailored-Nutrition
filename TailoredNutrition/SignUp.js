@@ -40,6 +40,7 @@ export default class SignUp extends Component<{}> {
     render() {
         console.log('SignUp.render');
         return (
+
             <View style={styles.container}>
             <Form ref={f => this._form = f} // assign a ref
         type={Person}/>
@@ -79,6 +80,7 @@ export default class SignUp extends Component<{}> {
             source={require("./assets/SignUp.png")}/>
             </TouchableHighlight>
             </View>
+
                 );
     }
 }

@@ -43,7 +43,7 @@ export default class Welcome extends Component<{}> {
 
                 <TouchableHighlight
                 onPress={this._onButtonPressed1}>
-                <Image source={require('./assets/Login.png')} 
+                <Image source={require('./Resources/Login.png')} 
                 style ={styles.image}/>
                 </TouchableHighlight>
 

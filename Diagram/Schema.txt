@@ -1,0 +1,37 @@
+const UserSchema = {
+    name: 'User'  ,
+    properties:
+        name: 'string',
+        sex: 'bool',
+        weight: 'double',
+        height: 'int',
+        dietId: 'int',
+        naturalBurn:
+}
+
+
+const FoodSchema = {
+    name: 'food',
+    properties:
+        protein:,
+        Carbs:,
+        fats:,
+        calories:,
+}
+
+
+
+                     3400 (natural burn)   
+Calories:            2300 (recommended)
+Recommended: | fat   | carbs  | pro
+Logged:      | fat   | carbs  | pro
+
+
+recC: 
+(2 pounds or 1 pound per week)
+(recalcualted on reweigh-in)
+
+Dynamic:
+carbs: (recalculate on diet change)
+fat: (recalculated on diet change)
+protien: (recalculated on diet change)
