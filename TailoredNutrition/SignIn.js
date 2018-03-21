@@ -38,6 +38,8 @@ export default class SignIn extends Component<{}> {
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
     console.log('value: ', value);
+	this.setState({ isPressed: true });
+    this.props.navigation.navigate('Welcome');
   }
   
 

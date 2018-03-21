@@ -23,6 +23,8 @@ export default class NewAccount extends Component<{}> {
     handleSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
         console.log('value: ', value);
+		//this.setState({ isPressed: true });
+        this.props.navigation.navigate('Welcome')
     }
   
 
@@ -50,10 +52,7 @@ export default class NewAccount extends Component<{}> {
     </KeyboardAvoidingView>
     );
   }
-  _onButtonPressed = () => {
-        this.setState({ isPressed: true });
-        this.props.navigation.goBack();
-    };
+
   
 }
 
