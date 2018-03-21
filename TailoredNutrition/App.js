@@ -14,17 +14,10 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import NewAccount from './NewAccount';
 
-
 type Props = {};
 
 const RootStack = StackNavigator(
     {
-<<<<<<< HEAD
-        Test:{
-            screen: Test,
-        },
-=======
->>>>>>> master
         Welcome: {
             screen: Welcome,
         },
@@ -40,7 +33,7 @@ const RootStack = StackNavigator(
 
      },
      {
-        initialRouteName: 'Welcome',
+        initialRouteName: 'SignUp',
      },
      );
 
