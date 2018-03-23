@@ -4,8 +4,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
-import ProfileModel from './ProfileModel';
-//import ProfileService from './ProfileService';
+import { TabNavigator, TabBarBottom } from 'react-navigation';
 import SignUp from './SignUp';
 import t from 'tcomb-form-native';
 
@@ -145,10 +144,12 @@ export default class NewAccount extends Component<{}> {
         this.setState({ isPressed: true });
       
       
-        this.props.navigation.goBack();
+        this.props.navigation.navigate('You');
     };
   
 }
+
+
 
 const styles = StyleSheet.create({
 container: {
