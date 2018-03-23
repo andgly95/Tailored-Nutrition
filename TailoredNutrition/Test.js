@@ -8,7 +8,21 @@ const db = SQLite.openDatabase('db.db');
 
 //import Test from './Test'
 
+
+
+
 export default class Test extends Component<{}> {
+
+  //Creates the table if we do not have it already
+  componentDidMount() {
+    db.transaction(tx => {
+      tx.executeSql(
+        'create table if not exists person (id integer primary key not null, username text, password text, weigth int, value text);'
+      );
+    });
+  }
+
+
   state = {
     inputValue: "Username"
   };
@@ -16,6 +30,7 @@ export default class Test extends Component<{}> {
   state1 = {
     inputValue: "Password"
   };
+
 
   _handleTextChange = inputValue => {
     this.setState({ inputValue });
@@ -26,15 +41,10 @@ export default class Test extends Component<{}> {
     console.log('Test.render');
     return (
             
-    <View style={styles.container}>
-      <View style={styles.Logo}>
+      <View style={styles.container}>
 
-        <Image style={styles.Logo}
-        source={require("./Resources/Logo.png")}/>
-
-
-      </View>
-            
+     
+       
             <View style={styles.buttonsContainer}>
             <TextInput style={styles.inputStyle}
             value={this.state.inputValue}
@@ -60,6 +70,18 @@ export default class Test extends Component<{}> {
   }
   _onButtonPressed = () => {
         this.setState({ isPressed: true });
+
+        //Save values in the states into our database
+        db.transaction(
+          tx => {
+              //Updates username/password?
+            tx.executeSql(`update person set username = ?`, [state]);
+            tx.executeSql(`update person set password = ?`, [state1]);
+          },
+          null,
+          this.update
+          );
+
         this.props.navigation.goBack();
     };
   

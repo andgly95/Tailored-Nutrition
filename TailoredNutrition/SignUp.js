@@ -42,6 +42,10 @@ var Person = t.struct({
   };
 
 export default class SignUp extends Component<{}> {
+
+
+   
+
     state = {user: ''}
     updateUser = (user) => {
         this.setState({ user: user })
