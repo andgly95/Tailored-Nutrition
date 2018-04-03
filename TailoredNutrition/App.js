@@ -12,21 +12,20 @@ import { StackNavigator } from 'react-navigation';
 import Welcome from './Welcome';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-import Test from './Test';
-
+import NewAccount from './NewAccount';
 
 type Props = {};
 
 const RootStack = StackNavigator(
     {
-        Test: {
-            screen:Test,
-        },
         Welcome: {
             screen: Welcome,
         },
         SignUp: {
             screen: SignUp,
+        },
+        NewAccount: {
+            screen: NewAccount,
         },
         SignIn: {
             screen: SignIn,
@@ -34,7 +33,7 @@ const RootStack = StackNavigator(
 
      },
      {
-        initialRouteName: 'Test',
+        initialRouteName: 'Welcome',
      },
      );
 
