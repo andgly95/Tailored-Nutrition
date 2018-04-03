@@ -29,7 +29,7 @@ export default class Goal extends Component<{}> {
     this.props.navigation.navigate('Account')
 }
   render() {
-    console.log('SignIn.render');
+    console.log('Goal.render');
     return (
             
     <KeyboardAvoidingView style={styles.container} behavior="padding">

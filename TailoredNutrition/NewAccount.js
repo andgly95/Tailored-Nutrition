@@ -3,9 +3,10 @@
 //Use https://medium.com/react-native-development/easily-build-forms-in-react-native-9006fcd2a73b
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import SignUp from './SignUp';
+import Term from './Term';
 import t from 'tcomb-form-native';
 
 import Expo, { SQLite } from 'expo';
@@ -118,20 +119,25 @@ export default class NewAccount extends Component<{}> {
         //Found a new form using the tutorial
             
             //</Form>
-            <TouchableHighlight
+          <TouchableHighlight
+            onPress={this._onButtonPressed1}>
+              <Text style = {{color: '#656565'}}>
+                Click <Text style = {{color: 'red'}}> here </Text> to view terms and conditions
+              </Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
             onPress={this.handleSubmit}>
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
-            
-            </TouchableHighlight>
+          </TouchableHighlight>
             
 
-           <TouchableHighlight
+          <TouchableHighlight
             onPress={this.DeleteTable}>
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
-            </TouchableHighlight>
-
+          </TouchableHighlight>
 
       </View>
     </KeyboardAvoidingView>
@@ -139,10 +145,12 @@ export default class NewAccount extends Component<{}> {
   }
   _onButtonPressed = () => {
         this.setState({ isPressed: true });
-      
-      
         this.props.navigation.navigate('You');
     };
+    _onButtonPressed1 = () => {
+      this.setState({ isPressed: true });
+      this.props.navigation.navigate('Term');
+  };
   
 }
 

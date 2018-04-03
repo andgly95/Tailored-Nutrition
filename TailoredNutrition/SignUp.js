@@ -103,7 +103,7 @@ export default TabNavigator(
         inactiveTintColor: 'gray',
       },
       animationEnabled: false,
-      swipeEnabled: false,
+      swipeEnabled: true,
     }
   );
   
