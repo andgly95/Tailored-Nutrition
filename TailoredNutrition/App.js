@@ -14,6 +14,7 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import NewAccount from './NewAccount';
 import BarCodeScan from './BarCodeScan';
+import Term from './Term';
 
 type Props = {};
 
@@ -33,6 +34,9 @@ const RootStack = StackNavigator(
         },
 		BarCodeScan: {
 			screen: BarCodeScan,
+		},
+		Term: {
+			screen: Term,
 		},
 
      },
