@@ -4,8 +4,6 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
-import ProfileModel from './ProfileModel';
-//import ProfileService from './ProfileService';
 import SignUp from './SignUp';
 import t from 'tcomb-form-native';
 
