@@ -29,7 +29,8 @@ export default class NewAccount extends Component<{}> {
   
   componentDidMount() {
 
-    console.log()
+    //Deletes db if we need it
+    console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
     db.transaction(
       tx => {
         //Create the table 

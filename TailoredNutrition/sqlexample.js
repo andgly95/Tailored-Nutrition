@@ -58,18 +58,14 @@ export default class Example extends React.Component {
   componentDidMount() {
     db.transaction(tx => {
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS PERSON (
-          username text primary key not null UNIQUE,
-          password text ,
-          sex bool ,
-          age integer,
-          email text UNIQUE, 
-          weight integer '
-        );
+        'create table if not exists items (id integer primary key not null, done int, value text);'
       );
     });
   }
 
+
+
+  
   render() {
     return (
       <View style={styles.container}>
