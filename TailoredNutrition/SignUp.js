@@ -18,6 +18,15 @@ import NewAccount from './NewAccount';
 import Goal from './Goal';
 import t from 'tcomb-form-native';
 
+
+
+//DB Stuff
+import Expo, { SQLite } from 'expo';
+const db = SQLite.openDatabase('db.db');
+
+
+
+
 const Form = t.form.Form;
 
 var Gender = t.enums({
@@ -52,7 +61,37 @@ class You extends Component<{}> {
         this.setState({ user: user })
     }
     handleSubmit = () => {
+       
+
+      let user = "";
+      db.transaction(
+        tx=>{
+          tx.executeSql('SELECT * FROM PROFILE',[],
+            (_,results) =>
+              console.log(results)
+            )
+        }
+      );
+
+
+        //Grab the form so we can take the data...
+        const value = this._form.getValue(); // use that ref to get the form value
+        console.log("\nRead in...",value);
+        //Now move information into our database...
+        db.transaction(
+          tx => {
+            tx.executeSql('UPDATE * FROM PROFILE WHERE username = ?;'
+                  ,[value.Name],
+                  (tx, results ) =>
+                    console.log(JSON.stringify(results))
+          
+          
+        );
+      }
+    );
+         
         this.props.navigation.navigate('Goal')
+        
     }
     render() {
         console.log('SignUp.render');
@@ -76,9 +115,10 @@ class You extends Component<{}> {
 
 export default TabNavigator(
     {
+      Account: { screen: NewAccount },
       You: { screen: You },
       Goal: {screen: Goal },
-      Account: { screen: NewAccount },
+     
     },
     {
       navigationOptions: ({ navigation }) => ({

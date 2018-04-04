@@ -55,7 +55,17 @@ export default class App extends Component<{}> {
   componentDidMount() {
 
     //Deletes db if we need it
+    //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
     console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
+
+    //Create a table that wil be treated like a session cache?
+    db.transaction(
+        tx =>{
+            tx.executeSql('CREATE TABLE IF NOT EXISTS SESSION (user text primary key UNIQUE);');
+
+        }
+    )
+
     db.transaction(
       tx => {
         //Create the table 
@@ -63,12 +73,16 @@ export default class App extends Component<{}> {
         //'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text ,sex bool ,age integer, email text  UNIQUE, weight integer );'
         //I would newline each field but it doesn't like it :(
           //USERNAME AS TEXT
+          //NAME AS TEXT
           //PASSWORD AS TEXT
           //SEX AS BOOL
           //AGE AS INT
           //EMAIL AS TEXT
           //WEIGHT AS INT
-          'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text);'
+          //HEIGHT AS INT
+          //ACTIVITY LEVEL(ACTIVITY) AS INT
+          //TARGET WEIGHT(TWEIGHT) AS INT
+          'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer);'
       );
 
       console.log('All tables within our database:')
@@ -78,10 +92,10 @@ export default class App extends Component<{}> {
       console.log('\n')
 
 
-      //console.log('Current values for our table::')
-     // tx.executeSql('SELECT * FROM PROFILE;',[],(_,{rows: {_array}})=>
-      //  console.log(JSON.stringify(_array)) 
-     // );
+    //   console.log('Current values for our table::')
+    //   tx.executeSql('SELECT * FROM PROFILE;',[],(_,{rows: {_array}})=>
+    //     console.log(JSON.stringify(_array)) 
+    //   );
 
 
     }
