@@ -9,12 +9,12 @@ import ProfileModel from './ProfileModel';
 import SignUp from './SignUp';
 import t from 'tcomb-form-native';
 
-import Expo, { SQLite } from 'expo';
+// import Expo, { SQLite } from 'expo';
 
 const Form = t.form.Form;
 
 
-const db = SQLite.openDatabase('db.db');
+// const db = SQLite.openDatabase('db.db');
 
 const User = t.struct({
                       username: t.String,
@@ -27,44 +27,44 @@ const User = t.struct({
 export default class NewAccount extends Component<{}> {
 
   
-  componentDidMount() {
+  // componentDidMount() {
 
-    //Deletes db if we need it
-    console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
-    db.transaction(
-      tx => {
-        //Create the table 
-      tx.executeSql(
-        //'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text ,sex bool ,age integer, email text  UNIQUE, weight integer );'
-        //I would newline each field but it doesn't like it :(
-          //USERNAME AS TEXT
-          //PASSWORD AS TEXT
-          //SEX AS BOOL
-          //AGE AS INT
-          //EMAIL AS TEXT
-          //WEIGHT AS INT
-          'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text);'
-      );
+  //   //Deletes db if we need it
+  //   console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
+  //   db.transaction(
+  //     tx => {
+  //       //Create the table 
+  //     tx.executeSql(
+  //       //'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text ,sex bool ,age integer, email text  UNIQUE, weight integer );'
+  //       //I would newline each field but it doesn't like it :(
+  //         //USERNAME AS TEXT
+  //         //PASSWORD AS TEXT
+  //         //SEX AS BOOL
+  //         //AGE AS INT
+  //         //EMAIL AS TEXT
+  //         //WEIGHT AS INT
+  //         'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text);'
+  //     );
 
-      console.log('All tables within our database:')
-      tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
-        console.log(JSON.stringify(_array)) 
-      );
-      console.log('\n')
-
-
-      //console.log('Current values for our table::')
-     // tx.executeSql('SELECT * FROM PROFILE;',[],(_,{rows: {_array}})=>
-      //  console.log(JSON.stringify(_array)) 
-     // );
+  //     console.log('All tables within our database:')
+  //     tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
+  //       console.log(JSON.stringify(_array)) 
+  //     );
+  //     console.log('\n')
 
 
-    }
+  //     //console.log('Current values for our table::')
+  //    // tx.executeSql('SELECT * FROM PROFILE;',[],(_,{rows: {_array}})=>
+  //     //  console.log(JSON.stringify(_array)) 
+  //    // );
+
+
+  //   }
     
-  );
-    console.log('\nCreated table (Hopefully)?');
+  // );
+  //   console.log('\nCreated table (Hopefully)?');
     
-  }
+  // }
 
   
     handleSubmit = () => {
