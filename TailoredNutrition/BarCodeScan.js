@@ -32,6 +32,13 @@ export default class BarCodeScan extends React.Component {
   }
 
   _handleBarCodeRead = ({ type, data }) => {
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    fetch ('https://trackapi.nutritionix.com/v2/search/item'+'?upc='+data, {
+      method: 'GET',
+      headers: new Headers( {
+        'x-app-id': 'beeef40f',
+        'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
+        'x-remote-user-id' : 0
+      })
+    }).then(response => console.log('Success:', response));
   }
 }
