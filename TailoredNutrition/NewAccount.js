@@ -68,6 +68,7 @@ export default class NewAccount extends Component<{}> {
   
     handleSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
+
         db.transaction(
           tx => {
               //Updates username/password
@@ -89,6 +90,7 @@ export default class NewAccount extends Component<{}> {
           //this.update
           );
         console.log('\nValue: ', value);
+
     }
   
 
@@ -143,6 +145,7 @@ export default class NewAccount extends Component<{}> {
     </KeyboardAvoidingView>
     );
   }
+
   _onButtonPressed = () => {
         this.setState({ isPressed: true });
         this.props.navigation.navigate('You');
