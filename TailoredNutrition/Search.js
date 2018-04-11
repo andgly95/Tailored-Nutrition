@@ -12,7 +12,7 @@ const Form = t.form.Form;
 
 const SearchForm = t.struct ({
 	Search: t.String,
-	Branded: t.boolean,
+	Branded: t.Boolean,
 });
 
 export default class Search extends Component<{}> {
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     container: {
         padding: 30,
         marginTop: 30,
-        alignItems: 'center'
     },
     // styling for buttons
     signButton: {
@@ -55,10 +54,6 @@ const styles = StyleSheet.create({
         width: 995 / 4,
         marginTop: 20,
    },
-    image: {
-        height: 182 / 4,
-        width: 995 / 4,
-    },
     searchInput: {
         height: 36,
         padding: 4,
