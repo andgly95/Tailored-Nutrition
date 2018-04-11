@@ -15,6 +15,7 @@ import SignIn from './SignIn';
 import NewAccount from './NewAccount';
 import BarCodeScan from './BarCodeScan';
 import Term from './Term';
+import Search from './Search';
 
 type Props = {};
 
@@ -38,10 +39,13 @@ const RootStack = StackNavigator(
 		Term: {
 			screen: Term,
 		},
+		Search : {
+			screen: Search,
+		},
 
      },
      {
-        initialRouteName: 'Welcome',
+        initialRouteName: 'Search',
      },
      );
 
