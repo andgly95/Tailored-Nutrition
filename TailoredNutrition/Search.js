@@ -29,7 +29,16 @@ export default class Search extends Component<{}> {
             'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
             'x-remote-user-id' : 0
           })
-        }).then(response => console.log('Success:', response));
+        }).then(function(response){ 
+            //console.log('Success:', response)
+            var test = JSON.parse(response['_bodyInit']);
+            //var stringme = JSON.stringify(test)
+           // console.log(stringme) 
+            //console.log("test")
+            console.log(test.branded[0])
+            
+            console.log("What")
+        });
       }
 
 render() {
