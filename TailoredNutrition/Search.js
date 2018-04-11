@@ -17,20 +17,35 @@ const SearchForm = t.struct ({
 
 export default class Search extends Component<{}> {
 	
-	handleSubmit  = () => {
+	barCodePress  = () => {
 		this.props.navigation.navigate('BarCodeScan');
 	}
-
+    handleSearchSubmit = () => {
+        const value = this._form.getValue(); // use that ref to get the form value
+        fetch ('https://trackapi.nutritionix.com/v2/search/instant?query=+'+value.Search, {
+          method: 'GET',
+          headers: new Headers( {
+            'x-app-id': 'beeef40f',
+            'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
+            'x-remote-user-id' : 0
+          })
+        }).then(response => console.log('Success:', response));
+      }
 
 render() {
 	return (
 		<View style={styles.container}>
 		<Button
-		onPress = {this.handleSubmit}
+		onPress = {this.barCodePress}
 		title = "Scan Bar Code"
 		/>
 		
-		<Form type = {SearchForm}/>
+		<Form type = {SearchForm}
+        ref={s => this._form = s}/>
+        <Button
+        onPress = {this.handleSearchSubmit}
+        title = "Search Entries"
+        />
 		</View>
 		);
 }
