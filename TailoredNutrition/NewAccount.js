@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import SignUp from './SignUp';
+import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import t from 'tcomb-form-native';
 
@@ -68,6 +69,7 @@ export default class NewAccount extends Component<{}> {
   
     handleSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
+
         db.transaction(
           tx => {
               //Updates username/password
@@ -89,6 +91,7 @@ export default class NewAccount extends Component<{}> {
           //this.update
           );
         console.log('\nValue: ', value);
+
     }
   
 
@@ -134,7 +137,7 @@ export default class NewAccount extends Component<{}> {
             
 
           <TouchableHighlight
-            onPress={this.DeleteTable}>
+            onPress={this._onButtonPressed2}>
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
           </TouchableHighlight>
@@ -143,6 +146,7 @@ export default class NewAccount extends Component<{}> {
     </KeyboardAvoidingView>
     );
   }
+
   _onButtonPressed = () => {
         this.setState({ isPressed: true });
         this.props.navigation.navigate('You');
@@ -151,7 +155,10 @@ export default class NewAccount extends Component<{}> {
       this.setState({ isPressed: true });
       this.props.navigation.navigate('Term');
   };
-  
+  _onButtonPressed2 = () => {
+    this.setState({ isPressed: true });
+    this.props.navigation.navigate('BarCodeScan');
+};
 }
 
 
