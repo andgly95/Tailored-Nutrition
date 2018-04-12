@@ -31,7 +31,7 @@ export default class NutritionFunctions extends Component<{}> {
 
 
     function keto(actualBurn){
-        actualBurn = actualBurn * .20; // set deficit
+        actualBurn = actualBurn - (actualBurn * .20) ; // set deficit
         var macros = new Object();
         macros.carbs = (actualBurn * .07) / 4;  // grams of carbs
         macros.fats = (actualBurn * .69) / 9;  // grams of fats
@@ -39,7 +39,7 @@ export default class NutritionFunctions extends Component<{}> {
     }
 
     function atkins(actualBurn){
-        actualBurn = actualBurn * .20; // set deficit
+        actualBurn = actualBurn - (actualBurn * .20); // set deficit
         var macros = new Object();
         macros.carbs;
         macros.fats;
