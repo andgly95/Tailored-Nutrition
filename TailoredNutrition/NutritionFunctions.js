@@ -1,3 +1,11 @@
+/*
+    We will need to store the following nutritional information on user on our database:
+    1. User dailyBurn/actualBurn (these will need to be updated as user updates there weight/age)
+    2. As far as what diet user is on, I am not sure how you want to implement this. Should we store the macro and calories limits everytime they are
+       recalculated or should we simply calculate in real time everyday?
+
+*/
+
 export default class NutritionFunctions extends Component<{}> {
     function dailyBurn(weight, Height, gender, age){ // calories burned by simply existing
         if (Gender == M){
