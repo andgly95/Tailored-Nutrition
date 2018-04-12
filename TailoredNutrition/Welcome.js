@@ -28,10 +28,10 @@ export default class Welcome extends Component<{}> {
         return (
                 <View style={styles.container}>
                 <Text style={styles.description}>
-                Welcome to Tailored Nutrition!
+                Welcome to Tailored Nutrition (insert name here)!
                 </Text>
                 <Text style={styles.description}>
-                Get started by answering just a few questions
+                It is time to make some logs for the purpose of your eternal health!
                 </Text>
                 
                 <TouchableHighlight
@@ -39,13 +39,6 @@ export default class Welcome extends Component<{}> {
                 <Image source={require('./Resources/start.png')} style={styles.image}/>
                 </TouchableHighlight>
 
-
-
-                <TouchableHighlight
-                onPress={this._onButtonPressed1}>
-                <Image source={require('./Resources/Login.png')} 
-                style ={styles.image}/>
-                </TouchableHighlight>
 
                 
                 
@@ -57,10 +50,6 @@ export default class Welcome extends Component<{}> {
         this.props.navigation.navigate('SignUp');
     };
 //////////////////////////////////////////
-    _onButtonPressed1 = () => {
-        this.setState({ isPressed: true });
-        this.props.navigation.navigate('SignIn');
-    };
 }
 
 
