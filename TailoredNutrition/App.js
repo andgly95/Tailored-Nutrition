@@ -16,6 +16,7 @@ import NewAccount from './NewAccount';
 import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import Search from './Search';
+import userLog from './userLog';
 
 type Props = {};
 
@@ -41,11 +42,14 @@ const RootStack = StackNavigator(
 		},
 		Search : {
 			screen: Search,
-		},
+        },
+        userLog : {
+            screen: userLog,
+        },
 
      },
      {
-        initialRouteName: 'Search',
+        initialRouteName: 'userLog',
      },
      );
 
