@@ -10,15 +10,22 @@ import {
     ActivityIndicator,
     Image,
     Picker,
-    TouchableHighlight
+    TouchableHighlight,
+    ScrollView
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; //
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import NewAccount from './NewAccount';
-import Goal from './Goal';
 import t from 'tcomb-form-native';
 
 const Form = t.form.Form;
+
+var Activity = t.enums({
+  L: 'Not Very Active',
+  M: 'Active',
+  H: 'Very Active'
+});
+
+
 
 var Gender = t.enums({
     M: 'Male',
@@ -29,86 +36,54 @@ var Person = t.struct({
     Name: t.String,
     weight: t.Number,
     gender: Gender,
-    birthDate: t.Date,
+    age: t.Number,
+    Height: t.Number,
+    DesiredWeight: t.Number,
+    ActivityLevel: Activity,
+    username: t.String,
+    password: t.String,
+    terms: t.Boolean
   });
 
   const options = {
     fields: {
-      birthDate: {
-        label: 'Birth Date',
-        mode: 'date',
-        config: {
-          //format: (date) => moment(date).format('YYYY-mm-d'),
-        },
-      },
+      
     },
   };
 
-class You extends Component<{}> {
+export default class You extends Component<{}> {
 
-
-    state = {user: ''}
-    updateUser = (user) => {
-        this.setState({ user: user })
-    }
-    handleSubmit = () => {
-        this.props.navigation.navigate('Goal')
-    }
-    render() {
-        console.log('SignUp.render');
-        return (
-
-            <View style={styles.container}>
-            <Form ref={f => this._form = f} // assign a ref
-        type={Person} 
-        options = {options}/>
-            
-         <TouchableHighlight
+  state = {user: ''}
+  updateUser = (user) => {
+    this.setState({ user: user })
+  }
+  handleSubmit = () => {
+    if (this._form.getValue() == null){console.log("error")}
+    else {console.log(this._form.getValue());
+    this.props.navigation.navigate('You')};
+  }
+  render() {
+    console.log('SignUp.render');
+    return (
+      <ScrollView>
+        <View style={styles.container}>
+          <Form ref={f => this._form = f} // assign a ref
+            type={Person} 
+            options = {options}/> 
+          <TouchableHighlight
             onPress={this.handleSubmit}>
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
             </TouchableHighlight>
+            
             </View>
-
+</ScrollView>
                 );
     }
 }
 
-export default TabNavigator(
-    {
-      You: { screen: You },
-      Goal: {screen: Goal },
-      Account: { screen: NewAccount },
-    },
-    {
-      navigationOptions: ({ navigation }) => ({
-        tabBarIcon: ({ focused, tintColor }) => {
-          const { routeName } = navigation.state;
-          let iconName;
-          if (routeName === 'Home') {
-            iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-          } else if (routeName === 'Settings') {
-            iconName = `ios-options${focused ? '' : '-outline'}`;
-          }
-  
-          // You can return any component that you like here! We usually use an
-          // icon component from react-native-vector-icons
-          return <Ionicons name={iconName} size={25} color={tintColor} />;
-        },
-      }),
-      tabBarComponent: TabBarBottom,
-      tabBarPosition: 'bottom',
-      tabBarOptions: {
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      },
-      animationEnabled: false,
-      swipeEnabled: true,
-    }
-  );
-  
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     description: {
         marginBottom: 10,
         fontSize: 18,
@@ -117,8 +92,7 @@ const styles = StyleSheet.create({
     },
     container: {
         padding: 30,
-        marginTop: 30,
-        alignItems: 'center'
+        marginTop: 30
     },
     // styling for buttons
     signButton: {

@@ -45,7 +45,7 @@ const RootStack = StackNavigator(
 
      },
      {
-        initialRouteName: 'Search',
+        initialRouteName: 'Welcome',
      },
      );
 
