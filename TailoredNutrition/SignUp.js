@@ -60,7 +60,7 @@ export default class You extends Component<{}> {
   handleSubmit = () => {
     if (this._form.getValue() == null){console.log("error")}
     else {console.log(this._form.getValue());
-    this.props.navigation.navigate('You')};
+    this.props.navigation.navigate('Search')};
   }
   render() {
     console.log('SignUp.render');
