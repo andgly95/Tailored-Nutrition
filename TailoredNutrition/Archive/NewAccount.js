@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import SignUp from './SignUp';
+import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import t from 'tcomb-form-native';
 
@@ -31,9 +32,13 @@ export default class NewAccount extends Component<{}> {
   
     handleSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
+<<<<<<< HEAD:TailoredNutrition/NewAccount.js
         console.log(value);
         let existinguser = 0; //Bool to hold if we have a user 
         //Now move information into our database...
+=======
+
+>>>>>>> master:TailoredNutrition/Archive/NewAccount.js
         db.transaction(
           tx => {
             tx.executeSql('SELECT * FROM PROFILE WHERE username = ?;'
@@ -85,6 +90,7 @@ export default class NewAccount extends Component<{}> {
 
               });
           }
+<<<<<<< HEAD:TailoredNutrition/NewAccount.js
 
           this.props.navigation.navigate('You')
 
@@ -110,6 +116,14 @@ export default class NewAccount extends Component<{}> {
         //   //this.update
         //   );
         // console.log('\nValue: ', value);
+=======
+          //,
+          //null,
+          //this.update
+          );
+        console.log('\nValue: ', value);
+
+>>>>>>> master:TailoredNutrition/Archive/NewAccount.js
     }
   
 
@@ -155,7 +169,7 @@ export default class NewAccount extends Component<{}> {
             
 
           <TouchableHighlight
-            onPress={this.DeleteTable}>
+            onPress={this._onButtonPressed2}>
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
           </TouchableHighlight>
@@ -164,6 +178,7 @@ export default class NewAccount extends Component<{}> {
     </KeyboardAvoidingView>
     );
   }
+
   _onButtonPressed = () => {
         this.setState({ isPressed: true });
         this.props.navigation.navigate('You');
@@ -172,7 +187,10 @@ export default class NewAccount extends Component<{}> {
       this.setState({ isPressed: true });
       this.props.navigation.navigate('Term');
   };
-  
+  _onButtonPressed2 = () => {
+    this.setState({ isPressed: true });
+    this.props.navigation.navigate('BarCodeScan');
+};
 }
 
 

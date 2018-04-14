@@ -12,8 +12,10 @@ import { StackNavigator } from 'react-navigation';
 import Welcome from './Welcome';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-import NewAccount from './NewAccount';
+import BarCodeScan from './BarCodeScan';
 import Term from './Term';
+import Search from './Search';
+import userLog from './userLog';
 
 
 
@@ -32,20 +34,29 @@ const RootStack = StackNavigator(
         SignUp: {
             screen: SignUp,
         },
-        NewAccount: {
-            screen: NewAccount,
-        },
         SignIn: {
             screen: SignIn,
         },
-
-        Term: {
-            screen: Term,
+		BarCodeScan: {
+			screen: BarCodeScan,
+		},
+		Term: {
+			screen: Term,
+		},
+		Search : {
+			screen: Search,
+        },
+        userLog : {
+            screen: userLog,
         },
 
      },
      {
+<<<<<<< HEAD
         initialRouteName: 'Welcome',
+=======
+        initialRouteName: 'userLog',
+>>>>>>> master
      },
      );
 

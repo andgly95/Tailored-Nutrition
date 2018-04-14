@@ -10,12 +10,11 @@ import {
     ActivityIndicator,
     Image,
     Picker,
-    TouchableHighlight
+    TouchableHighlight,
+    ScrollView
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; //
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import NewAccount from './NewAccount';
-import Goal from './Goal';
 import t from 'tcomb-form-native';
 
 
@@ -29,6 +28,14 @@ const db = SQLite.openDatabase('db.db');
 
 const Form = t.form.Form;
 
+var Activity = t.enums({
+  L: 'Not Very Active',
+  M: 'Active',
+  H: 'Very Active'
+});
+
+
+
 var Gender = t.enums({
     M: 'Male',
     F: 'Female'
@@ -38,24 +45,24 @@ var Person = t.struct({
     Name: t.String,
     weight: t.Number,
     gender: Gender,
-    birthDate: t.Date,
+    age: t.Number,
+    Height: t.Number,
+    DesiredWeight: t.Number,
+    ActivityLevel: Activity,
+    username: t.String,
+    password: t.String,
+    terms: t.Boolean
   });
 
   const options = {
     fields: {
-      birthDate: {
-        label: 'Birth Date',
-        mode: 'date',
-        config: {
-          //format: (date) => moment(date).format('YYYY-mm-d'),
-        },
-      },
+      
     },
   };
 
-class You extends Component<{}> {
+export default class You extends Component<{}> {
 
-
+<<<<<<< HEAD
     state = {user: ''}
     updateUser = (user) => {
         this.setState({ user: user })
@@ -103,16 +110,38 @@ class You extends Component<{}> {
         options = {options}/>
             
          <TouchableHighlight
+=======
+  state = {user: ''}
+  updateUser = (user) => {
+    this.setState({ user: user })
+  }
+  handleSubmit = () => {
+    if (this._form.getValue() == null){console.log("error")}
+    else {console.log(this._form.getValue());
+    this.props.navigation.navigate('Search')};
+  }
+  render() {
+    console.log('SignUp.render');
+    return (
+      <ScrollView>
+        <View style={styles.container}>
+          <Form ref={f => this._form = f} // assign a ref
+            type={Person} 
+            options = {options}/> 
+          <TouchableHighlight
+>>>>>>> master
             onPress={this.handleSubmit}>
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
             </TouchableHighlight>
+            
             </View>
-
+</ScrollView>
                 );
     }
 }
 
+<<<<<<< HEAD
 export default TabNavigator(
     {
       Account: { screen: NewAccount },
@@ -147,8 +176,10 @@ export default TabNavigator(
     }
   );
   
+=======
+>>>>>>> master
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     description: {
         marginBottom: 10,
         fontSize: 18,
@@ -157,8 +188,7 @@ const styles = StyleSheet.create({
     },
     container: {
         padding: 30,
-        marginTop: 30,
-        alignItems: 'center'
+        marginTop: 30
     },
     // styling for buttons
     signButton: {

@@ -40,13 +40,6 @@ export default class Welcome extends Component<{}> {
                 </TouchableHighlight>
 
 
-
-                <TouchableHighlight
-                onPress={this._onButtonPressed1}>
-                <Image source={require('./Resources/Login.png')} 
-                style ={styles.image}/>
-                </TouchableHighlight>
-
                 
                 
                 </View>
@@ -57,10 +50,6 @@ export default class Welcome extends Component<{}> {
         this.props.navigation.navigate('SignUp');
     };
 //////////////////////////////////////////
-    _onButtonPressed1 = () => {
-        this.setState({ isPressed: true });
-        this.props.navigation.navigate('SignIn');
-    };
 }
 
 
