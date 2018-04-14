@@ -40,6 +40,7 @@ export default class Welcome extends Component<{}> {
                 <Image source={require('./Resources/start.png')} style={styles.image}/>
                 </TouchableHighlight>
 
+<<<<<<< HEAD
                 <TouchableHighlight
                 onPress = {this._onButtonPressed1}>
                 <Text>
@@ -47,13 +48,27 @@ export default class Welcome extends Component<{}> {
                 </Text>
                 </TouchableHighlight>
 
+=======
+            <TouchableHighlight
+                onPress={this._signIn}>
+                <Image source={require('./Resources/Login.png')} style={styles.image}/>
+                </TouchableHighlight>
+                
+                
+>>>>>>> refs/remotes/origin/master
                 </View>
                 );
+    }
+    _signIn = () => {
+        this.setState({isPressed: true});
+        
+        this.props.navigation.navigate('SignIn');
     }
     _onButtonPressed = () => {
         this.setState({ isPressed: true });
         this.props.navigation.navigate('SignUp');
     };
+<<<<<<< HEAD
     _onButtonPressed1 = () => {
         this.setState({ isPressed: true });
         this.props.navigation.navigate('SignIn');
@@ -61,6 +76,8 @@ export default class Welcome extends Component<{}> {
 
 
 //////////////////////////////////////////
+=======
+>>>>>>> refs/remotes/origin/master
 }
 
 
