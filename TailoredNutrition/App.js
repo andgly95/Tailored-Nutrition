@@ -56,7 +56,7 @@ const RootStack = StackNavigator(
 
      },
      {
-        initialRouteName: 'userProfile',
+        initialRouteName: 'Welcome',
      },
      );
 
