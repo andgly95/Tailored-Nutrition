@@ -16,7 +16,6 @@ import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import Search from './Search';
 import userLog from './userLog';
-import userProfile from './Profile/userProfile'
 
 
 
@@ -50,13 +49,10 @@ var RootStack = StackNavigator(
         userLog : {
             screen: userLog,
         },
-        userProfile: {
-            screen: userProfile,
-        }
 
     },
      {
-        initialRouteName: 'userProfile',
+        initialRouteName: '',
      },
      );
 
