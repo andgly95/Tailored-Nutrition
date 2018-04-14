@@ -45,11 +45,7 @@ const RootStack = StackNavigator(
 
      },
      {
-<<<<<<< HEAD
-        initialRouteName: 'Welcome',
-=======
-        initialRouteName: 'userLog',
->>>>>>> master
+        initialRouteName: 'Search',
      },
      );
 
