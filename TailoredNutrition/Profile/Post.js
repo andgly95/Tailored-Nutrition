@@ -5,7 +5,7 @@ import {StyleSheet,
 				Button,
 				View
 			} from 'react-native';
-import BarCodeScan from './BarCodeScan';
+import BarCodeScan from '../BarCodeScan';
 import t from 'tcomb-form-native';
 
 const Form = t.form.Form;
@@ -15,7 +15,7 @@ const SearchForm = t.struct ({
 	Branded: t.Boolean,
 });
 
-export default class Search extends Component<{}> {
+export default class Post extends Component<{}> {
 	
 	barCodePress  = () => {
 		this.props.navigation.navigate('BarCodeScan');

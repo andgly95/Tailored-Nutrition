@@ -17,6 +17,7 @@ import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import Search from './Search';
 import userLog from './userLog';
+import userProfile from './Profile/userProfile'
 
 type Props = {};
 
@@ -46,10 +47,13 @@ const RootStack = StackNavigator(
         userLog : {
             screen: userLog,
         },
+        userProfile: {
+            screen: userProfile,
+        }
 
      },
      {
-        initialRouteName: 'userLog',
+        initialRouteName: 'userProfile',
      },
      );
 
