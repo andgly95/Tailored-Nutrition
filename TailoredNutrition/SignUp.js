@@ -10,105 +10,137 @@ import {
     ActivityIndicator,
     Image,
     Picker,
-    TouchableHighlight
+    TouchableHighlight,
+    ScrollView
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; //
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import NewAccount from './NewAccount';
-import Goal from './Goal';
 import t from 'tcomb-form-native';
+
+
+
+//DB Stuff
+import Expo, { SQLite } from 'expo';
+const db = SQLite.openDatabase('db.db');
+
+
+
 
 const Form = t.form.Form;
 
+var Activity = t.enums({
+  0: 'Not Very Active',
+  1: 'Active',
+  2: 'Very Active'
+});
+
+
+
 var Gender = t.enums({
-    M: 'Male',
-    F: 'Female'
+    0: 'Male',
+    1: 'Female'
 });
 
 var Person = t.struct({
     Name: t.String,
     weight: t.Number,
     gender: Gender,
-    birthDate: t.Date,
+    age: t.Number,
+    Height: t.Number,
+    DesiredWeight: t.Number,
+    ActivityLevel: Activity,
+    username: t.String,
+    password: t.String,
+    terms: t.Boolean
   });
 
   const options = {
     fields: {
-      birthDate: {
-        label: 'Birth Date',
-        mode: 'date',
-        config: {
-          //format: (date) => moment(date).format('YYYY-mm-d'),
-        },
-      },
+      
     },
   };
 
-class You extends Component<{}> {
+export default class You extends Component<{}> {
 
-
-    state = {user: ''}
-    updateUser = (user) => {
-        this.setState({ user: user })
+  state = {user: ''}
+  updateUser = (user) => {
+    this.setState({ user: user })
+  }
+  handleSubmit = () => {
+    var re = this._form.getValue();
+    if (re == null){
+      console.log("Error:Not all fields were filled out.")
     }
-    handleSubmit = () => {
-        this.props.navigation.navigate('Goal')
-    }
-    render() {
-        console.log('SignUp.render');
-        return (
+    else {
+      console.log(re);
+      //Check if they read the TOS
+      if (re.terms != 1){
+        alert("Please confirm that you read our TOS which allows us to sell your information! ")
+        return
+      }
+        
+/*
+      ADD MORE CHECKS HERE FOR AGE, HEIGHT AND SO ON
 
-            <View style={styles.container}>
-            <Form ref={f => this._form = f} // assign a ref
-        type={Person} 
-        options = {options}/>
-            
-         <TouchableHighlight
+*/
+
+      //Handle storage here, no touchy please
+      db.transaction(
+        tx => {
+          //Check first for a duplicate user
+          tx.executeSql(
+           'SELECT * FROM PROFILE WHERE username = ?;',
+           [re.username],
+           (tx,result) => {
+             console.log(result.rows.length)
+            if(result.rows.length != 0){
+              console.log(result)
+              //If results.length isn't zero then we found a matching row with same username
+              console.log("Sign up failed due to possible duplicate user.")
+              alert(`Please try again with a different username!`);
+            }
+            else{
+                console.log("Inserting new user...")
+                //If we reach here we should insert a new entry
+                tx.executeSql('INSERT INTO PROFILE (username, password,name, sex, age,height,weight,tweight,activity) VALUES (?,?,?,?,?,?,?,?,?);',
+                [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.DesiredWeight,re.ActivityLevel],
+                (tx,result) =>{
+                  console.log("Successfull insert, debug info:\n ?", result)
+                  
+                this.props.navigation.navigate('Search')
+                }
+              );
+            }
+          }
+          );
+        }
+      );
+
+
+    };
+  }
+  render() {
+    console.log('SignUp.render');
+    return (
+      <ScrollView>
+        <View style={styles.container}>
+          <Form ref={f => this._form = f} // assign a ref
+            type={Person} 
+            options = {options}/> 
+          <TouchableHighlight
             onPress={this.handleSubmit}>
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
             </TouchableHighlight>
+            
             </View>
-
+</ScrollView>
                 );
     }
 }
 
-export default TabNavigator(
-    {
-      You: { screen: You },
-      Goal: {screen: Goal },
-      Account: { screen: NewAccount },
-    },
-    {
-      navigationOptions: ({ navigation }) => ({
-        tabBarIcon: ({ focused, tintColor }) => {
-          const { routeName } = navigation.state;
-          let iconName;
-          if (routeName === 'Home') {
-            iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-          } else if (routeName === 'Settings') {
-            iconName = `ios-options${focused ? '' : '-outline'}`;
-          }
-  
-          // You can return any component that you like here! We usually use an
-          // icon component from react-native-vector-icons
-          return <Ionicons name={iconName} size={25} color={tintColor} />;
-        },
-      }),
-      tabBarComponent: TabBarBottom,
-      tabBarPosition: 'bottom',
-      tabBarOptions: {
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      },
-      animationEnabled: false,
-      swipeEnabled: true,
-    }
-  );
-  
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     description: {
         marginBottom: 10,
         fontSize: 18,
@@ -117,8 +149,7 @@ const styles = StyleSheet.create({
     },
     container: {
         padding: 30,
-        marginTop: 30,
-        alignItems: 'center'
+        marginTop: 30
     },
     // styling for buttons
     signButton: {

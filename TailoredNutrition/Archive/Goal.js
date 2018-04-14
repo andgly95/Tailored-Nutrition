@@ -9,6 +9,8 @@ import SignUp from './SignUp';
 import t from 'tcomb-form-native';
 
 import Expo, { SQLite } from 'expo';
+const db = SQLite.openDatabase('db.db');
+
 
 const Form = t.form.Form;
 
@@ -26,6 +28,28 @@ const Goals = t.struct({
 
 export default class Goal extends Component<{}> {
   handleSubmit = () => {
+
+    const value = this._form.getValue(); // use that ref to get the form value
+
+    let user = "";
+    db.transaction(
+      tx=>{
+        tx.executeSql('SELECT * FROM PROFILE',[],
+          (_,results) =>
+            console.log(results)
+          )
+      }
+    );
+
+
+    db.transaction(
+      tx => {
+        tx.executeSql('UPDATE PROFILE SET height = ?, tweight = ?, activity = ? WHERE username = ?'
+              ,[value.Height,value.DesiredWeight,value.ActivityLevel,user],
+            (_, { rows: {_array} }) =>
+            console.log(JSON.stringify(_array))
+            );
+      });
     this.props.navigation.navigate('Account')
 }
   render() {

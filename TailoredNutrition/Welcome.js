@@ -28,10 +28,10 @@ export default class Welcome extends Component<{}> {
         return (
                 <View style={styles.container}>
                 <Text style={styles.description}>
-                Welcome to Tailored Nutrition (insert name here)!
+                Welcome to Tailored Nutrition!
                 </Text>
                 <Text style={styles.description}>
-                It is time to make some logs for the purpose of your eternal health!
+                Get started by answering just a few questions
                 </Text>
                 
                 <TouchableHighlight

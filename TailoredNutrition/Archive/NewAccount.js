@@ -28,70 +28,102 @@ const User = t.struct({
 export default class NewAccount extends Component<{}> {
 
   
-  componentDidMount() {
-
-    console.log()
-    db.transaction(
-      tx => {
-        //Create the table 
-      tx.executeSql(
-        //'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text ,sex bool ,age integer, email text  UNIQUE, weight integer );'
-        //I would newline each field but it doesn't like it :(
-          //USERNAME AS TEXT
-          //PASSWORD AS TEXT
-          //SEX AS BOOL
-          //AGE AS INT
-          //EMAIL AS TEXT
-          //WEIGHT AS INT
-          'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text);'
-      );
-
-      console.log('All tables within our database:')
-      tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
-        console.log(JSON.stringify(_array)) 
-      );
-      console.log('\n')
-
-
-      //console.log('Current values for our table::')
-     // tx.executeSql('SELECT * FROM PROFILE;',[],(_,{rows: {_array}})=>
-      //  console.log(JSON.stringify(_array)) 
-     // );
-
-
-    }
-    
-  );
-    console.log('\nCreated table (Hopefully)?');
-    
-  }
 
   
     handleSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
+<<<<<<< HEAD:TailoredNutrition/NewAccount.js
+        console.log(value);
+        let existinguser = 0; //Bool to hold if we have a user 
+        //Now move information into our database...
+=======
 
+>>>>>>> master:TailoredNutrition/Archive/NewAccount.js
         db.transaction(
           tx => {
-              //Updates username/password
-              //USERNAME MUST HAVE A VALUE, do a client side check using form to make sure value is non-null
-            tx.executeSql(`INSERT INTO PROFILE (username,password) VALUES (?,?);`, [value.username,value.password]);
-            console.log('Saved user as ', value.username, " with a password of" , value.password )
-            console.log('Updated rows for database:')
-            //Get all the data from Profile
-            tx.executeSql('SELECT * from PROFILE;', 
-            //arguments
-            [],
-            //On success function
-            (_, { rows: {_array} }) =>
-              console.log(JSON.stringify(_array))
-            );
+            tx.executeSql('SELECT * FROM PROFILE WHERE username = ?;'
+                  ,[value.username],
+                  (tx, results ) =>{
+                    //console.log(JSON.stringify(results));
+                    //tx holds the transaction info and results holds the results info
+                    if(results.length != 0){
+                      console.log("Possible duplicate user...");
+                      //Check if we selected any rows, if so flip the existing user to signal that we shouldn't proceed
+                      existinguser = 1;
+                      //Decide how to handle this condition where we have a user with the same name...
+                      //this.props.navigation.navigate('You') //For now redirect to the same page?
+                      return;
+                    }
+                    else
+                      console.log("Name has passed the check...");
+                    
+                  }
+                );
+          });
+         
+          console.log("User count",existinguser);        
+          if (existinguser == 0){
+            console.log("New user...Adding information...")
+           db.transaction(
+              tx => {
+                tx.executeSql('INSERT INTO PROFILE (username,password) VALUES (?,?);', 
+                //arguments
+                [value.username,value.password],
+                //On success function
+                (_, { rows: {_array} }) =>{
+                  console.log(JSON.stringify(_array));
+                  console.log("stored information");
+                });
+                
+
+                //Wipe our sessions table...
+                tx.executeSql('DELETE FROM SESSION;',[],()=>
+                    console.log("Deleted session information..."));
+
+
+                // //Insert user into our sessions table...
+                // tx.executeSql('INSERT INTO SESSION (USER) VALUES ?;',[value.username],
+                // (_, results) =>{
+                //   console.log(results);
+                //   console.log("UPDATED SESSION?");
+                // });
+
+              });
           }
+<<<<<<< HEAD:TailoredNutrition/NewAccount.js
+
+          this.props.navigation.navigate('You')
+
+
+        // db.transaction(
+        //   tx => {
+        //       //Updates username/password
+        //       //USERNAME MUST HAVE A VALUE, do a client side check using form to make sure value is non-null
+        //     tx.executeSql(`INSERT INTO PROFILE (username,password) VALUES (?,?);`, [value.username,value.password]);
+        //     console.log('Saved user as ', value.username, " with a password of" , value.password )
+        //     console.log('Updated rows for database:')
+        //     //Get all the data from Profile
+        //     tx.executeSql('SELECT * from PROFILE;', 
+        //     //arguments
+        //     [],
+        //     //On success function
+        //     (_, { rows: {_array} }) =>
+        //       console.log(JSON.stringify(_array))
+        //     );
+        //   }
+        //   //,
+        //   //null,
+        //   //this.update
+        //   );
+        // console.log('\nValue: ', value);
+=======
           //,
           //null,
           //this.update
           );
         console.log('\nValue: ', value);
 
+>>>>>>> master:TailoredNutrition/Archive/NewAccount.js
     }
   
 
@@ -110,7 +142,7 @@ export default class NewAccount extends Component<{}> {
 
 
   render() {
-    console.log('SignIn.render');
+    console.log('NewAccount.render');
     return (
             
     <KeyboardAvoidingView style={styles.container} behavior="padding">
