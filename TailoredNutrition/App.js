@@ -52,11 +52,7 @@ const RootStack = StackNavigator(
 
      },
      {
-<<<<<<< HEAD
         initialRouteName: 'Welcome',
-=======
-        initialRouteName: 'userLog',
->>>>>>> master
      },
      );
 
@@ -67,7 +63,7 @@ export default class App extends Component<{}> {
 
     //Deletes db if we need it
     //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
-    console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
+    //console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
 
     //Create a table that wil be treated like a session cache?
     db.transaction(
@@ -96,23 +92,23 @@ export default class App extends Component<{}> {
           'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer);'
       );
 
-      console.log('All tables within our database:')
-      tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
-        console.log(JSON.stringify(_array)) 
-      );
-      console.log('\n')
-
-
-    //   console.log('Current values for our table::')
-    //   tx.executeSql('SELECT * FROM PROFILE;',[],(_,{rows: {_array}})=>
-    //     console.log(JSON.stringify(_array)) 
+    //   console.log('All tables within our database:')
+    //   tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
+    //     console.log(_array) 
     //   );
+    //   console.log('\n')
+
+
+      console.log('Current values for our table::')
+      tx.executeSql('SELECT * FROM PROFILE;',[],(_,{rows: {_array}})=>
+        console.log(_array) 
+      );
 
 
     }
     
   );
-    console.log('\nCreated table (Hopefully)?');
+    console.log('\nTable created!');
     
   }
     render() {
