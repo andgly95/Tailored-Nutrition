@@ -39,17 +39,24 @@ export default class Welcome extends Component<{}> {
                 <Image source={require('./Resources/start.png')} style={styles.image}/>
                 </TouchableHighlight>
 
-
+            <TouchableHighlight
+                onPress={this._signIn}>
+                <Image source={require('./Resources/Login.png')} style={styles.image}/>
+                </TouchableHighlight>
                 
                 
                 </View>
                 );
     }
+    _signIn = () => {
+        this.setState({isPressed: true});
+        
+        this.props.navigation.navigate('SignIn');
+    }
     _onButtonPressed = () => {
         this.setState({ isPressed: true });
         this.props.navigation.navigate('SignUp');
     };
-//////////////////////////////////////////
 }
 
 

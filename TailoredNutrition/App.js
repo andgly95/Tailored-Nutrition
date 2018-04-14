@@ -26,7 +26,7 @@ const db = SQLite.openDatabase('db.db'); //Open db here
 
 type Props = {};
 
-const RootStack = StackNavigator(
+var RootStack = StackNavigator(
     {
         Welcome: {
             screen: Welcome,
@@ -50,7 +50,7 @@ const RootStack = StackNavigator(
             screen: userLog,
         },
 
-     },
+    },
      {
         initialRouteName: 'Welcome',
      },
@@ -63,6 +63,7 @@ export default class App extends Component<{}> {
 
     //Deletes db if we need it
     //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
+    
     //console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
 
     //Create a table that wil be treated like a session cache?
@@ -89,7 +90,8 @@ export default class App extends Component<{}> {
           //HEIGHT AS INT
           //ACTIVITY LEVEL(ACTIVITY) AS INT
           //TARGET WEIGHT(TWEIGHT) AS INT
-          'CREATE TABLE IF NOT EXISTS PROFILE ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer);'
+          //LOGID AS INT
+          'CREATE TABLE IF NOT EXISTS PROFILES ( username text primary key not null UNIQUE, logid not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer);'
       );
 
     //   console.log('All tables within our database:')
@@ -98,9 +100,24 @@ export default class App extends Component<{}> {
     //   );
     //   console.log('\n')
 
+    
+    console.log('Current Session values :')
+    tx.executeSql('SELECT * FROM SESSION;',[],(_,{rows: {_array}})=>{
+        
+      console.log(_array[0]) 
+        if (_array[0].user != null){
+            console.log("Found a session...")
+            //Handle default screen here
+            //this.props.navigation.navigate('Search')
+        }
+        else{
+            console.log("Did not find a session...")
+        }
+    }
+    );
 
-      console.log('Current values for our table::')
-      tx.executeSql('SELECT * FROM PROFILE;',[],(_,{rows: {_array}})=>
+      console.log('Current values for our table:')
+      tx.executeSql('SELECT * FROM PROFILES;',[],(_,{rows: {_array}})=>
         console.log(_array) 
       );
 
@@ -112,6 +129,7 @@ export default class App extends Component<{}> {
     
   }
     render() {
+        
          return <RootStack />;
     }
 }

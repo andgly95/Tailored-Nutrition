@@ -69,7 +69,7 @@ export default class You extends Component<{}> {
   handleSubmit = () => {
     var re = this._form.getValue();
     if (re == null){
-      console.log("Error:Not all fields were filled out.")
+      console.log("SignUp: Error,Not all fields were filled out.")
     }
     else {
       console.log(re);
@@ -89,10 +89,10 @@ export default class You extends Component<{}> {
         tx => {
           //Check first for a duplicate user
           tx.executeSql(
-           'SELECT * FROM PROFILE WHERE username = ?;',
+           'SELECT * FROM PROFILES WHERE username = ?;',
            [re.username],
            (tx,result) => {
-             console.log(result.rows.length)
+            
             if(result.rows.length != 0){
               console.log(result)
               //If results.length isn't zero then we found a matching row with same username
@@ -102,15 +102,25 @@ export default class You extends Component<{}> {
             else{
                 console.log("Inserting new user...")
                 //If we reach here we should insert a new entry
-                tx.executeSql('INSERT INTO PROFILE (username, password,name, sex, age,height,weight,tweight,activity) VALUES (?,?,?,?,?,?,?,?,?);',
+                tx.executeSql('INSERT INTO PROFILES (username, password,name, sex, age,height,weight,tweight,activity) VALUES (?,?,?,?,?,?,?,?,?);',
                 [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.DesiredWeight,re.ActivityLevel],
                 (tx,result) =>{
                   console.log("Successfull insert, debug info:\n ?", result)
                   
-                this.props.navigation.navigate('Search')
+                  this.props.navigation.navigate('Search')
+                },
+                () => {
+                  console.log("Failed to execute Insert query for SignUp")
+                  alert("Was not able to create a new profile!")
+                  return
                 }
               );
             }
+          },
+          () => {
+            console.log("Failed to execute SignUp query.")
+            alert("Cannot contact database, pay us more money.")
+            return
           }
           );
         }
