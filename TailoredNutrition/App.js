@@ -20,7 +20,7 @@ import userProfile from './Profile/userProfile'
 
 
 
-//import Expo, { SQLite } from 'expo';//Import SQLite
+import Expo, { SQLite } from 'expo';//Import SQLite
 
 //const db = SQLite.openDatabase('db.db'); //Open db here
 
@@ -63,7 +63,7 @@ var RootStack = StackNavigator(
 export default class App extends Component<{}> {
 
     //Do creation of tables upon start up of app
- /*   componentDidMount() {
+    /*componentDidMount() {
 
     //Deletes db if we need it
     //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
