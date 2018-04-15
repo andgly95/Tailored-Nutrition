@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, TouchableHighlight, KeyboardAvoidingView,
   ScrollView } from 'react-native';
 import SignUp from './SignUp';
+import userProfile from './Profile/userProfile'
 import t from 'tcomb-form-native';
 
 
@@ -89,7 +90,7 @@ export default class SignIn extends Component<{}> {
                   //Just add username to session's table for now...
                   console.log("Valid user!")
                   if(value.rememberme){
-                  tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',
+                    tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',
                     [value.username],
                     ()=>{
                       console.log("Session set to username", value.username)
@@ -100,6 +101,7 @@ export default class SignIn extends Component<{}> {
                   }
                 
                 
+                //this.props.navigation.navigate('userProfile')
                 this.props.navigation.navigate('Search')
                 return
               }
