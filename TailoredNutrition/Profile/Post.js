@@ -7,6 +7,7 @@ import {StyleSheet,
                 KeyboardAvoidingView,
 			} from 'react-native';
 import BarCodeScan from '../BarCodeScan';
+import { TabNavigator, TabBarBottom } from 'react-navigation';
 import t from 'tcomb-form-native';
 
 const Form = t.form.Form;

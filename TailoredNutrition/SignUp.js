@@ -16,6 +16,7 @@ import {
 import { Ionicons } from '@expo/vector-icons'; //
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import t from 'tcomb-form-native';
+import userProfile from './Profile/userProfile'
 
 
 
@@ -102,11 +103,22 @@ export default class You extends Component<{}> {
             else{
                 console.log("Inserting new user...")
                 //If we reach here we should insert a new entry
-                tx.executeSql('INSERT INTO PROFILES (username, password,name, sex, age,height,weight,tweight,activity) VALUES (?,?,?,?,?,?,?,?,?);',
+                tx.executeSql('INSERT INTO PROFILES (username, password,name, sex, age,height,weight,tweight,activity,logid) VALUES (?,?,?,?,?,?,?,?,?,0);',
                 [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.DesiredWeight,re.ActivityLevel],
                 (tx,result) =>{
                   console.log("Successfull insert, debug info:\n ?", result)
-                  
+
+                  //Session this new user...
+                  tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',
+                    [re.username],
+                    ()=>{
+                      console.log("Session set to username", re.username)
+                    },
+                    ()=>{
+                      console.log("Was not able to complete the session insert/replace")
+                    });
+
+                  //this.props.navigation.navigate('userProfile')
                   this.props.navigation.navigate('Search')
                 },
                 () => {

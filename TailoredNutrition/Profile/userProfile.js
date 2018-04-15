@@ -20,6 +20,12 @@ import PropTypes from 'prop-types'
 import Posts from './Posts'
 import Post from './Post'
 
+//DB
+import Expo, { SQLite } from 'expo';//Import SQLite
+const db = SQLite.openDatabase('db.db'); //Open db here
+
+
+
 const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
@@ -197,6 +203,21 @@ class userProfile extends Component {
 
   renderContactHeader = () => {
     const { avatar, name, bio } = this.props
+
+    //DB calls here?
+    db.transaction(
+      tx => {
+        tx.executeSql(
+          'SELECT * FROM SESSION LIMIT 1;',[],
+          (t,result) => {
+            console.log(result.rows._array[0].user);
+            this.name = result.rows._array[0].user;
+            console.log(this.name)
+          }
+        );
+      }
+    );
+
     return (
       <View style={styles.headerContainer}>
         <View style={styles.userRow}>
@@ -207,7 +228,7 @@ class userProfile extends Component {
             
           />
           <View style={styles.userNameRow}>
-            <Text style={styles.userNameText}> UserName </Text>
+            <Text style={styles.userNameText}> Username </Text>
           </View>
           <View style={styles.userBioRow}>
             <Text style={styles.userBioText}>{bio}</Text>

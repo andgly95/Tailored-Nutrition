@@ -96,7 +96,7 @@ export default class App extends Component<{}> {
           //ACTIVITY LEVEL(ACTIVITY) AS INT
           //TARGET WEIGHT(TWEIGHT) AS INT
           //LOGID AS INT
-          'CREATE TABLE IF NOT EXISTS PROFILES ( username text primary key not null UNIQUE, logid not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer);'
+          'CREATE TABLE IF NOT EXISTS PROFILES ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer,logid integer );'
       );
 
     //   console.log('All tables within our database:')
@@ -108,10 +108,9 @@ export default class App extends Component<{}> {
     
     console.log('Current Session values :')
     tx.executeSql('SELECT * FROM SESSION;',[],(_,result)=>{
-        
-      console.log(result.rows.length) 
+      console.log(result)
        if(result.rows.length != 0){
-            if (result.row._array[0].user != null){
+            if (result.rows._array[0].user != null){
                 console.log("Found a session...")
                 //Handle default screen here
                 //this.props.navigation.navigate('Search')
