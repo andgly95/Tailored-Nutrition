@@ -22,9 +22,9 @@ export default class Terms extends Component<{}> {
     }
     render() {
         console.log('Terms.render');
-        return (
+        return (<ScrollView>
                 <View style={styles.container}>
-				<ScrollView>
+				
                     <Text style={styles.header}>
                     We want you to get fit!
                     </Text>
@@ -52,10 +52,13 @@ export default class Terms extends Component<{}> {
                     Adults and legal guardians are warned that the App is not backed by any United States Certified Nutrition Specialist. All 
                     recommendations are simply that, recommendations.
 
+                    
+
                     </Text>
-					</ScrollView>
+					
 
                     </View>
+                    </ScrollView>
                 );
     }
 

@@ -12,33 +12,27 @@ import { StackNavigator } from 'react-navigation';
 import Welcome from './Welcome';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-<<<<<<< HEAD
-import RealmSignUp from './RealmSignUp'
-=======
 import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import Search from './Search';
 import userLog from './userLog';
 import userProfile from './Profile/userProfile'
->>>>>>> master
 
 
 
-//import Expo, { SQLite } from 'expo';//Import SQLite
+import Expo, { SQLite } from 'expo';//Import SQLite
 
-//const db = SQLite.openDatabase('db.db'); //Open db here
+const db = SQLite.openDatabase('db.db'); //Open db here
 
 
-//type Props = {};
+type Props = {};
 
 var RootStack = StackNavigator(
     {
         Welcome: {
             screen: Welcome,
         },
-        RealmSignUp:{
-            screen: RealmSignUp,
-        },
+       
         SignUp: {
             screen: SignUp,
         },
@@ -63,19 +57,19 @@ var RootStack = StackNavigator(
 
     },
      {
-        initialRouteName: 'userProfile',
+        initialRouteName: 'Welcome',
      },
      );
 
 export default class App extends Component<{}> {
 
     //Do creation of tables upon start up of app
- /*   componentDidMount() {
+    componentDidMount() {
 
     //Deletes db if we need it
     //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
     
-    //console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
+    console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
 
     //Create a table that wil be treated like a session cache?
     db.transaction(
@@ -113,16 +107,21 @@ export default class App extends Component<{}> {
 
     
     console.log('Current Session values :')
-    tx.executeSql('SELECT * FROM SESSION;',[],(_,{rows: {_array}})=>{
+    tx.executeSql('SELECT * FROM SESSION;',[],(_,result)=>{
         
-      console.log(_array[0]) 
-        if (_array[0].user != null){
-            console.log("Found a session...")
-            //Handle default screen here
-            //this.props.navigation.navigate('Search')
+      console.log(result.rows.length) 
+       if(result.rows.length != 0){
+            if (result.row._array[0].user != null){
+                console.log("Found a session...")
+                //Handle default screen here
+                //this.props.navigation.navigate('Search')
+            }
+            else{
+                console.log("Did not find a session...")
+            }
         }
         else{
-            console.log("Did not find a session...")
+            console.log("No session has been logged!")
         }
     }
     );
@@ -138,7 +137,7 @@ export default class App extends Component<{}> {
   );
     console.log('\nTable created!');
     
-    }*/
+    }
     render() {
         
          return <RootStack />;
