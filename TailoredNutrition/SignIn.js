@@ -102,7 +102,7 @@ export default class SignIn extends Component<{}> {
                 
                 
                 //this.props.navigation.navigate('userProfile')
-                this.props.navigation.navigate('Search')
+                this.props.navigation.navigate('userProfile')
                 return
               }
               else{ //If passwords don't match

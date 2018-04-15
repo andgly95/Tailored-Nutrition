@@ -119,7 +119,7 @@ export default class You extends Component<{}> {
                     });
 
                   //this.props.navigation.navigate('userProfile')
-                  this.props.navigation.navigate('Search')
+                  this.props.navigation.navigate('userProfile')
                 },
                 () => {
                   console.log("Failed to execute Insert query for SignUp")
