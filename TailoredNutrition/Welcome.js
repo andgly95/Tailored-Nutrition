@@ -42,8 +42,9 @@ export default class Welcome extends Component<{}> {
 
                 <TouchableHighlight
                 onPress = {this._onButtonPressed1}>
+
                 <Text>
-                    already have an account? <Text style= {{color: 'blue', marginTop: 30}}> Sign In </Text>
+                    Already have an account? <Text style= {{color: 'blue', marginTop: 30}}> Sign In </Text>
                 </Text>
                 </TouchableHighlight>
 
