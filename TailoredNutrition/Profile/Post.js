@@ -3,7 +3,8 @@
 import React, {Component} from 'react';
 import {StyleSheet,
 				Button,
-				View
+                View,
+                KeyboardAvoidingView,
 			} from 'react-native';
 import BarCodeScan from '../BarCodeScan';
 import t from 'tcomb-form-native';
@@ -43,7 +44,8 @@ export default class Post extends Component<{}> {
 
 render() {
 	return (
-		<View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.container}>
 		<Button
 		onPress = {this.barCodePress}
 		title = "Scan Bar Code"
@@ -56,6 +58,8 @@ render() {
         title = "Search Entries"
         />
 		</View>
+        </KeyboardAvoidingView>
+
 		);
 }
 }
