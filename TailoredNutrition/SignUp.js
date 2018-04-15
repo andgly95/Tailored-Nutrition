@@ -137,17 +137,33 @@ export default class You extends Component<{}> {
           <Form ref={f => this._form = f} // assign a ref
             type={Person} 
             options = {options}/> 
+            
+            <TouchableHighlight
+            onPress = {this._onButtonPressed1}>
+            <Text>
+               Tap <Text style= {{color: 'blue', marginTop: 30}}>Here </Text> for terms and conditions
+            </Text>
+            </TouchableHighlight>
+
           <TouchableHighlight
             onPress={this.handleSubmit}>
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
-            </TouchableHighlight>
+          </TouchableHighlight>
+
             
             </View>
-</ScrollView>
-                );
-    }
+    </ScrollView>
+    );
+  }
+  _onButtonPressed1 = () => {
+    this.setState({ isPressed: true });
+    this.props.navigation.navigate('Term');
+  };
 }
+
+
+
 
 
   const styles = StyleSheet.create({

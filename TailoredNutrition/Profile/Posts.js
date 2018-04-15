@@ -8,7 +8,7 @@ import {
     FlatList,
 } from 'react-native';
 
-export default class userLog extends Component<{}> {
+export default class Posts extends Component<{}> {
 state = {
     data: []
 };

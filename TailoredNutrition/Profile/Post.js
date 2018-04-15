@@ -3,9 +3,10 @@
 import React, {Component} from 'react';
 import {StyleSheet,
 				Button,
-				View
+                View,
+                KeyboardAvoidingView,
 			} from 'react-native';
-import BarCodeScan from './BarCodeScan';
+import BarCodeScan from '../BarCodeScan';
 import t from 'tcomb-form-native';
 
 const Form = t.form.Form;
@@ -15,7 +16,7 @@ const SearchForm = t.struct ({
 	Branded: t.Boolean,
 });
 
-export default class Search extends Component<{}> {
+export default class Post extends Component<{}> {
 	
 	barCodePress  = () => {
 		this.props.navigation.navigate('BarCodeScan');
@@ -43,7 +44,8 @@ export default class Search extends Component<{}> {
 
 render() {
 	return (
-		<View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.container}>
 		<Button
 		onPress = {this.barCodePress}
 		title = "Scan Bar Code"
@@ -56,6 +58,8 @@ render() {
         title = "Search Entries"
         />
 		</View>
+        </KeyboardAvoidingView>
+
 		);
 }
 }

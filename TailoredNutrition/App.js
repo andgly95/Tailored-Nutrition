@@ -16,15 +16,16 @@ import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import Search from './Search';
 import userLog from './userLog';
+import userProfile from './Profile/userProfile'
 
 
 
-import Expo, { SQLite } from 'expo';//Import SQLite
+//import Expo, { SQLite } from 'expo';//Import SQLite
 
-const db = SQLite.openDatabase('db.db'); //Open db here
+//const db = SQLite.openDatabase('db.db'); //Open db here
 
 
-type Props = {};
+//type Props = {};
 
 var RootStack = StackNavigator(
     {
@@ -49,17 +50,20 @@ var RootStack = StackNavigator(
         userLog : {
             screen: userLog,
         },
+        userProfile: {
+            screen: userProfile,
+        }
 
     },
      {
-        initialRouteName: 'Welcome',
+        initialRouteName: 'userProfile',
      },
      );
 
 export default class App extends Component<{}> {
 
     //Do creation of tables upon start up of app
-  componentDidMount() {
+ /*   componentDidMount() {
 
     //Deletes db if we need it
     //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
@@ -127,7 +131,7 @@ export default class App extends Component<{}> {
   );
     console.log('\nTable created!');
     
-  }
+    }*/
     render() {
         
          return <RootStack />;
