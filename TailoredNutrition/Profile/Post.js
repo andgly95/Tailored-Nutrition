@@ -1,13 +1,14 @@
 'use strict'
-
+// SEARCH!!!!!!!!
+// SEARCH!!!!!!!!
 import React, {Component} from 'react';
 import {StyleSheet,
 				Button,
                 View,
-                FlatList
+                KeyboardAvoidingView,
 			} from 'react-native';
-import BarCodeScan from './BarCodeScan';
-import SearchResults from './SearchResults';
+import BarCodeScan from '../BarCodeScan';
+import { TabNavigator, TabBarBottom } from 'react-navigation';
 import t from 'tcomb-form-native';
 
 const Form = t.form.Form;
@@ -17,35 +18,7 @@ const SearchForm = t.struct ({
 	Branded: t.Boolean,
 });
 
-class ListItem extends React.PureComponent {
-    _onPress = () => {
-      this.props.onPressItem(this.props.index);
-    }
-  
-    render() {
-      const item = this.props.item;
-      const price = item.price_formatted.split(' ')[0];
-      return (
-        <TouchableHighlight
-          onPress={this._onPress}
-          underlayColor='#dddddd'>
-          <View>
-            <View style={styles.rowContainer}>
-              <Image style={styles.thumb} source={{ uri: item.img_url }} />
-              <View style={styles.textContainer}>
-                <Text style={styles.price}>{price}</Text>
-                <Text style={styles.title}
-                  numberOfLines={1}>{item.title}</Text>
-              </View>
-            </View>
-            <View style={styles.separator}/>
-          </View>
-        </TouchableHighlight>
-      );
-    }
-  }
-
-export default class Search extends Component<{}> {
+export default class Post extends Component<{}> {
 	
 	barCodePress  = () => {
 		this.props.navigation.navigate('BarCodeScan');
@@ -66,30 +39,15 @@ export default class Search extends Component<{}> {
             //console.log(stringme) 
             console.log(test)
             console.log(test.branded[0])
-            this.props.navigator.push({
-                title: 'Results',
-                component: SearchResults,
-                passProps: {common: test.common}
-              });
-              
+            
+            console.log("What")
         });
       }
-      _keyExtractor = (item, index) => index;
 
-      _renderItem = ({item}) => {
-        return (
-          <TouchableHighlight
-            underlayColor='#dddddd'>
-            <View>
-              <Text>{item.title}</Text>
-            </View>
-          </TouchableHighlight>
-        );
-        
-      };
 render() {
 	return (
-		<View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.container}>
 		<Button
 		onPress = {this.barCodePress}
 		title = "Scan Bar Code"
@@ -101,12 +59,8 @@ render() {
         onPress = {this.handleSearchSubmit}
         title = "Search Entries"
         />
-        <FlatList
-        data={this.props.listings}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-      />
 		</View>
+        </KeyboardAvoidingView>
 
 		);
 }

@@ -15,6 +15,7 @@ import {
 import SignUp from './SignUp'
 
 import SignIn from './SignIn'
+import { colors } from 'react-native-elements';
 
 export default class Welcome extends Component<{}> {
     constructor(props) {
@@ -39,16 +40,32 @@ export default class Welcome extends Component<{}> {
                 <Image source={require('./Resources/start.png')} style={styles.image}/>
                 </TouchableHighlight>
 
+                <TouchableHighlight
+                onPress = {this._onButtonPressed1}>
 
-                
-                
+                <Text>
+                    Already have an account? <Text style= {{color: 'blue', marginTop: 30}}> Sign In </Text>
+                </Text>
+                </TouchableHighlight>
+
                 </View>
                 );
+    }
+    _signIn = () => {
+        this.setState({isPressed: true});
+        
+        this.props.navigation.navigate('SignIn');
     }
     _onButtonPressed = () => {
         this.setState({ isPressed: true });
         this.props.navigation.navigate('SignUp');
     };
+    _onButtonPressed1 = () => {
+        this.setState({ isPressed: true });
+        this.props.navigation.navigate('SignIn');
+    };
+
+
 //////////////////////////////////////////
 }
 

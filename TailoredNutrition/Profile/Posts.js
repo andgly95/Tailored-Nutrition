@@ -1,5 +1,8 @@
 'use strict';
 // https://www.youtube.com/watch?v=IuYo009yc8w&t=7s    <- use for reference to understand what is happening here.
+// userLogs!!!
+// userLogs!!!
+
 import React, { Component } from 'react';
 import {
     StyleSheet,
@@ -8,7 +11,7 @@ import {
     FlatList,
 } from 'react-native';
 
-export default class userLog extends Component<{}> {
+export default class Posts extends Component<{}> {
 state = {
     data: []
 };
