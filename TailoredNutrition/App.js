@@ -69,7 +69,7 @@ export default class App extends Component<{}> {
     //Deletes db if we need it
     //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
     
-    //console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
+    console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
 
     //Create a table that wil be treated like a session cache?
     db.transaction(
