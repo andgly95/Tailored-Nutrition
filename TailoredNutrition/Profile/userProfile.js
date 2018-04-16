@@ -164,10 +164,10 @@ class userProfile extends Component {
   _renderScene = ({ route: { key } }) => {
     const { post, posts } = this.props
     if(key == 1){
-        return <Post containerStyle={styles.sceneContainer} post={post} />
+        return <Post navigation={this.props.navigation} containerStyle={styles.sceneContainer} post={post} />
     }
     else if (key == 2){
-        return <Posts containerStyle={styles.sceneContainer} posts={posts} /> 
+        return <Posts navigation={this.props.navigation} containerStyle={styles.sceneContainer} posts={posts} /> 
     }
   }
 

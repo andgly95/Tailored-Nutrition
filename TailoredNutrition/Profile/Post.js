@@ -21,6 +21,7 @@ const SearchForm = t.struct ({
 export default class Post extends Component<{}> {
 	
 	barCodePress  = () => {
+        console.log('failwhale')
 		this.props.navigation.navigate('BarCodeScan');
 	}
     handleSearchSubmit = () => {
@@ -47,7 +48,7 @@ export default class Post extends Component<{}> {
 render() {
 	return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <View style={styles.container}>
+        <View>
 		<Button
 		onPress = {this.barCodePress}
 		title = "Scan Bar Code"
@@ -75,8 +76,7 @@ const styles = StyleSheet.create({
         color: '#656565'
     },
     container: {
-        padding: 30,
-        marginTop: 30,
+       // padding: 30,
     },
     // styling for buttons
     signButton: {

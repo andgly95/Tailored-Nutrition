@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { BarCodeScanner, Permissions } from 'expo';
 
 export default class BarCodeScan extends React.Component {
