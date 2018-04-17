@@ -11,6 +11,10 @@ import {
 } from 'react-native';
 
 export default class SearchResults extends Component<{}> {
+  state = {
+    results: []
+  }
+  
   _keyExtractor = (item, index) => index;
 
   _renderItem = ({item}) => {

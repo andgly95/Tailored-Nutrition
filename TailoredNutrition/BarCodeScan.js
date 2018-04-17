@@ -6,6 +6,7 @@ import { BarCodeScanner, Permissions } from 'expo';
 export default class BarCodeScan extends React.Component {
   state = {
     hasCameraPermission: null,
+    data:[]
   }
 
   async componentWillMount() {
@@ -40,6 +41,10 @@ export default class BarCodeScan extends React.Component {
         'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
         'x-remote-user-id' : 0
       })
-    }).then(response => console.log('Success:', response));
+    }).then(function(response){
+      let result = JSON.parse(response['_bodyText']);
+      console.log(result.foods[0].brand_name + result.foods[0].food_name);
+      //this.setState(result.)
+    })
   }
 }
