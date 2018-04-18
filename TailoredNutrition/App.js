@@ -14,9 +14,9 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import BarCodeScan from './BarCodeScan';
 import Term from './Term';
-import Search from './Search';
 import userLog from './userLog';
-import userProfile from './Profile/userProfile'
+import userProfile from './Profile/userProfile';
+import ScanResults from './ScanResults';
 
 
 
@@ -45,14 +45,14 @@ var RootStack = StackNavigator(
 		Term: {
 			screen: Term,
 		},
-		Search : {
-			screen: Search,
-        },
         userLog : {
             screen: userLog,
         },
         userProfile: {
             screen: userProfile,
+        },
+        ScanResult: {
+            screen: ScanResults,
         }
 
     },
@@ -70,7 +70,7 @@ export default class App extends Component<{}> {
     //Deletes db if we need it
     //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
     
-    console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
+    //console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
 
     //Create a table that wil be treated like a session cache?
     db.transaction(

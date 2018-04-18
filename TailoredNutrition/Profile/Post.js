@@ -24,21 +24,21 @@ export default class Post extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {data: [
-            {food_name: 'pizza'},
-            {food_name: 'pizza hut'},
-            {food_name: 'pizza bagel'}
-        ]};
-        this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
+        this.state = {data: []};
+        this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+        this.barCodePress = this.barCodePress.bind(this);
     }
 
 	barCodePress  = () => {
         console.log('failwhale')
-		this.props.navigation.navigate('BarCodeScan');
+        this.setState({data: {food_name: 'gross bagel'}});
+        console.log(this.state)
+		this.props.navigation.navigate('BarCodeScan', {navigation: this.props.navigation});
     }
     
     handleSearchSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
+        var self = this;
         fetch ('https://trackapi.nutritionix.com/v2/search/instant?query=+'+value.Search, {
           method: 'GET',
           headers: new Headers( {
@@ -60,10 +60,12 @@ export default class Post extends Component {
             for (let i = 0; i < brandSize;i++){
                 console.log("Result " + i + " " + test.common[i].food_name)
             }
-            //console.log(test);
-            console.log(this);
-            this.setState({data: {food_name: 'gross bagel'}});
-            console.log({data})
+            console.log(test);
+            
+            self.setState({data: {food_name: 'gross bagel'}});
+            console.log("State",self.state);
+
+            console.log("Data", self.state.data)
 
             
             
