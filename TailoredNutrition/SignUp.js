@@ -11,7 +11,11 @@ import {
     Image,
     Picker,
     TouchableHighlight,
-    ScrollView
+    ScrollView,
+	KeyboardAvoidingView,
+	Platform,
+	Animated,
+	Keyboard,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; //
 import { TabNavigator, TabBarBottom } from 'react-navigation';
@@ -60,8 +64,78 @@ var Person = t.struct({
       
     },
   };
+  
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
+
 
 export default class You extends Component<{}> {
+	
+	constructor(props) {
+
+    super(props);
+
+
+
+    this.keyboardHeight = new Animated.Value(0);
+
+  }
+
+
+
+  componentWillMount () {
+
+    this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+
+    this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+
+  }
+
+
+
+  componentWillUnmount() {
+
+    this.keyboardWillShowSub.remove();
+
+    this.keyboardWillHideSub.remove();
+
+  }
+
+
+
+  keyboardWillShow = (event) => {
+
+    Animated.parallel([
+
+      Animated.timing(this.keyboardHeight, {
+
+        duration: event.duration,
+
+        toValue: event.endCoordinates.height,
+
+      }),
+
+    ]).start();
+
+  };
+
+
+
+  keyboardWillHide = (event) => {
+
+    Animated.parallel([
+
+      Animated.timing(this.keyboardHeight, {
+
+        duration: event.duration,
+
+        toValue: 0,
+
+      }),
+
+
+    ]).start();
+
+  };
 
   state = {user: ''}
   updateUser = (user) => {
@@ -144,11 +218,14 @@ export default class You extends Component<{}> {
   render() {
     console.log('SignUp.render');
     return (
+
       <ScrollView>
+	<Animated.View style={[styles.container, { paddingBottom: this.keyboardHeight }]}>
         <View style={styles.container}>
           <Form ref={f => this._form = f} // assign a ref
             type={Person} 
             options = {options}/> 
+		
             
             <TouchableHighlight
             onPress = {this._onButtonPressed1}>
@@ -162,10 +239,11 @@ export default class You extends Component<{}> {
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
           </TouchableHighlight>
-
-            
             </View>
+		</Animated.View>
     </ScrollView>
+			
+	
     );
   }
   _onButtonPressed1 = () => {
