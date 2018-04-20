@@ -15,6 +15,7 @@ const SearchForm = t.struct ({
 	Branded: t.Boolean,
 });
 
+// This page displays the methods that the user can add nutrition information, either manually or through the barcode scanner.
 export default class Search extends Component<{}> {
 	
 	barCodePress  = () => {
@@ -43,6 +44,7 @@ export default class Search extends Component<{}> {
 
 render() {
 	return (
+		// This is what is displayed on the search screen, which has options for barcode scanning and manual search.
 		<View style={styles.container}>
 		<Button
 		onPress = {this.barCodePress}
@@ -78,6 +80,7 @@ const styles = StyleSheet.create({
         width: 995 / 4,
         marginTop: 20,
    },
+	//styling for the text input for manual searches
     searchInput: {
         height: 36,
         padding: 4,

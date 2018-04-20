@@ -12,7 +12,7 @@ import {
     Image,
 	ScrollView,
 } from 'react-native';
-
+// The page in the app which displays the terms and conditions for the app
 export default class Terms extends Component<{}> {
     constructor(props) {
         super(props);
