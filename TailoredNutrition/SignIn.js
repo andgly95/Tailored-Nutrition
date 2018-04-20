@@ -24,6 +24,7 @@ const User = t.struct({
   rememberme: t.Boolean
 });
 
+// The username and password login fields, complete with an error message for cases where the login information is missing or incorrect
 const options = {
   fields: {
     username: {
@@ -196,7 +197,7 @@ container: {
     width: 995 / 4,
     marginTop: 20,
   },
-      
+    // styling for input fields
   inputStyle: {
     width: 375, 
     height: 44, 

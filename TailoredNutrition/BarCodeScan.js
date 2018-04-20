@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
+// The app page responsible for the bar code scanner of food.
 export default class BarCodeScan extends React.Component {
   state = {
     hasCameraPermission: null,
@@ -13,6 +14,7 @@ export default class BarCodeScan extends React.Component {
     }
 
   render() {
+	  // This will make sure that the app has permission from the camera on the phone before it is able to read barcodes.
     const { hasCameraPermission } = this.state;
 
     if (hasCameraPermission === null) {
@@ -31,6 +33,7 @@ export default class BarCodeScan extends React.Component {
     }
   }
 
+  	// This is what performs the barcode read operations.
   _handleBarCodeRead = ({ type, data }) => {
     fetch ('https://trackapi.nutritionix.com/v2/search/item'+'?upc='+data, {
       method: 'GET',

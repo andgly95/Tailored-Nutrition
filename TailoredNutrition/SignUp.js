@@ -246,6 +246,7 @@ export default class You extends Component<{}> {
 	
     );
   }
+  // For the button which allows you to read the terms and conditions
   _onButtonPressed1 = () => {
     this.setState({ isPressed: true });
     this.props.navigation.navigate('Term');
@@ -277,6 +278,7 @@ export default class You extends Component<{}> {
         height: 182 / 4,
         width: 995 / 4,
     },
+	// styling for input fields
     searchInput: {
         height: 36,
         padding: 4,
