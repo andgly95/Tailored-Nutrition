@@ -68,6 +68,7 @@ var Person = t.struct({
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
 
+	  // This page displays upon first logging on to the app. The user inputs their information to be stored on a database.
 export default class You extends Component<{}> {
 	
   state = {user: ''}
