@@ -43,6 +43,8 @@ var Gender = t.enums({
 });
 
 var Person = t.struct({
+    username: t.String,
+    password: t.String,
     Name: t.String,
     weight: t.Number,
     gender: Gender,
@@ -50,8 +52,6 @@ var Person = t.struct({
     Height: t.Number,
     DesiredWeight: t.Number,
     ActivityLevel: Activity,
-    username: t.String,
-    password: t.String,
     terms: t.Boolean
   });
 
