@@ -17,6 +17,7 @@ import Term from './Term';
 import Search from './Search';
 import userLog from './userLog';
 import userProfile from './Profile/userProfile'
+import Settings from './Settings'
 
 
 
@@ -54,11 +55,15 @@ var RootStack = StackNavigator(
         },
         userProfile: {
             screen: userProfile,
-        }
+        },
+		
+		Settings: {
+			screen: Settings,
+		},
 
     },
      {
-        initialRouteName: 'Welcome',
+        initialRouteName: 'Settings',
      },
      );
 
