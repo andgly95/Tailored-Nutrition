@@ -4,7 +4,8 @@
 import React, {Component} from 'react';
 import {StyleSheet,
     FlatList,
-				Button,
+                Button,
+                TouchableHighlight,
                 View,
                 Text,
                 KeyboardAvoidingView,
@@ -24,14 +25,13 @@ export default class Post extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {data: []};
+        this.state = {data: ["response goes here"]};
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
         this.barCodePress = this.barCodePress.bind(this);
     }
 
 	barCodePress  = () => {
         console.log('failwhale')
-        this.setState({data: {food_name: 'gross bagel'}});
         console.log(this.state)
 		this.props.navigation.navigate('BarCodeScan', {navigation: this.props.navigation});
     }
@@ -46,33 +46,34 @@ export default class Post extends Component {
             'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
             'x-remote-user-id' : 0
           })
-        }).then(function(response){ 
-            //console.log('Success:', response)
-            var test = JSON.parse(response['_bodyInit']);
-           // var stringme = JSON.stringify(test)
-            //console.log(stringme) 
-            console.log("Number of Branded Results: " + test.branded.length)
-            console.log("Number of Common Results: " + test.common.length)
-            let brandSize = 5;
-            if (test.branded.length < 5) brandSize = test.branded.length
-            //var brandSize = Math.min(test.branded.length, 5);
-            //var commonSize = Math.min(test.common.length, 5);
-            for (let i = 0; i < brandSize;i++){
-                console.log("Result " + i + " " + test.common[i].food_name)
-            }
-            console.log(test);
-            
-            self.setState({data: {food_name: 'gross bagel'}});
-            console.log("State",self.state);
-
-            console.log("Data", self.state.data)
-
-            
-            
+        }).then(response => {
+            //console.log("Response", response);
+            return response.json();
+        }).then(responseData => {
+            ///console.log("Response Data", responseData);
+            this._handleResponse(responseData);
+            return responseData;
         })
     .catch(function(error){ console.log(error)});
-      }
-
+      };
+    
+    _handleResponse = (response) => {
+        
+        //console.log("Response Handler", response);
+        this.setState({data: response});
+        console.log(this.state);
+    };
+    _keyExtractor = (item, index) => index;
+    _renderItem = ({item}) => {
+        return (
+          <TouchableHighlight
+            underlayColor='#dddddd'>
+            <View>
+              <Text>{item.brand_name_item_name}</Text>
+            </View>
+          </TouchableHighlight>
+        );
+    };
 render() {
 	return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -88,20 +89,18 @@ render() {
         onPress = {this.handleSearchSubmit.bind(this)}
         title = "Search Entries"
         />
-		</View>
         <FlatList
-        data={this.state.data}
-        keyExtractor={(x,i) => i}
-        renderItem={({item}) =>
-            <Text>
-                {item.food_name}
-            </Text>}
+        data={this.state.data.branded}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
       />
+        </View>
         </KeyboardAvoidingView>
 
-		);
+        );
+    };
 }
-}
+
 
 
 const styles = StyleSheet.create({

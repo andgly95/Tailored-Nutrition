@@ -9,19 +9,18 @@ import {
   FlatList,
   Text,
 } from 'react-native';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 
-export default class ScanResults extends Component<{}> {
+export default class ScanResults extends Component {
   constructor(props) {
     super(props);
-    //let state = this.props.navigation;
-
+      this.state = {result: "365 Everyday Value Electrolyte Water"};
   }
 
   render() {
     return (
       <View>
-        <Text>You have scanned {this.props.navigation.params.result}</Text>
+        <Text>You have scanned {this.state.result}</Text>
       </View>
     );
   }

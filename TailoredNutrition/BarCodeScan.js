@@ -4,13 +4,16 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { BarCodeScanner, Permissions } from 'expo';
 import ScanResults from './ScanResults';
 
+const API = 'https://trackapi.nutritionix.com/v2/search/item?upc=';
+
 export default class BarCodeScan extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       hasCameraPermission: null,
-      food_name: ''
+      item: [],
+      itemNate: '',
     };
     this._handleBarCodeRead = this._handleBarCodeRead.bind(this);
   }
@@ -23,35 +26,37 @@ export default class BarCodeScan extends React.Component {
 
     _handleBarCodeRead = ({ type, data,props }) => {
       var self = this;
-      fetch ('https://trackapi.nutritionix.com/v2/search/item'+'?upc='+data, {
+
+      fetch (API+data, {
         method: 'GET',
         headers: new Headers( {
-          'x-app-id': 'a895c79f',
-          'x-app-key': 'e61b89b47db104313658073ed3bbf420',
+          'x-app-id': 'beeef40f',
+          'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
           'x-remote-user-id' : 0
         })
-      }).then(function(response){
-        //console.log(response);
-       
-        let result = JSON.parse(response['_bodyText']);
-        var itemName = result.foods[0].brand_name + " " + result.foods[0].food_name
-        console.log(itemName);
-        self.setState({
-            food_name: itemName
-        });
-       alert(self.state.food_name);
-       self.props.navigation.navigate('ScanResult', 
-        {result: self.state.food_name});
-
-      }).catch((error) => {
+      }).then(response => {
+        //console.log("Response", response);
+        return response.json();
+    }).then(responseData => {
+        ///console.log("Response Data", responseData);
+        this._handleResponse(responseData);
+        return responseData;
+    })
+      .catch((error) => {
         console.error(error);
       });
       
     }
-
+    _handleResponse = (response) => {
+        
+      //console.log("Response Handler", response);
+      this.setState({item: response});
+      console.log(this.state.item);
+      alert(this.state.item.foods[0].brand_name+this.state.item.foods[0].food_name)
+  };
   render() {
     const { hasCameraPermission } = this.state;
-    console.log("State", this.state.food_name)
+    console.log("State", this.state.data)
     if (hasCameraPermission === null) {
       return <Text>Requesting for camera permission</Text>;
     } else if (hasCameraPermission === false) {
