@@ -15,8 +15,10 @@ import SignIn from './SignIn';
 import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import userLog from './userLog';
-import userProfile from './Profile/userProfile';
+import userProfile from './Profile/userProfile'
+import Settings from './Settings'
 import ScanResults from './ScanResults';
+
 
 
 
@@ -54,6 +56,11 @@ var RootStack = StackNavigator(
         userProfile: {
             screen: userProfile,
         },
+		
+		Settings: {
+			screen: Settings,
+		},
+
         ScanResult: {
             screen: ScanResults,
         }
@@ -61,7 +68,7 @@ var RootStack = StackNavigator(
     },
      {
 
-        initialRouteName: 'userProfile',
+        initialRouteName: 'Welcome',
      },
      );
 
