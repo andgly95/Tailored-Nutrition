@@ -19,8 +19,8 @@ export default class ScanResults extends Component {
 
   render() {
     return (
-      <View style={container}>
-        <Text style = {title}> {this.state.result.brand_name} {this.state.result.food_name}</Text>
+      <View style={styles.container}>
+        <Text style = {styles.title}> {this.state.result.brand_name} {this.state.result.food_name}</Text>
         <Image
           style={{width: 250, height: 250}}
           source={{uri: this.state.result.photo.thumb}}
