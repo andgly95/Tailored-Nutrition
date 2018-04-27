@@ -1,14 +1,34 @@
+'use strict';
 import React, { Component } from 'react';
-import { Text, TextInput, View, StyleSheet } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Button, Alert } from 'react-native';
+import t from 'tcomb-form-native';
 
+const Form = t.form.Form;
+
+var Activity = t.enums({
+  0: 'Not Very Active',
+  1: 'Active',
+  2: 'Very Active'
+});
+
+var Level = t.struct({
+    ActivityLevel: Activity
+  });
+
+  const options = {
+    fields: {
+      
+    },
+  };
+  
 export default class Settings extends Component {
 	
-	age = {
-		inputValue: ""
+/*	age = {
+		inputValue: " "
 	};
 	
 	weight = {
-		inputValuer:""
+		inputValuer:" "
 	};
 	
 	TextChange = inputValue => {
@@ -17,23 +37,44 @@ export default class Settings extends Component {
 	
 	TextModify = inputValuer=> {
 		this.setState({inputValuer});
+	};*/
+	
+		Presser = ( ) => {
+		Alert.alert(
+		'Settings saved!',);
 	};
+	
+	 constructor(props) {
+    super(props);
+    this.state = { age: 'Fill Me!',
+							weight:'Fill Me!'};
+  }
 	
   render() {
     return (
 		<View style = {styles.container}>
       <Text style = {styles.description}> Old Age </Text>
 	  <TextInput 
-	  			value = {this.age.inputValue}
-				onChangeText = {this.TextChange}
+	  			value = {this.state.age}
+				onChangeText = {(age) => this.setState({age})}
 		/>
 		<Text> </Text>
 	  <Text style = {styles.description}> Old Weight </Text>
 	 	<TextInput 
-	  			value = {this.weight.inputValuer}
-				onChangeText = {this.TextModify}
+	  			value = {this.state.weight}
+				onChangeText = {(weight) => this.setState({weight})}
 		/>
-	  </View>
+		<Text> </Text>
+		 <Form ref={f => this._form = f} 
+            type={Level} 
+            options = {options}/> 
+			<Text> </Text>
+		<Button
+			title = "Save Changes"
+			style = {styles.signButton}
+			onPress = {this.Presser}
+			/>
+			</View>
     );
   }
 }
