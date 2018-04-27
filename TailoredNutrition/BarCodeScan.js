@@ -15,6 +15,7 @@ export default class BarCodeScan extends React.Component {
       hasCameraPermission: null,
       item: [],
       itemNate: '',
+      alreadyScanned: false,
     };
     this._handleBarCodeRead = this._handleBarCodeRead.bind(this);
   }
@@ -26,6 +27,8 @@ export default class BarCodeScan extends React.Component {
     }
 
     _handleBarCodeRead = ({ type, data,props }) => {
+    if (this.state.alreadyScanned === false){
+      
       var self = this;
 
       fetch (API+data, {
@@ -41,12 +44,13 @@ export default class BarCodeScan extends React.Component {
     }).then(responseData => {
         ///console.log("Response Data", responseData);
         this._handleResponse(responseData);
+        this.setState({alreadyScanned: true})
         return responseData;
     })
       .catch((error) => {
         console.error(error);
       });
-      
+    }
     }
     _handleResponse = (response) => {
         
