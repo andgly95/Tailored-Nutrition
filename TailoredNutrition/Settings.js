@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, StyleSheet } from 'react-native';
+import { Text, TextInput, View, StyleSheet } from 'react-native';
 
 export default class Settings extends Component {
 	
@@ -7,22 +7,33 @@ export default class Settings extends Component {
 		inputValue: ""
 	};
 	
+	weight = {
+		inputValuer:""
+	};
+	
 	TextChange = inputValue => {
 		this.setState({inputValue});
 	};
 	
+	TextModify = inputValuer=> {
+		this.setState({inputValuer});
+	};
+	
   render() {
     return (
+		<View style = {styles.container}>
       <Text style = {styles.description}> Old Age </Text>
-	 /*<Text style = {styles.description}> Place TextInput Here </Text>
-	  <Text style = {styles.description}> Old Gender </Text>
-	  <Text style = {styles.description}> Place TextInput Here</Text>
+	  <TextInput 
+	  			value = {this.age.inputValue}
+				onChangeText = {this.TextChange}
+		/>
+		<Text> </Text>
 	  <Text style = {styles.description}> Old Weight </Text>
-	  <Text style = {styles.description}> Place TextInput Here </Text>
-	  <Text style = {styles.description}> Old Height </Text>
-	  <Text style = {styles.description}> Place TextInput Here </Text>
-	  <Text style = {styles.description}> Old Activity Level </Text>
-	  <Text style = {styles.description}> Place TextInput Here </Text>*/
+	 	<TextInput 
+	  			value = {this.weight.inputValuer}
+				onChangeText = {this.TextModify}
+		/>
+	  </View>
     );
   }
 }
