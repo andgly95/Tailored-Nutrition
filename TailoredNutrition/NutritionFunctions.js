@@ -6,8 +6,8 @@
 
 */
 
-export default class NutritionFunctions extends Component<{}> {
-    function dailyBurn(weight, Height, gender, age){ // calories burned by simply existing
+//export default class NutritionFunctions extends Component<{}> {
+    export function dailyBurn(weight, Height, gender, age){ // calories burned by simply existing
         if (Gender == M){
             return (66 + (6.2 * weight) + (12.7 * Height) - (6.76 * age));
         }
@@ -16,29 +16,30 @@ export default class NutritionFunctions extends Component<{}> {
         }
     }
 
-    function actualBurn(dailyBurn, activity){ // calories actually burned according to activity level
-        if (activity == L){
+    export function actualBurn(dailyBurn, activity){ // calories actually burned according to activity level
+        if (activity == 'L'){
             return (dailyBurn * 1.2);
         }
-        else if (activity == M){
+        else if (activity == 'M'){
             return (dailyBurn * 1.55);
         }
-        else if (activity == H){
+        else if (activity == 'H'){
             return (dailyBurn * 1.725);
         }
     }
 
 
 
-    function keto(actualBurn){
+    export function keto(actualBurn){
         actualBurn = actualBurn - (actualBurn * .20) ; // set deficit
         var macros = new Object();
         macros.carbs = (actualBurn * .07) / 4;  // grams of carbs
         macros.fats = (actualBurn * .69) / 9;  // grams of fats
         macros.protein = (actualBurn * .24) / 4; // grams of protein
+        return 1;
     }
 
-    function atkins(actualBurn){
+    export function atkins(actualBurn){
         actualBurn = actualBurn - (actualBurn * .20); // set deficit
         var macros = new Object();
         macros.carbs;
@@ -48,15 +49,15 @@ export default class NutritionFunctions extends Component<{}> {
 
 
     // Calorie Restrictive Diets (Calorie based not macros based)
-    function SmallCalorieRestrictive(dailyBurn){ // small calorie deficit
+    export function SmallCalorieRestrictive(dailyBurn){ // small calorie deficit
         return dailyBurn - (dailyBurn * .12);
     }
 
-    function MediumCalorieRestrictive(dailyBurn){ // medium calorie deficit
+    export function MediumCalorieRestrictive(dailyBurn){ // medium calorie deficit
         return dailyBurn - (dailyBurn * .24);
     }
 
-    function LargeCalorieRestrictive(dailyBurn){ // large calorie deficit 
+    export function LargeCalorieRestrictive(dailyBurn){ // large calorie deficit 
         return dailyBurn - (dailyBurn * .36);
     }
-};
+//};

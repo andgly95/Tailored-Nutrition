@@ -11,13 +11,17 @@ import {
     Image,
     Picker,
     TouchableHighlight,
-    ScrollView
+    ScrollView,
+	KeyboardAvoidingView,
+	Platform,
+	Animated,
+	Keyboard,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; //
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import t from 'tcomb-form-native';
-import userProfile from './Profile/userProfile'
-
+import userProfile from './Profile/userProfile';
+import NutritionFunctions from './NutritionFunctions';
 
 
 //DB Stuff
@@ -43,6 +47,8 @@ var Gender = t.enums({
 });
 
 var Person = t.struct({
+    username: t.String,
+    password: t.String,
     Name: t.String,
     weight: t.Number,
     gender: Gender,
@@ -50,8 +56,6 @@ var Person = t.struct({
     Height: t.Number,
     DesiredWeight: t.Number,
     ActivityLevel: Activity,
-    username: t.String,
-    password: t.String,
     terms: t.Boolean
   });
 
@@ -60,9 +64,13 @@ var Person = t.struct({
       
     },
   };
+  
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
+
+	  // This page displays upon first logging on to the app. The user inputs their information to be stored on a database.
 export default class You extends Component<{}> {
-
+	
   state = {user: ''}
   updateUser = (user) => {
     this.setState({ user: user })
@@ -144,11 +152,14 @@ export default class You extends Component<{}> {
   render() {
     console.log('SignUp.render');
     return (
+
       <ScrollView>
+		  <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View style={styles.container}>
           <Form ref={f => this._form = f} // assign a ref
             type={Person} 
             options = {options}/> 
+		
             
             <TouchableHighlight
             onPress = {this._onButtonPressed1}>
@@ -162,12 +173,14 @@ export default class You extends Component<{}> {
             <Image style={styles.signButton}
             source={require("./Resources/SignUp.png")}/>
           </TouchableHighlight>
-
-            
             </View>
+			</KeyboardAvoidingView>
     </ScrollView>
+			
+	
     );
   }
+  // For the button which allows you to read the terms and conditions
   _onButtonPressed1 = () => {
     this.setState({ isPressed: true });
     this.props.navigation.navigate('Term');
@@ -199,6 +212,7 @@ export default class You extends Component<{}> {
         height: 182 / 4,
         width: 995 / 4,
     },
+	// styling for input fields
     searchInput: {
         height: 36,
         padding: 4,

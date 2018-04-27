@@ -24,6 +24,7 @@ const User = t.struct({
   rememberme: t.Boolean
 });
 
+// The username and password login fields, complete with an error message for cases where the login information is missing or incorrect
 const options = {
   fields: {
     username: {
@@ -46,6 +47,7 @@ const formStyles = {
   ...Form.stylesheet,
 }
 
+// This page is where the user logs in to their account.
 export default class SignIn extends Component<{}> {
 
   constructor(props) {
@@ -88,6 +90,7 @@ export default class SignIn extends Component<{}> {
               if(row["password"] == value.password)
               {   //If passwords match
                   //Just add username to session's table for now...
+                  global.name = value.username
                   console.log("Valid user!")
                   if(value.rememberme){
                     tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',
@@ -196,7 +199,7 @@ container: {
     width: 995 / 4,
     marginTop: 20,
   },
-      
+    // styling for input fields
   inputStyle: {
     width: 375, 
     height: 44, 

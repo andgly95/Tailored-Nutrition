@@ -19,6 +19,8 @@ import PropTypes from 'prop-types'
 
 import Posts from './Posts'
 import Post from './Post'
+import {keto,actualBurn} from '../NutritionFunctions';
+
 
 //DB
 import Expo, { SQLite } from 'expo';//Import SQLite
@@ -106,10 +108,16 @@ const styles = StyleSheet.create({
 })
 
 class userProfile extends Component {
+   static test = {
+     keto : keto(2),
+     dailyburn : actualBurn(2500,'H')
+   }
+
   static propTypes = {
     avatar: PropTypes.string,//.isRequired,
     name: PropTypes.string,//.isRequired,
-    bio: PropTypes.string,//.isRequired,
+    //bio: PropTypes.string,//.isRequired,
+    //bio: PropTypes.number,
     containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     tabContainerStyle: PropTypes.oneOfType([
       PropTypes.object,
@@ -203,7 +211,6 @@ class userProfile extends Component {
 
   renderContactHeader = () => {
     const { avatar, name, bio } = this.props
-
     //DB calls here?
     db.transaction(
       tx => {
@@ -218,6 +225,7 @@ class userProfile extends Component {
       }
     );
 
+
     return (
       <View style={styles.headerContainer}>
         <View style={styles.userRow}>
@@ -228,10 +236,10 @@ class userProfile extends Component {
             
           />
           <View style={styles.userNameRow}>
-            <Text style={styles.userNameText}> Username </Text>
+            <Text style={styles.userNameText}> {global.name} </Text>
           </View>
           <View style={styles.userBioRow}>
-            <Text style={styles.userBioText}>{bio}</Text>
+            <Text style={styles.userBioText}>{JSON.stringify(userProfile.test)}</Text>
           </View>
         </View>
         <View style={styles.socialRow}>
