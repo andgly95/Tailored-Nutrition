@@ -90,6 +90,7 @@ export default class SignIn extends Component<{}> {
               if(row["password"] == value.password)
               {   //If passwords match
                   //Just add username to session's table for now...
+                  global.name = value.username
                   console.log("Valid user!")
                   if(value.rememberme){
                     tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',

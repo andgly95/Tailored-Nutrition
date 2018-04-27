@@ -20,8 +20,8 @@ import {
 import { Ionicons } from '@expo/vector-icons'; //
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import t from 'tcomb-form-native';
-import userProfile from './Profile/userProfile'
-
+import userProfile from './Profile/userProfile';
+import NutritionFunctions from './NutritionFunctions';
 
 
 //DB Stuff
