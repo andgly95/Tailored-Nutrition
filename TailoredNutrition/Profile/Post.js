@@ -3,8 +3,11 @@
 // SEARCH!!!!!!!!
 import React, {Component} from 'react';
 import {StyleSheet,
-				Button,
+    FlatList,
+                Button,
+                TouchableHighlight,
                 View,
+                Text,
                 KeyboardAvoidingView,
 			} from 'react-native';
 import BarCodeScan from '../BarCodeScan';
@@ -18,13 +21,24 @@ const SearchForm = t.struct ({
 	Branded: t.Boolean,
 });
 
-export default class Post extends Component<{}> {
-	
+export default class Post extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {data: ["response goes here"]};
+        this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+        this.barCodePress = this.barCodePress.bind(this);
+    }
+
 	barCodePress  = () => {
-		this.props.navigation.navigate('BarCodeScan');
-	}
+        console.log('failwhale')
+        console.log(this.state)
+		this.props.navigation.navigate('BarCodeScan', {navigation: this.props.navigation});
+    }
+    
     handleSearchSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
+        var self = this;
         fetch ('https://trackapi.nutritionix.com/v2/search/instant?query=+'+value.Search, {
           method: 'GET',
           headers: new Headers( {
@@ -32,22 +46,38 @@ export default class Post extends Component<{}> {
             'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
             'x-remote-user-id' : 0
           })
-        }).then(function(response){ 
-            //console.log('Success:', response)
-            var test = JSON.parse(response['_bodyInit']);
-           // var stringme = JSON.stringify(test)
-            //console.log(stringme) 
-            console.log(test)
-            console.log(test.branded[0])
-            
-            console.log("What")
-        });
-      }
-
+        }).then(response => {
+            //console.log("Response", response);
+            return response.json();
+        }).then(responseData => {
+            ///console.log("Response Data", responseData);
+            this._handleResponse(responseData);
+            return responseData;
+        })
+    .catch(function(error){ console.log(error)});
+      };
+    
+    _handleResponse = (response) => {
+        
+        //console.log("Response Handler", response);
+        this.setState({data: response});
+        console.log(this.state);
+    };
+    _keyExtractor = (item, index) => index;
+    _renderItem = ({item}) => {
+        return (
+          <TouchableHighlight
+            underlayColor='#dddddd'>
+            <View>
+              <Text>{item.brand_name_item_name} {item.food_name}</Text>
+            </View>
+          </TouchableHighlight>
+        );
+    };
 render() {
 	return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <View style={styles.container}>
+        <View>
 		<Button
 		onPress = {this.barCodePress}
 		title = "Scan Bar Code"
@@ -56,15 +86,21 @@ render() {
 		<Form type = {SearchForm}
         ref={s => this._form = s}/>
         <Button
-        onPress = {this.handleSearchSubmit}
+        onPress = {this.handleSearchSubmit.bind(this)}
         title = "Search Entries"
         />
-		</View>
+        <FlatList
+        data={this.state.data.common}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+      />
+        </View>
         </KeyboardAvoidingView>
 
-		);
+        );
+    };
 }
-}
+
 
 
 const styles = StyleSheet.create({
@@ -75,8 +111,7 @@ const styles = StyleSheet.create({
         color: '#656565'
     },
     container: {
-        padding: 30,
-        marginTop: 30,
+       padding: 30,
     },
     // styling for buttons
     signButton: {
