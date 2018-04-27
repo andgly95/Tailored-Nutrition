@@ -14,9 +14,9 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import BarCodeScan from './BarCodeScan';
 import Term from './Term';
-import Search from './Search';
 import userLog from './userLog';
-import userProfile from './Profile/userProfile'
+import userProfile from './Profile/userProfile';
+import ScanResults from './ScanResults';
 
 
 
@@ -46,19 +46,20 @@ var RootStack = StackNavigator(
 		Term: {
 			screen: Term,
 		},
-		Search : {
-			screen: Search,
-        },
         userLog : {
             screen: userLog,
         },
         userProfile: {
             screen: userProfile,
+        },
+        ScanResult: {
+            screen: ScanResults,
         }
 
     },
      {
-        initialRouteName: 'Welcome',
+
+        initialRouteName: 'userProfile',
      },
      );
 
