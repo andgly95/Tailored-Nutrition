@@ -6,6 +6,7 @@ import ScanResults from './ScanResults';
 
 const API = 'https://trackapi.nutritionix.com/v2/search/item?upc=';
 
+// The app page responsible for the bar code scanner of food.
 export default class BarCodeScan extends React.Component {
 
   constructor(props) {
@@ -14,6 +15,7 @@ export default class BarCodeScan extends React.Component {
       hasCameraPermission: null,
       item: [],
       itemNate: '',
+      alreadyScanned: false,
     };
     this._handleBarCodeRead = this._handleBarCodeRead.bind(this);
   }
@@ -25,6 +27,8 @@ export default class BarCodeScan extends React.Component {
     }
 
     _handleBarCodeRead = ({ type, data,props }) => {
+    if (this.state.alreadyScanned === false){
+      
       var self = this;
 
       fetch (API+data, {
@@ -40,12 +44,13 @@ export default class BarCodeScan extends React.Component {
     }).then(responseData => {
         ///console.log("Response Data", responseData);
         this._handleResponse(responseData);
+        this.setState({alreadyScanned: true})
         return responseData;
     })
       .catch((error) => {
         console.error(error);
       });
-      
+    }
     }
     _handleResponse = (response) => {
         
@@ -55,6 +60,7 @@ export default class BarCodeScan extends React.Component {
       alert(this.state.item.foods[0].brand_name+this.state.item.foods[0].food_name)
   };
   render() {
+	  // This will make sure that the app has permission from the camera on the phone before it is able to read barcodes.
     const { hasCameraPermission } = this.state;
     console.log("State", this.state.data)
     if (hasCameraPermission === null) {
