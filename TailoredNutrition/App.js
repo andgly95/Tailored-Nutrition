@@ -25,6 +25,8 @@ import Expo, { SQLite } from 'expo';//Import SQLite
 const db = SQLite.openDatabase('db.db'); //Open db here
 
 
+global.name = "No name"
+
 type Props = {};
 
 // This is what allos all of the pages of the app to navigate to different pages.
