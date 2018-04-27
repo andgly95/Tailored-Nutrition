@@ -8,6 +8,7 @@ import {
     FlatList,
 } from 'react-native';
 
+// This page displays the user's logged information for the app.
 export default class userLog extends Component<{}> {
 state = {
     data: []

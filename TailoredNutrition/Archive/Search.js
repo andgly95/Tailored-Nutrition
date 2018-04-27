@@ -3,9 +3,11 @@
 import React, {Component} from 'react';
 import {StyleSheet,
 				Button,
-				View
+                View,
+                FlatList
 			} from 'react-native';
 import BarCodeScan from './BarCodeScan';
+import SearchResults from './SearchResults';
 import t from 'tcomb-form-native';
 
 const Form = t.form.Form;
@@ -15,6 +17,38 @@ const SearchForm = t.struct ({
 	Branded: t.Boolean,
 });
 
+<<<<<<< HEAD:TailoredNutrition/Search.js
+// This page displays the methods that the user can add nutrition information, either manually or through the barcode scanner.
+=======
+class ListItem extends React.PureComponent {
+    _onPress = () => {
+      this.props.onPressItem(this.props.index);
+    }
+  
+    render() {
+      const item = this.props.item;
+      const price = item.price_formatted.split(' ')[0];
+      return (
+        <TouchableHighlight
+          onPress={this._onPress}
+          underlayColor='#dddddd'>
+          <View>
+            <View style={styles.rowContainer}>
+              <Image style={styles.thumb} source={{ uri: item.img_url }} />
+              <View style={styles.textContainer}>
+                <Text style={styles.price}>{price}</Text>
+                <Text style={styles.title}
+                  numberOfLines={1}>{item.title}</Text>
+              </View>
+            </View>
+            <View style={styles.separator}/>
+          </View>
+        </TouchableHighlight>
+      );
+    }
+  }
+
+>>>>>>> Andrew:TailoredNutrition/Archive/Search.js
 export default class Search extends Component<{}> {
 	
 	barCodePress  = () => {
@@ -36,13 +70,30 @@ export default class Search extends Component<{}> {
             //console.log(stringme) 
             console.log(test)
             console.log(test.branded[0])
-            
-            console.log("What")
+            this.props.navigator.push({
+                title: 'Results',
+                component: SearchResults,
+                passProps: {common: test.common}
+              });
+              
         });
       }
+      _keyExtractor = (item, index) => index;
 
+      _renderItem = ({item}) => {
+        return (
+          <TouchableHighlight
+            underlayColor='#dddddd'>
+            <View>
+              <Text>{item.title}</Text>
+            </View>
+          </TouchableHighlight>
+        );
+        
+      };
 render() {
 	return (
+		// This is what is displayed on the search screen, which has options for barcode scanning and manual search.
 		<View style={styles.container}>
 		<Button
 		onPress = {this.barCodePress}
@@ -55,7 +106,13 @@ render() {
         onPress = {this.handleSearchSubmit}
         title = "Search Entries"
         />
+        <FlatList
+        data={this.props.listings}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+      />
 		</View>
+
 		);
 }
 }
@@ -78,6 +135,7 @@ const styles = StyleSheet.create({
         width: 995 / 4,
         marginTop: 20,
    },
+	//styling for the text input for manual searches
     searchInput: {
         height: 36,
         padding: 4,
