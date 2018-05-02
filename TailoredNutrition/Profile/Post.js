@@ -57,7 +57,7 @@ export default class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {data: ["response goes here"],
-      item, [];};
+      item: [],};
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
         this.barCodePress = this.barCodePress.bind(this);
     }

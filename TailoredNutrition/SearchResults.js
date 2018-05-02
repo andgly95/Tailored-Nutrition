@@ -23,15 +23,15 @@ export default class SearchResults extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style = {styles.title}>The Food Is {this.state.result.food_name}</Text>
-        {/*<Image
+        <Text style = {styles.title}>{this.state.result.food_name}</Text>
+        <Image
           style={{width: 250, height: 250}}
           source={{uri: this.state.result.photo.thumb}}
-        />*/}
-        <Text>Calories: {this.state.result.foods.nf_calories}</Text>
-        <Text>Protein: {this.state.result.foods.nf_protein}</Text>
-        <Text>Fat: {this.state.result.foods.nf_total_fat}</Text>
-        <Text>Carbohydrates: {this.state.result.foods.nf_total_carbohydrate}</Text>
+        />
+        <Text>Calories: {this.state.result.nf_calories}</Text>
+        <Text>Protein: {this.state.result.nf_protein}</Text>
+        <Text>Fat: {this.state.result.nf_total_fat}</Text>
+        <Text>Carbohydrates: {this.state.result.nf_total_carbohydrate}</Text>
       </View>
     );
   }
