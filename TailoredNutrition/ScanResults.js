@@ -9,7 +9,15 @@ import {
   FlatList,
   Text,
 } from 'react-native';
+
+
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
+
+
+
+import Expo, { SQLite } from 'expo';//Import SQLite
+
+const db = SQLite.openDatabase('db.db'); //Open db here
 
 export default class ScanResults extends Component {
   constructor(props) {
@@ -29,9 +37,50 @@ export default class ScanResults extends Component {
         <Text>Protein: {this.state.result.nf_protein}</Text>
         <Text>Fat: {this.state.result.nf_total_fat}</Text>
         <Text>Carbohydrates: {this.state.result.nf_total_carbohydrate}</Text>
+        <Text>Serving Quantity: {this.state.result.serving_qty}</Text>
+        <Text>Serving Unit: {this.state.result.serving_unit}</Text>
+
+        
+        
+        <TouchableHighlight
+                onPress = {this._Handlelog}>
+
+                <Text>
+                     <Text style= {{color: 'red', marginTop: 30}}> Confirm Scan </Text>
+                </Text>
+                </TouchableHighlight>
+
       </View>
     );
   }
+
+  _Handlelog = () =>{
+
+    let today = new Date()
+    let day = String(today).split(' ');
+    let date = day[0] +" "+ day[1]+ " " + day[2] + " " + day[3]
+
+    let name = String(global.user.user)
+    db.transaction(
+      tx => {
+        tx.executeSql('INSERT INTO LOGS (username,date,time,food_name,brand_name,qty,serving_unit,cal,fat,carbs,protein,img) values (?,?,?,?,?,?,?,?,?,?,?,?);',
+        [name,date,day[4],this.state.result.food_name,this.state.result.brand_name,this.state.result.serving_qty,this.state.result.serving_unit,this.state.result.nf_calories,this.state.result.nf_total_fat,this.state.result.nf_total_carbohydrate,this.state.result.nf_protein,this.state.result.photo.thumb],
+        (tx,result) =>{
+          console.log("Successfull insert, debug info:\n ", result)
+          //Back up to userprofile
+          this.props.navigation.navigate('userProfile')
+        },(error) => {
+          console.log("Error while logging:",error)
+          console.log("Failed to log item!")
+          alert("Was not able to log item!")
+          return
+        }
+      );
+
+      }
+    );
+  }
+
 }
 const styles = StyleSheet.create({
   container: {
