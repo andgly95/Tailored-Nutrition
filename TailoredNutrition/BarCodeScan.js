@@ -4,7 +4,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { BarCodeScanner, Permissions } from 'expo';
 import ScanResults from './ScanResults';
 
-const API = 'https://trackapi.nutritionix.com/v2/search/item?upc=';
+const searchAPI = 'https://trackapi.nutritionix.com/v2/search/item?upc=';
 
 // The app page responsible for the bar code scanner of food.
 export default class BarCodeScan extends React.Component {
@@ -31,7 +31,7 @@ export default class BarCodeScan extends React.Component {
       
       var self = this;
 
-      fetch (API+data, {
+      fetch (searchAPI+data, {
         method: 'GET',
         headers: new Headers( {
           'x-app-id': 'beeef40f',

@@ -14,6 +14,9 @@ import BarCodeScan from '../BarCodeScan';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import t from 'tcomb-form-native';
 
+const detailsAPI = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
+const searchAPI = 'https://trackapi.nutritionix.com/v2/search/instant?query=';
+
 const Form = t.form.Form;
 
 const SearchForm = t.struct ({
@@ -21,11 +24,40 @@ const SearchForm = t.struct ({
 	Branded: t.Boolean,
 });
 
+class ListItem extends Component {
+    _onPress = () => {
+      this.props.onPressItem(this.props.index);
+    }
+  
+    render() {
+      const item = this.props.item;
+      return (
+        <TouchableHighlight
+          onPress={this._onPress}
+          underlayColor='#dddddd'>
+          <View>
+            <View style={styles.rowContainer}>
+            <TouchableHighlight
+            onPress={this._onPress}
+            underlayColor='#dddddd'>
+            <View>
+              <Text>{item.brand_name_item_name} {item.food_name}</Text>
+            </View>
+          </TouchableHighlight>
+            </View>
+            <View style={styles.separator}/>
+          </View>
+        </TouchableHighlight>
+      );
+    }
+  }
+
 export default class Post extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {data: ["response goes here"]};
+        this.state = {data: ["response goes here"],
+      item, [];};
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
         this.barCodePress = this.barCodePress.bind(this);
     }
@@ -39,7 +71,9 @@ export default class Post extends Component {
     handleSearchSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
         var self = this;
-        fetch ('https://trackapi.nutritionix.com/v2/search/instant?query=+'+value.Search, {
+        const url = searchAPI+value.Search;
+        console.log(url);
+        fetch (url, {
           method: 'GET',
           headers: new Headers( {
             'x-app-id': 'beeef40f',
@@ -53,9 +87,8 @@ export default class Post extends Component {
             ///console.log("Response Data", responseData);
             this._handleResponse(responseData);
             return responseData;
-        })
-    .catch(function(error){ console.log(error)});
-      };
+        }).catch(function(error){ console.log(error)});
+        };
     
     _handleResponse = (response) => {
         
@@ -64,15 +97,48 @@ export default class Post extends Component {
         console.log(this.state);
     };
     _keyExtractor = (item, index) => index;
-    _renderItem = ({item}) => {
-        return (
-          <TouchableHighlight
-            underlayColor='#dddddd'>
-            <View>
-              <Text>{item.brand_name_item_name} {item.food_name}</Text>
-            </View>
-          </TouchableHighlight>
-        );
+    
+    _onPressItem = (index) => {
+      let entry = this.state.data.common[index];
+      console.log('Entry, ', entry.food_name);
+      
+      const url = detailsAPI;
+      console.log("URl: ", url);
+      fetch (url, {
+        method: 'POST',
+        headers: new Headers( {
+          'x-app-id': 'a895c79f',
+          'x-app-key': 'e61b89b47db104313658073ed3bbf420',
+          'x-remote-user-id' : 0,
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({
+          query: entry.food_name,
+        }),
+      }).then(response => {
+          //console.log("Response", response);
+          return response.json();
+      }).then(responseData => {
+          ///console.log("Response Data", responseData);
+          this._displayDetails(responseData);
+          return responseData;
+      }).catch(function(error){ console.log(error)});
+    };
+    _displayDetails = (response) => {
+        
+      //console.log("Response Handler", response);
+      console.log("Navigation About To Be Called:");
+      this.setState({item: response});
+      return this.props.navigation.navigate('SearchResults',{item: this.state.item.foods[0]});
+  };
+    _renderItem = ({item, index}) => {
+      return (
+        <ListItem
+          item={item}
+          index={index}
+          onPressItem={this._onPressItem}
+        />
+      );
     };
 render() {
 	return (
@@ -93,7 +159,7 @@ render() {
         data={this.state.data.common}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
-      />
+        />
         </View>
         </KeyboardAvoidingView>
 
