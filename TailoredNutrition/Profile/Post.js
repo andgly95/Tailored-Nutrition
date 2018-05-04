@@ -97,13 +97,21 @@ export default class Post extends Component {
     _handleResponse = (response) => {
         
         //console.log("Response Handler", response);
-        this.setState({data: response});
-        console.log(this.state);
+        if (this.state.isBranded){
+          console.log("BRANDED");
+          this.setState({data: response.branded});
+        }
+        else if (!this.state.isBranded) {
+          console.log("COMMON");
+          this.setState({data: response.common});
+        }
+        
+        console.log("DATA SET TO: ", this.state);
     };
     _keyExtractor = (item, index) => index;
     
     _onPressItem = (index) => {
-      let entry = this.state.data.common[index];
+      let entry = this.state.data[index];
       console.log('Entry, ', entry.food_name);
       
       const url = detailsAPI;
@@ -144,22 +152,7 @@ export default class Post extends Component {
         />
       );
     };
-    _getData = () => {
-      console.log("BRANDED");
-
-      if (this.state.isBranded){
-        console.log("BRANDED");
-        return this.state.data.branded;
-      }
-      else if (!this.state.isBranded && this.state.data.length > 0) {
-        console.log("BRANDED");
-        return this.state.data.common;
-      }
-    }
-
-    _getCommon = () => {
-      return this.state.data.common;
-    }
+    
 render() {
 	return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -176,7 +169,7 @@ render() {
         title = "Search Entries"
         />
         <FlatList
-        data={this.state.data.common}
+        data={this.state.data}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
         />
