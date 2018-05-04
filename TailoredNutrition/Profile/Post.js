@@ -54,12 +54,14 @@ class ListItem extends Component {
 
 export default class Post extends Component {
     
-    constructor(props) {
-        super(props);
-        this.state = {data: ["response goes here"],
-      item: [],};
-        this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-        this.barCodePress = this.barCodePress.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {data: [],
+      item: [],
+      isBranded: false,
+    };
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.barCodePress = this.barCodePress.bind(this);
     }
 
 	barCodePress  = () => {
@@ -71,6 +73,8 @@ export default class Post extends Component {
     handleSearchSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
         var self = this;
+        let branded = value.Branded;
+        this.setState({isBranded: branded});
         const url = searchAPI+value.Search;
         console.log(url);
         fetch (url, {
@@ -140,6 +144,22 @@ export default class Post extends Component {
         />
       );
     };
+    _getData = () => {
+      console.log("BRANDED");
+
+      if (this.state.isBranded){
+        console.log("BRANDED");
+        return this.state.data.branded;
+      }
+      else if (!this.state.isBranded && this.state.data.length > 0) {
+        console.log("BRANDED");
+        return this.state.data.common;
+      }
+    }
+
+    _getCommon = () => {
+      return this.state.data.common;
+    }
 render() {
 	return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
