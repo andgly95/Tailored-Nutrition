@@ -111,10 +111,10 @@ export default class You extends Component<{}> {
             else{
                 console.log("Inserting new user...")
                 //If we reach here we should insert a new entry
-                tx.executeSql('INSERT INTO PROFILES (username, password,name, sex, age,height,weight,tweight,activity,logid) VALUES (?,?,?,?,?,?,?,?,?,0);',
+                tx.executeSql('INSERT INTO PROFILES (username, password,name, sex, age,height,weight,tweight,activity) VALUES (?,?,?,?,?,?,?,?,?);',
                 [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.DesiredWeight,re.ActivityLevel],
                 (tx,result) =>{
-                  console.log("Successfull insert, debug info:\n ?", result)
+                  console.log("Successfull insert, debug info:\n ", result)
 
                   //Session this new user...
                   tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',
@@ -127,6 +127,16 @@ export default class You extends Component<{}> {
                     });
 
                   //this.props.navigation.navigate('userProfile')
+                    
+                  //Update globals here to act as a cache.
+                  global.user.name = re.Name
+                  global.user.user = re.username
+                  global.user.age = re.age
+                  global.user.sex = re.gender
+                  global.user.height = re.Height
+                  global.user.activity = re.ActivityLevel
+                  
+
                   this.props.navigation.navigate('userProfile')
                 },
                 () => {

@@ -17,6 +17,17 @@ import SignUp from './SignUp'
 import SignIn from './SignIn'
 import { colors } from 'react-native-elements';
 
+
+
+//Test
+
+import Expo, { SQLite } from 'expo';//Import SQLite
+
+const db = SQLite.openDatabase('db.db'); //Open db here
+
+
+
+
 // This page is for the initial welcome page for the app which appears upon start-up.
 export default class Welcome extends Component<{}> {
     constructor(props) {
@@ -27,6 +38,8 @@ export default class Welcome extends Component<{}> {
     }
     render() {
         console.log('Welcome.render');
+
+
         return (
 			// What displays on the initial screen
                 <View style={styles.container}>
