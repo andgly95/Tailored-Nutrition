@@ -18,9 +18,12 @@ import Expo, { SQLite } from 'expo';//Import SQLite
 const db = SQLite.openDatabase('db.db'); //Open db here
 
 export default class Posts extends Component<{}> {
-state = {
-    data: []
-};
+    constructor(props) {
+        super(props);
+        this.state = {
+            log: [],
+        };
+      }
 
 
 
@@ -29,9 +32,9 @@ componentWillMount(){
 }
 
 fetchData = async () => {
-     const response = await fetch("https://randomuser.me/api?results=10"); // link to JSON with data
-     const json = await response.json();
-     this.setState({data: json.results}); 
+    // const response = await fetch("https://randomuser.me/api?results=10"); // link to JSON with data
+    // const json = await response.json();
+    // this.setState({data: json.results}); 
 
     
      //I'm pulling and displaying all the logs for the user here, we could filter more by using the date at a later time, but for now i want to display all the logged entries
@@ -55,19 +58,19 @@ fetchData = async () => {
 
 
     render(){
-    console.log('userLogs.render');
-        console.log(this.state.data)
+    //console.log('userLogs.render');
+        console.log("LOGS: ", this.state.item)
 
 
         return(
             <View style = {styles.container}>
                 <Text style = {styles.header}> User Log: </Text>     
                     <FlatList 
-                        data={this.state.data}
+                        data={this.state.result}
                         keyExtractor= {(x, i) => i}
                         renderItem= {({ item }) =>
                             <Text>
-                                {item.name.first} {item.name.last} 
+                                {item.first} {item.name.last} 
                             </Text>}
                     />
             </View>

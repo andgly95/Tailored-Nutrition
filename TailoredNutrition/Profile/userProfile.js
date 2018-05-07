@@ -217,7 +217,6 @@ class userProfile extends Component {
         tx.executeSql(
           'SELECT * FROM SESSION LIMIT 1;',[],
           (t,result) => {
-            console.log(result.rows._array[0].user);
             this.name = result.rows._array[0].user;
             console.log(this.name)
           }
