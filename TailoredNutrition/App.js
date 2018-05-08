@@ -15,8 +15,11 @@ import SignIn from './SignIn';
 import BarCodeScan from './BarCodeScan';
 import Term from './Term';
 import userLog from './userLog';
-import userProfile from './Profile/userProfile';
+import userProfile from './Profile/userProfile'
+import Settings from './Settings'
+import SearchResults from './SearchResults/';
 import ScanResults from './ScanResults';
+
 
 
 
@@ -24,8 +27,14 @@ import Expo, { SQLite } from 'expo';//Import SQLite
 
 const db = SQLite.openDatabase('db.db'); //Open db here
 
-
-global.name = "No name"
+global.user = {
+    user : null,
+    name: "No name",
+    weight : 0,
+    sex : 0,
+    age : -1,
+    activity : null
+}
 
 type Props = {};
 
@@ -54,9 +63,18 @@ var RootStack = StackNavigator(
         userProfile: {
             screen: userProfile,
         },
+		
+		Settings: {
+			screen: Settings,
+		},
+
+        SearchResults: {
+            screen: SearchResults,
+        },
+
         ScanResult: {
             screen: ScanResults,
-        }
+        },
 
     },
      {
@@ -99,10 +117,14 @@ export default class App extends Component<{}> {
           //HEIGHT AS INT
           //ACTIVITY LEVEL(ACTIVITY) AS INT
           //TARGET WEIGHT(TWEIGHT) AS INT
-          //LOGID AS INT
-          'CREATE TABLE IF NOT EXISTS PROFILES ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer,logid integer );'
+         
+          'CREATE TABLE IF NOT EXISTS PROFILES ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer);'
       );
 
+
+      tx.executeSql(
+        'CREATE TABLE IF NOT EXISTS LOGS(username text not null,date string, time string,food_name text,brand_name text,qty float, serving_unit text, cal float,fat float, carbs float, protein float,img text );'
+      );
     //   console.log('All tables within our database:')
     //   tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
     //     console.log(_array) 
@@ -139,7 +161,6 @@ export default class App extends Component<{}> {
     
   );
     console.log('\nTable created!');
-    
     }
     render() {
         

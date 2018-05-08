@@ -32,6 +32,8 @@ const options = {
       error: "Provide a valid Username!"
     },
     password: {
+      password: true,
+      secureTextEntry: true,
       error: "Invalid Password!"
     },
     rememberme:{
@@ -85,12 +87,25 @@ export default class SignIn extends Component<{}> {
 
               //Instead of executing the query lets just store the data in memory...
               var row = result.rows._array[0]
+              //console.log(row)
            
               
               if(row["password"] == value.password)
               {   //If passwords match
                   //Just add username to session's table for now...
-                  global.name = value.username
+
+                  //Update our global variables so we don't have to make another DB call which is slow
+                  global.user.name = row.name
+                  global.user.user = row.username
+                  global.user.age = row.age
+                  global.user.sex = row.sex
+                  global.user.height = row.height
+                  global.user.activity = row.activity
+
+                  console.log(global.user)
+
+
+
                   console.log("Valid user!")
                   if(value.rememberme){
                     tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',

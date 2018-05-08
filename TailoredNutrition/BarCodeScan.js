@@ -4,7 +4,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { BarCodeScanner, Permissions } from 'expo';
 import ScanResults from './ScanResults';
 
-const API = 'https://trackapi.nutritionix.com/v2/search/item?upc=';
+const searchAPI = 'https://trackapi.nutritionix.com/v2/search/item?upc=';
 
 // The app page responsible for the bar code scanner of food.
 export default class BarCodeScan extends React.Component {
@@ -21,6 +21,42 @@ export default class BarCodeScan extends React.Component {
   }
   
   async componentWillMount() {
+
+
+
+    //REMOVE WHEN DONE
+
+    //Used for testing, don't remove until we're done with logging.
+  //   fetch (API+"06827465", {
+  //     method: 'GET',
+  //     headers: new Headers( {
+  //       'x-app-id': 'beeef40f',
+  //       'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
+  //       'x-remote-user-id' : 0
+  //     })
+  //   }).then(response => {
+  //     //console.log("Response", response);
+  //     return response.json();
+  // }).then(responseData => {
+  //     ///console.log("Response Data", responseData);
+  //     this._handleResponse(responseData);
+  //     this.setState({alreadyScanned: true})
+  //     return responseData;
+  // })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({hasCameraPermission: status === 'granted'});
     console.log("State",this.state.hasCameraPermission)
@@ -31,7 +67,7 @@ export default class BarCodeScan extends React.Component {
       
       var self = this;
 
-      fetch (API+data, {
+      fetch (searchAPI+data, {
         method: 'GET',
         headers: new Headers( {
           'x-app-id': 'beeef40f',

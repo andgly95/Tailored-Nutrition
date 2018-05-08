@@ -217,7 +217,6 @@ class userProfile extends Component {
         tx.executeSql(
           'SELECT * FROM SESSION LIMIT 1;',[],
           (t,result) => {
-            console.log(result.rows._array[0].user);
             this.name = result.rows._array[0].user;
             console.log(this.name)
           }
@@ -236,7 +235,7 @@ class userProfile extends Component {
             
           />
           <View style={styles.userNameRow}>
-            <Text style={styles.userNameText}> {global.name} </Text>
+            <Text style={styles.userNameText}> {global.user.name} </Text>
           </View>
           <View style={styles.userBioRow}>
             <Text style={styles.userBioText}>{JSON.stringify(userProfile.test)}</Text>
