@@ -33,8 +33,9 @@ export default class ScanResults extends Component {
           style={{width: 250, height: 250}}
           source={{uri: this.state.result.photo.thumb}}
         />
+
+        <Text>Calories: {this.state.result.nf_calories}</Text>
         <View style = {styles.macrodetails}>
-          <Text>Calories: {this.state.result.nf_calories}</Text>
           <Text>Protein: {this.state.result.nf_protein}</Text>
           <Text>Fat: {this.state.result.nf_total_fat}</Text>
           <Text>Carbohydrates: {this.state.result.nf_total_carbohydrate}</Text>
@@ -42,16 +43,28 @@ export default class ScanResults extends Component {
         <Text>Serving Size: {this.state.result.serving_qty} {this.state.result.serving_unit}</Text>
 
         
-        
+        <View style = {styles.macrodetails}>
+
         <TouchableHighlight
-                onPress = {this._Handlelog}>
+          onPress = {this._Handlelog}>
 
-                <Image
-                 style={{width: 50, height: 50}}
-                 source={require("./Resources/check.png")}/>
+          <Image
+            style={{width: 50, height: 50}}
+            source={require("./Resources/redx.png")}/>
 
-                </TouchableHighlight>
+        </TouchableHighlight>
 
+        <TouchableHighlight
+          onPress = {this._Handlelog}>
+
+          <Image
+            style={{width: 50, height: 50}}
+            source={require("./Resources/check.png")}/>
+
+        </TouchableHighlight>
+
+        
+        </View>
       </View>
     );
   }
@@ -96,6 +109,6 @@ const styles = StyleSheet.create({
   },
   macrodetails: {
    flexDirection: 'row',
-   alignSelf: 'stretch',
+   justifyContent: 'space-between',
   },
 });
