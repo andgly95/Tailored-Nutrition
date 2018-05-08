@@ -69,7 +69,7 @@ export default class Post extends Component {
           <TouchableHighlight
             underlayColor='#dddddd'>
             <View>
-              <Text>{item.brand_name_item_name}</Text>
+              <Text>{item.brand_name_item_name} {item.food_name}</Text>
             </View>
           </TouchableHighlight>
         );
@@ -90,7 +90,7 @@ render() {
         title = "Search Entries"
         />
         <FlatList
-        data={this.state.data.branded}
+        data={this.state.data.common}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
       />

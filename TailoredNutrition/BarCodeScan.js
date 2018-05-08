@@ -57,12 +57,13 @@ export default class BarCodeScan extends React.Component {
       //console.log("Response Handler", response);
       this.setState({item: response});
       console.log(this.state.item);
-      alert(this.state.item.foods[0].brand_name+this.state.item.foods[0].food_name)
+      alert(this.state.item.foods[0].brand_name+" "+this.state.item.foods[0].food_name);
+      return this.props.navigation.navigate('ScanResult',{item: this.state.item.foods[0]});
   };
   render() {
 	  // This will make sure that the app has permission from the camera on the phone before it is able to read barcodes.
     const { hasCameraPermission } = this.state;
-    console.log("State", this.state.data)
+    console.log("State", this.state.item)
     if (hasCameraPermission === null) {
       return <Text>Requesting for camera permission</Text>;
     } else if (hasCameraPermission === false) {
