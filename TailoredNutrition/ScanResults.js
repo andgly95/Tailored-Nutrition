@@ -33,21 +33,23 @@ export default class ScanResults extends Component {
           style={{width: 250, height: 250}}
           source={{uri: this.state.result.photo.thumb}}
         />
-        <Text>Calories: {this.state.result.nf_calories}</Text>
-        <Text>Protein: {this.state.result.nf_protein}</Text>
-        <Text>Fat: {this.state.result.nf_total_fat}</Text>
-        <Text>Carbohydrates: {this.state.result.nf_total_carbohydrate}</Text>
-        <Text>Serving Quantity: {this.state.result.serving_qty}</Text>
-        <Text>Serving Unit: {this.state.result.serving_unit}</Text>
+        <View style = {styles.macrodetails}>
+          <Text>Calories: {this.state.result.nf_calories}</Text>
+          <Text>Protein: {this.state.result.nf_protein}</Text>
+          <Text>Fat: {this.state.result.nf_total_fat}</Text>
+          <Text>Carbohydrates: {this.state.result.nf_total_carbohydrate}</Text>
+        </View>
+        <Text>Serving Size: {this.state.result.serving_qty} {this.state.result.serving_unit}</Text>
 
         
         
         <TouchableHighlight
                 onPress = {this._Handlelog}>
 
-                <Text>
-                     <Text style= {{color: 'red', marginTop: 30}}> Confirm Scan </Text>
-                </Text>
+                <Image
+                 style={{width: 50, height: 50}}
+                 source={require("./Resources/check.png")}/>
+
                 </TouchableHighlight>
 
       </View>
@@ -85,10 +87,15 @@ export default class ScanResults extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 25,
+    marginTop: 25,
   },
   title: {
     fontSize: 25,
+  },
+  macrodetails: {
+   flexDirection: 'row',
+   alignSelf: 'stretch',
   },
 });

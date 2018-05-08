@@ -21,7 +21,7 @@ export default class Posts extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
-            log: [],
+            log: {},
         };
       }
 
@@ -45,8 +45,9 @@ fetchData = async () => {
         tx => {
       tx.executeSql('SELECT * FROM LOGS WHERE username = ?;',[user],(_,{rows: {_array}})=>{
             
-            console.log(_array)
-           // this.setState({data:_array})
+            console.log(_array);
+            let logData = _array
+           this.setState({log:logData});
 
             }
         );
@@ -59,18 +60,18 @@ fetchData = async () => {
 
     render(){
     //console.log('userLogs.render');
-        console.log("LOGS: ", this.state.item)
+        console.log("LOGS: ", this.state.log)
 
 
         return(
             <View style = {styles.container}>
                 <Text style = {styles.header}> User Log: </Text>     
                     <FlatList 
-                        data={this.state.result}
+                        data={this.state.log}
                         keyExtractor= {(x, i) => i}
                         renderItem= {({ item }) =>
                             <Text>
-                                {item.first} {item.name.last} 
+                                {item.brand_name} {item.food_name} {item.cal} 
                             </Text>}
                     />
             </View>

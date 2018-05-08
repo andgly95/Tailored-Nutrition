@@ -79,7 +79,7 @@ var RootStack = StackNavigator(
     },
      {
 
-        initialRouteName: 'Welcome',
+        initialRouteName: 'userProfile',
      },
      );
 

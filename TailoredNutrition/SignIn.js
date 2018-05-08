@@ -32,6 +32,8 @@ const options = {
       error: "Provide a valid Username!"
     },
     password: {
+      password: true,
+      secureTextEntry: true,
       error: "Invalid Password!"
     },
     rememberme:{
