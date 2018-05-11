@@ -37,7 +37,8 @@ global.user = {
     Limfat: 0,
     LimCarbs: 0,
     LimPro:0,
-    LimCal:0
+    LimCal:0,
+    
 }
 
 type Props = {};

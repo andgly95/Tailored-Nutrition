@@ -112,10 +112,17 @@ const styles = StyleSheet.create({
 //SELECT * FROM tablename ORDER BY column DESC LIMIT 1; 
 
 class userProfile extends Component {
-   static test = {
+
+
+
+
+     static test = {
      keto : keto(3500),
+      
+    
      //dailyburn : actualBurn(2500,'H')
-   }
+    }
+
 
   static propTypes = {
     avatar: PropTypes.string,//.isRequired,
@@ -250,8 +257,14 @@ class userProfile extends Component {
           </View>
           <View style={styles.userBioRow}>
             <Text style={styles.userBioText}>Carbs: {(userProfile.test.keto.carbs)}</Text>
+            
+            <Text style={styles.userBioText}>Carbs: {(global.user.LimCarbs)}</Text>
             <Text style={styles.userBioText}>Fats: {(userProfile.test.keto.fats)}</Text>
+            <Text style={styles.userBioText}>Fats: {(global.user.Limfat)}</Text>
             <Text style={styles.userBioText}>Protein: {(userProfile.test.keto.protein)}</Text>
+            <Text style={styles.userBioText}>Pro: {(global.user.LimPro)}</Text>
+            <Text style={styles.userBioText}>Test: {(userProfile.what)}</Text>
+          
           </View>
         </View>
         <View style={styles.socialRow}>
