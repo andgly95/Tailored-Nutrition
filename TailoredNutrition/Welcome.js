@@ -63,6 +63,13 @@ export default class Welcome extends Component<{}> {
                 </Text>
                 </TouchableHighlight>
 
+                <TouchableHighlight
+                onPress = {this._skip}>
+                <Text>
+.
+                    </Text>
+                </TouchableHighlight>
+
                 </View>
                 );
     }
@@ -70,6 +77,9 @@ export default class Welcome extends Component<{}> {
         this.setState({isPressed: true});
         
         this.props.navigation.navigate('SignIn');
+    }
+    _skip = () => {
+        this.props.navigation.navigate('userProfile')
     }
     _onButtonPressed = () => {
         this.setState({ isPressed: true });

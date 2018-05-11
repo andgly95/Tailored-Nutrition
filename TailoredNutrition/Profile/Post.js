@@ -15,6 +15,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import t from 'tcomb-form-native';
 
 const detailsAPI = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
+const brandAPI = 'https://trackapi.nutritionix.com/v2/search/item?nix_item_id=';
 const searchAPI = 'https://trackapi.nutritionix.com/v2/search/instant?query=';
 
 const Form = t.form.Form;
@@ -41,7 +42,7 @@ class ListItem extends Component {
             onPress={this._onPress}
             underlayColor='#dddddd'>
             <View>
-              <Text>{item.brand_name_item_name} {item.food_name}</Text>
+              <Text>{this.props.isBranded ? item.brand_name_item_name:item.food_name}</Text>
             </View>
           </TouchableHighlight>
             </View>
@@ -50,7 +51,9 @@ class ListItem extends Component {
         </TouchableHighlight>
       );
     }
+  
   }
+
 
 export default class Post extends Component {
     
@@ -112,29 +115,49 @@ export default class Post extends Component {
     
     _onPressItem = (index) => {
       let entry = this.state.data[index];
-      console.log('Entry, ', entry.food_name);
-      
+      let key = entry.food_name;
       const url = detailsAPI;
-      console.log("URl: ", url);
-      fetch (url, {
-        method: 'POST',
-        headers: new Headers( {
-          'x-app-id': 'a895c79f',
-          'x-app-key': 'e61b89b47db104313658073ed3bbf420',
-          'x-remote-user-id' : 0,
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify({
-          query: entry.food_name,
-        }),
-      }).then(response => {
-          //console.log("Response", response);
+      console.log('Entry, ', key);
+      if (this.state.isBranded){
+        key = entry.nix_item_id;
+        fetch (brandAPI+key, {
+          method: 'GET',
+          headers: new Headers( {
+            'x-app-id': 'beeef40f',
+            'x-app-key': 'cb4cbe72b287f9c795ac894f3ef544fd',
+            'x-remote-user-id' : 0
+          })
+        }).then(response => {
+          console.log("Response", response);
           return response.json();
       }).then(responseData => {
           ///console.log("Response Data", responseData);
           this._displayDetails(responseData);
           return responseData;
-      }).catch(function(error){ console.log(error)});
+      }).catch(function(error){ console.log(error)})
+    ;
+      } else {
+          fetch (url, {
+          method: 'POST',
+          headers: new Headers( {
+            'x-app-id': 'a895c79f',
+            'x-app-key': 'e61b89b47db104313658073ed3bbf420',
+            'x-remote-user-id' : 0,
+            'Content-Type': 'application/json',
+         }),
+          body: JSON.stringify({
+            query: key,
+          }),
+        }).then(response => {
+            //console.log("Response", response);
+            return response.json();
+        }).then(responseData => {
+            ///console.log("Response Data", responseData);
+            this._displayDetails(responseData);
+            return responseData;
+        }).catch(function(error){ console.log(error)})
+      ;}
+      
     };
     _displayDetails = (response) => {
         
@@ -149,6 +172,7 @@ export default class Post extends Component {
           item={item}
           index={index}
           onPressItem={this._onPressItem}
+          isBranded={this.state.isBranded}
         />
       );
     };

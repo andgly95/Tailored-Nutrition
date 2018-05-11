@@ -65,7 +65,7 @@ fetchData = async () => {
 
         return(
             <View style = {styles.container}>
-                <Text style = {styles.header}> User Log: </Text>     
+                <Text style = {styles.header}> User Log: </Text>  
                     <FlatList 
                         data={this.state.log}
                         keyExtractor= {(x, i) => i}
