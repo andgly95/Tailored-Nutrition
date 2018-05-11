@@ -23,6 +23,8 @@ import t from 'tcomb-form-native';
 import userProfile from './Profile/userProfile';
 import NutritionFunctions from './NutritionFunctions';
 
+import {keto,actualBurn,dailyBurn,LargeCalorieRestrictive} from './NutritionFunctions';
+
 
 //DB Stuff
 import Expo, { SQLite } from 'expo';
@@ -115,7 +117,7 @@ export default class You extends Component<{}> {
                 console.log("Inserting new user...")
                 //If we reach here we should insert a new entry
                 tx.executeSql('INSERT INTO PROFILES (username, password,name, sex, age,height,weight,tweight,activity) VALUES (?,?,?,?,?,?,?,?,?);',
-                [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.DesiredWeight,re.ActivityLevel],
+                [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.weight,re.DesiredWeight,re.ActivityLevel],
                 (tx,result) =>{
                   console.log("Successfull insert, debug info:\n ", result)
 
@@ -136,8 +138,21 @@ export default class You extends Component<{}> {
                   global.user.user = re.username
                   global.user.age = re.age
                   global.user.sex = re.gender
+                  global.user.weight = re.weight
                   global.user.height = re.Height
                   global.user.activity = re.ActivityLevel
+                  
+                  let dburn = dailyBurn(re.weight, re.weight, re.gender, re.age)
+                  console.log( "DBurn:",dburn)
+                  let aBurn = actualBurn(dburn,re.ActivityLevel)
+                  console.log("aBurn:",aBurn)
+                  let restrict = LargeCalorieRestrictive(aBurn)
+                  console.log("restrict:",restrict)
+                  //Store restrict
+                  let ket = keto(aBurn)
+                  console.log("Keto:",keto.keto)
+                  //Store keto stuff, keto.keto.fats etc
+
                   
 
                   this.props.navigation.navigate('userProfile')

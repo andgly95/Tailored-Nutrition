@@ -107,10 +107,14 @@ const styles = StyleSheet.create({
   },
 })
 
+
+//To get last row in a table?
+//SELECT * FROM tablename ORDER BY column DESC LIMIT 1; 
+
 class userProfile extends Component {
    static test = {
-     keto : keto(2),
-     dailyburn : actualBurn(2500,'H')
+     keto : keto(3500),
+     //dailyburn : actualBurn(2500,'H')
    }
 
   static propTypes = {
@@ -180,6 +184,12 @@ class userProfile extends Component {
   }
 
   _renderLabel = props => ({ route, index }) => {
+
+
+    console.log(userProfile.test.keto.fats)
+
+
+
     const inputRange = props.navigationState.routes.map((x, i) => i)
     const outputRange = inputRange.map(
       inputIndex => (inputIndex === index ? 'black' : 'gray')
@@ -226,6 +236,7 @@ class userProfile extends Component {
 
 
     return (
+      
       <View style={styles.headerContainer}>
         <View style={styles.userRow}>
           <Image
@@ -238,7 +249,9 @@ class userProfile extends Component {
             <Text style={styles.userNameText}> {global.user.name} </Text>
           </View>
           <View style={styles.userBioRow}>
-            <Text style={styles.userBioText}>{JSON.stringify(userProfile.test)}</Text>
+            <Text style={styles.userBioText}>Carbs: {(userProfile.test.keto.carbs)}</Text>
+            <Text style={styles.userBioText}>Fats: {(userProfile.test.keto.fats)}</Text>
+            <Text style={styles.userBioText}>Protein: {(userProfile.test.keto.protein)}</Text>
           </View>
         </View>
         <View style={styles.socialRow}>
