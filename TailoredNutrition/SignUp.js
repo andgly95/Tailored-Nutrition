@@ -59,10 +59,13 @@ var Person = t.struct({
     terms: t.Boolean
   });
 
-  const options = {
+  var options = {
     fields: {
-      
-    },
+      password: {
+        password: true,
+        secureTextEntry: true
+      }
+    }
   };
   
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0

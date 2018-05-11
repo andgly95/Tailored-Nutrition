@@ -17,6 +17,7 @@ import Term from './Term';
 import userLog from './userLog';
 import userProfile from './Profile/userProfile'
 import Settings from './Settings'
+import SearchResults from './SearchResults/';
 import ScanResults from './ScanResults';
 
 
@@ -67,9 +68,13 @@ var RootStack = StackNavigator(
 			screen: Settings,
 		},
 
+        SearchResults: {
+            screen: SearchResults,
+        },
+
         ScanResult: {
             screen: ScanResults,
-        }
+        },
 
     },
      {

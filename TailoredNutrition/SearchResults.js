@@ -9,31 +9,30 @@ import {
   FlatList,
   Text,
 } from 'react-native';
-
-
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
-
 
 
 import Expo, { SQLite } from 'expo';//Import SQLite
 
 const db = SQLite.openDatabase('db.db'); //Open db here
 
-export default class ScanResults extends Component {
+export default class SearchResults extends Component {
   constructor(props) {
     super(props);
+    //console.log("INIT, ", this.props.navigation.state.params.item);
+
       this.state = {result: this.props.navigation.state.params.item};
+      //console.log("Result", this.state.result);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style = {styles.title}> {this.state.result.brand_name} {this.state.result.food_name}</Text>
+        <Text style = {styles.title}>{this.state.result.brand_name} {this.state.result.food_name}</Text>
         <Image
           style={{width: 250, height: 250}}
           source={{uri: this.state.result.photo.thumb}}
         />
-
         <Text>Calories: {this.state.result.nf_calories}</Text>
         <View style = {styles.macrodetails}>
           <Text style={{padding: 5}}>Protein: {this.state.result.nf_protein}</Text>

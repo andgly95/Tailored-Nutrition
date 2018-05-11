@@ -217,7 +217,6 @@ class userProfile extends Component {
         tx.executeSql(
           'SELECT * FROM SESSION LIMIT 1;',[],
           (t,result) => {
-            console.log(result.rows._array[0].user);
             this.name = result.rows._array[0].user;
             console.log(this.name)
           }
@@ -248,28 +247,11 @@ class userProfile extends Component {
               size={30}
               type="entypo"
               color="#3B5A98"
-              name="facebook-with-circle"
-              onPress={() => console.log('facebook')}
+              name="tools"
+              onPress={() => this.props.navigation.navigate('Settings')}
             />
           </View>
-          <View style={styles.socialIcon}>
-            <Icon
-              size={30}
-              type="entypo"
-              color="#56ACEE"
-              name="twitter-with-circle"
-              onPress={() => console.log('twitter')}
-            />
-          </View>
-          <View>
-            <Icon
-              size={30}
-              type="entypo"
-              color="#DD4C39"
-              name="google--with-circle"
-              onPress={() => console.log('google')}
-            />
-          </View>
+          
         </View>
       </View>
     )
