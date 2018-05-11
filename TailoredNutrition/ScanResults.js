@@ -36,9 +36,9 @@ export default class ScanResults extends Component {
 
         <Text>Calories: {this.state.result.nf_calories}</Text>
         <View style = {styles.macrodetails}>
-          <Text>Protein: {this.state.result.nf_protein}</Text>
-          <Text>Fat: {this.state.result.nf_total_fat}</Text>
-          <Text>Carbohydrates: {this.state.result.nf_total_carbohydrate}</Text>
+          <Text style={{padding: 5}}>Protein: {this.state.result.nf_protein}</Text>
+          <Text style={{padding: 5}}>Fat: {this.state.result.nf_total_fat}</Text>
+          <Text style={{padding: 5}}>Carbohydrates: {this.state.result.nf_total_carbohydrate}</Text>
         </View>
         <Text>Serving Size: {this.state.result.serving_qty} {this.state.result.serving_unit}</Text>
 
