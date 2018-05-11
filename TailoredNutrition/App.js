@@ -33,7 +33,11 @@ global.user = {
     weight : 0,
     sex : 0,
     age : -1,
-    activity : null
+    activity : null,
+    Limfat: 0,
+    LimCarbs: 0,
+    LimPro:0,
+    LimCal:0
 }
 
 type Props = {};

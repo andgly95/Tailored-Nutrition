@@ -150,8 +150,15 @@ export default class You extends Component<{}> {
                   console.log("restrict:",restrict)
                   //Store restrict
                   let ket = keto(aBurn)
-                  console.log("Keto:",keto.keto)
-                  //Store keto stuff, keto.keto.fats etc
+                  console.log("Keto:",ket.keto)
+                  //Store keto stuff, ket.fats etc
+                  global.user.Limfat = ket.fats
+                  global.user.LimCarbs = ket.carbs
+                  global.user.LimPro = ket.protein
+                  global.user.LimCal = restrict
+
+                  console.log(global.user)
+
 
                   
 
