@@ -131,9 +131,7 @@ export default class App extends Component<{}> {
         'CREATE TABLE IF NOT EXISTS LOGS(username text not null,userid integer,date string, time string,food_name text,brand_name text,qty float, serving_unit text, cal float,fat float, carbs float, protein float,img text );'
       );
 
-      tx.executeSql(
-        'INSERT INTO PROFILES(username) VALUES ("test");'
-      );
+     
        console.log('All tables within our database:')
        tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
          console.log(_array) 

@@ -62,6 +62,6 @@
     }
 
     export function LargeCalorieRestrictive(actualBurn){ // large calorie deficit 
-        return actualBurn - (actualBurn * .36);
+        return Math.round(actualBurn - (actualBurn * .36));
     }
 //};

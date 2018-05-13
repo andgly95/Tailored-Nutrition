@@ -161,8 +161,8 @@ export default class You extends Component<{}> {
 
 
                 //If we reach here we should insert a new entry
-                tx.executeSql('INSERT INTO PROFILES (username, password ,name , sex, age,height,weight,tweight,activity,lcarbs,lfats,lpro,lcal,logid,rememberme) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
-                [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.weight,re.DesiredWeight,re.ActivityLevel,ket.carbs,ket.fats,ket.protein,restrict,null,1],
+                tx.executeSql('INSERT INTO PROFILES (username, password ,name , sex, age,height,weight,tweight,activity,lcarbs,lfats,lpro,lcal,rememberme) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,1);',
+                [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.weight,re.DesiredWeight,re.ActivityLevel,ket.carbs,ket.fats,ket.protein,restrict],
                 (tx,result) =>{
                   console.log("Successfull insert, debug info:\n ", result)
 
