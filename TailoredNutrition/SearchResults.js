@@ -17,6 +17,12 @@ import Expo, { SQLite } from 'expo';//Import SQLite
 const db = SQLite.openDatabase('db.db'); //Open db here
 
 export default class SearchResults extends Component {
+
+
+
+
+
+  
   constructor(props) {
     super(props);
     //console.log("INIT, ", this.props.navigation.state.params.item);

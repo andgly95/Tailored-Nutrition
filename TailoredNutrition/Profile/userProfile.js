@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 
 class userProfile extends Component {
   
- componentWillMount() {
+  componentWillMount() {
    
   let today = new Date()
   let day = String(today).split(' ');
@@ -119,9 +119,10 @@ class userProfile extends Component {
   
   db.transaction(
     tx => {
-      tx.executeSql('SELECT * FROM LOGS WHERE date = ? AND username = ?  ORDER BY time DESC limit 1;',
+      tx.executeSql('SELECT * FROM LOGS WHERE date = ? AND username = ?  ORDER BY time DESC  limit 1;',
       [ddate,global.user.user],
       (_,result)=>{
+        console.log(result.rows)
         if(result.rows.length != 0){
           console.log("Updated daily limits")
            global.user.LimCal = result.rows._array[0].dcalc
