@@ -96,15 +96,15 @@ export default class App extends Component<{}> {
     //Deletes db if we need it
     //DANGERRRRRRRRRRRRRRRRRRRRRRRRRRR
     
-    //console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
+    console.log( Expo.FileSystem.deleteAsync(Expo.FileSystem.documentDirectory + 'SQLite/db.db' ))
 
-    //Create a table that wil be treated like a session cache?
-    db.transaction(
-        tx =>{
-            tx.executeSql('CREATE TABLE IF NOT EXISTS SESSION (user text primary key UNIQUE);');
+    //Moved Sessions to user table
+    // db.transaction(
+    //     tx =>{
+    //         tx.executeSql('CREATE TABLE IF NOT EXISTS SESSION (user text primary key UNIQUE);');
 
-        }
-    )
+    //     }
+    // )
 
     db.transaction(
       tx => {
@@ -123,12 +123,12 @@ export default class App extends Component<{}> {
           //ACTIVITY LEVEL(ACTIVITY) AS INT
           //TARGET WEIGHT(TWEIGHT) AS INT
          
-          'CREATE TABLE IF NOT EXISTS PROFILES ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer);'
+          'CREATE TABLE IF NOT EXISTS PROFILES ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer, lcarbs integer, lfats integer, lpro integer,logid integer,_rememberme bool);'
       );
 
 
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS LOGS(username text not null,date string, time string,food_name text,brand_name text,qty float, serving_unit text, cal float,fat float, carbs float, protein float,img text );'
+        'CREATE TABLE IF NOT EXISTS LOGS(username text not null,userid integer,date string, time string,food_name text,brand_name text,qty float, serving_unit text, cal float,fat float, carbs float, protein float,img text );'
       );
     //   console.log('All tables within our database:')
     //   tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
