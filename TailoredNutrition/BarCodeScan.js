@@ -27,7 +27,7 @@ export default class BarCodeScan extends React.Component {
     //REMOVE WHEN DONE
 
     //Used for testing, don't remove until we're done with logging.
-  //   fetch (API+"06827465", {
+  //   fetch (searchAPI+"06827465", {
   //     method: 'GET',
   //     headers: new Headers( {
   //       'x-app-id': 'beeef40f',

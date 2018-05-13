@@ -107,11 +107,40 @@ const styles = StyleSheet.create({
   },
 })
 
+
+//To get last row in a table?
+//SELECT * FROM tablename ORDER BY column DESC LIMIT 1; 
+
 class userProfile extends Component {
-   static test = {
-     keto : keto(2),
-     dailyburn : actualBurn(2500,'H')
-   }
+  
+ componentWillMount() {
+   
+  let today = new Date()
+  let day = String(today).split(' ');
+  let ddate = day[0] +" "+ day[1]+ " " + day[2] + " " + day[3]
+  
+  db.transaction(
+    tx => {
+      tx.executeSql('SELECT * FROM LOGS WHERE date = ? AND username = ?  ORDER BY time DESC limit 1;',
+      [ddate,global.user.user],
+      (_,result)=>{
+        
+           global.user.LimCal = result.rows._array[0].dcalc
+           global.user.LimCarbs = result.rows._array[0].dcc
+           global.user.Limfat = result.rows._array[0].dfc
+           global.user.LimPro = result.rows._array[0].dpc
+           
+           this.renderContactHeader()
+      },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+);
+ }
+
+
 
   static propTypes = {
     avatar: PropTypes.string,//.isRequired,
@@ -180,6 +209,11 @@ class userProfile extends Component {
   }
 
   _renderLabel = props => ({ route, index }) => {
+
+
+
+
+
     const inputRange = props.navigationState.routes.map((x, i) => i)
     const outputRange = inputRange.map(
       inputIndex => (inputIndex === index ? 'black' : 'gray')
@@ -211,21 +245,11 @@ class userProfile extends Component {
 
   renderContactHeader = () => {
     const { avatar, name, bio } = this.props
-    //DB calls here?
-    db.transaction(
-      tx => {
-        tx.executeSql(
-          'SELECT * FROM SESSION LIMIT 1;',[],
-          (t,result) => {
-            this.name = result.rows._array[0].user;
-            console.log(this.name)
-          }
-        );
-      }
-    );
+  
 
 
     return (
+      
       <View style={styles.headerContainer}>
         <View style={styles.userRow}>
           <Image
@@ -238,7 +262,12 @@ class userProfile extends Component {
             <Text style={styles.userNameText}> {global.user.name} </Text>
           </View>
           <View style={styles.userBioRow}>
-            <Text style={styles.userBioText}>{JSON.stringify(userProfile.test)}</Text>
+            
+            <Text style={styles.userBioText}>Daily Carbs Limit: {(global.user.LimCarbs)}</Text>
+            <Text style={styles.userBioText}>Daily Fats Limit: {(global.user.Limfat)}</Text>
+            <Text style={styles.userBioText}>Daily Protein Limit: {(global.user.LimPro)}</Text>
+            <Text style={styles.userBioText}>Daily Calories Limit: {(global.user.LimCal)}</Text>
+          
           </View>
         </View>
         <View style={styles.socialRow}>
