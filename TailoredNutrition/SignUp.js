@@ -98,6 +98,10 @@ export default class You extends Component<{}> {
 
 */
 
+      
+            
+
+
       //Handle storage here, no touchy please
       db.transaction(
         tx => {
@@ -115,57 +119,60 @@ export default class You extends Component<{}> {
             }
             else{
                 console.log("Inserting new user...")
+
+                //Session this new user...
+                  tx.executeSql('UPDATE PROFILES SET rememberme = 0 WHERE rememberme = 1 ;',
+                    [re.username],
+                    ()=>{
+                      console.log("We reset all remember me values!")
+                    },
+                    (Errorlog)=>{
+                      console.log("Unable to clear remember mes")
+                      console.log("Errorlog:",Errorlog)
+                    });
+
+
+
+               //Update globals here to act as a cache.
+               global.user.name = re.Name
+               global.user.user = re.username
+               global.user.age = re.age
+               global.user.sex = re.gender
+               global.user.weight = re.weight
+               global.user.height = re.Height
+               global.user.activity = re.ActivityLevel
+               
+               let dburn = dailyBurn(re.weight, re.weight, re.gender, re.age)
+               console.log( "DBurn:",dburn)
+               let aBurn = actualBurn(dburn,re.ActivityLevel)
+               console.log("aBurn:",aBurn)
+               let restrict = LargeCalorieRestrictive(aBurn)
+               console.log("restrict:",restrict)
+               //Store restrict
+               let ket = keto(aBurn)
+               console.log("Keto:",ket)
+               //Store keto stuff, ket.fats etc
+               global.user.Limfat = ket.fats
+               global.user.LimCarbs = ket.carbs
+               global.user.LimPro = ket.protein
+               global.user.LimCal = restrict
+               console.log("Global user struct:")
+               console.log(global.user)
+
+
                 //If we reach here we should insert a new entry
-                tx.executeSql('INSERT INTO PROFILES (username, password,name, sex, age,height,weight,tweight,activity) VALUES (?,?,?,?,?,?,?,?,?);',
-                [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.weight,re.DesiredWeight,re.ActivityLevel],
+                tx.executeSql('INSERT INTO PROFILES (username, password ,name , sex, age,height,weight,tweight,activity,lcarbs,lfats,lpro,lcal,logid,rememberme) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+                [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.weight,re.DesiredWeight,re.ActivityLevel,ket.carbs,ket.fats,ket.protein,restrict,null,1],
                 (tx,result) =>{
                   console.log("Successfull insert, debug info:\n ", result)
 
-                  //Session this new user...
-                  tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',
-                    [re.username],
-                    ()=>{
-                      console.log("Session set to username", re.username)
-                    },
-                    ()=>{
-                      console.log("Was not able to complete the session insert/replace")
-                    });
-
                   //this.props.navigation.navigate('userProfile')
-                    
-                  //Update globals here to act as a cache.
-                  global.user.name = re.Name
-                  global.user.user = re.username
-                  global.user.age = re.age
-                  global.user.sex = re.gender
-                  global.user.weight = re.weight
-                  global.user.height = re.Height
-                  global.user.activity = re.ActivityLevel
-                  
-                  let dburn = dailyBurn(re.weight, re.weight, re.gender, re.age)
-                  console.log( "DBurn:",dburn)
-                  let aBurn = actualBurn(dburn,re.ActivityLevel)
-                  console.log("aBurn:",aBurn)
-                  let restrict = LargeCalorieRestrictive(aBurn)
-                  console.log("restrict:",restrict)
-                  //Store restrict
-                  let ket = keto(aBurn)
-                  console.log("Keto:",ket.keto)
-                  //Store keto stuff, ket.fats etc
-                  global.user.Limfat = ket.fats
-                  global.user.LimCarbs = ket.carbs
-                  global.user.LimPro = ket.protein
-                  global.user.LimCal = restrict
-
-                  console.log(global.user)
-
-
-                  
-
+  
                   this.props.navigation.navigate('userProfile')
                 },
-                () => {
+                (e,ee) => {
                   console.log("Failed to execute Insert query for SignUp")
+                  console.log(ee)
                   alert("Was not able to create a new profile!")
                   return
                 }
