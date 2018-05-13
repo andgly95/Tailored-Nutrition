@@ -10,6 +10,8 @@ import {
     View,
     FlatList,
 } from 'react-native';
+import Log from './Log';
+
 
 
 
@@ -45,7 +47,7 @@ fetchData = async () => {
         tx => {
       tx.executeSql('SELECT * FROM LOGS WHERE username = ?;',[user],(_,{rows: {_array}})=>{
             
-            console.log(_array);
+            //console.log(_array);
             let logData = _array
            this.setState({log:logData});
 
@@ -60,20 +62,22 @@ fetchData = async () => {
 
     render(){
     //console.log('userLogs.render');
-        console.log("LOGS: ", this.state.log)
+       // console.log("LOGS: ", this.state.log)
 
 
         return(
             <View style = {styles.container}>
                 <Text style = {styles.header}> User Log: </Text>  
-                    <FlatList 
+                    <Log log={this.state.log}/>
+                    
+                    {/*<FlatList 
                         data={this.state.log}
                         keyExtractor= {(x, i) => i}
                         renderItem= {({ item }) =>
                             <Text>
                                 {item.brand_name} {item.food_name} {item.cal} 
                             </Text>}
-                    />
+                    />*/}
             </View>
         );
 
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
+        //alignItems: "center",
         backgroundColor: "white",
     },
 

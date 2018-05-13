@@ -247,7 +247,7 @@ class userProfile extends Component {
               size={30}
               type="entypo"
               color="#3B5A98"
-              name="tools"
+              name="cog"
               onPress={() => this.props.navigation.navigate('Settings')}
             />
           </View>
