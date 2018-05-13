@@ -108,12 +108,10 @@ const styles = StyleSheet.create({
 })
 
 
-//To get last row in a table?
-//SELECT * FROM tablename ORDER BY column DESC LIMIT 1; 
 
 class userProfile extends Component {
   
- componentWillMount() {
+  componentWillMount() {
    
   let today = new Date()
   let day = String(today).split(' ');
@@ -121,16 +119,19 @@ class userProfile extends Component {
   
   db.transaction(
     tx => {
-      tx.executeSql('SELECT * FROM LOGS WHERE date = ? AND username = ?  ORDER BY time DESC limit 1;',
+      tx.executeSql('SELECT * FROM LOGS WHERE date = ? AND username = ?  ORDER BY time DESC  limit 1;',
       [ddate,global.user.user],
       (_,result)=>{
-        
+        console.log(result.rows)
+        if(result.rows.length != 0){
+          console.log("Updated daily limits")
            global.user.LimCal = result.rows._array[0].dcalc
            global.user.LimCarbs = result.rows._array[0].dcc
            global.user.Limfat = result.rows._array[0].dfc
            global.user.LimPro = result.rows._array[0].dpc
            
            this.renderContactHeader()
+        }
       },
         (error) => {
           console.log(error)
