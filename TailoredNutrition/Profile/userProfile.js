@@ -114,16 +114,6 @@ const styles = StyleSheet.create({
 class userProfile extends Component {
 
 
-
-
-     static test = {
-     keto : keto(3500),
-      
-    
-     //dailyburn : actualBurn(2500,'H')
-    }
-
-
   static propTypes = {
     avatar: PropTypes.string,//.isRequired,
     name: PropTypes.string,//.isRequired,
@@ -193,7 +183,6 @@ class userProfile extends Component {
   _renderLabel = props => ({ route, index }) => {
 
 
-    console.log(userProfile.test.keto.fats)
 
 
 
@@ -229,17 +218,17 @@ class userProfile extends Component {
   renderContactHeader = () => {
     const { avatar, name, bio } = this.props
     //DB calls here?
-    db.transaction(
-      tx => {
-        tx.executeSql(
-          'SELECT * FROM SESSION LIMIT 1;',[],
-          (t,result) => {
-            this.name = result.rows._array[0].user;
-            console.log(this.name)
-          }
-        );
-      }
-    );
+    // db.transaction(
+    //   tx => {
+    //     tx.executeSql(
+    //       'SELECT * FROM SESSION LIMIT 1;',[],
+    //       (t,result) => {
+    //         this.name = result.rows._array[0].user;
+    //         console.log(this.name)
+    //       }
+    //     );
+    //   }
+    // );
 
 
     return (
@@ -256,14 +245,11 @@ class userProfile extends Component {
             <Text style={styles.userNameText}> {global.user.name} </Text>
           </View>
           <View style={styles.userBioRow}>
-            <Text style={styles.userBioText}>Carbs: {(userProfile.test.keto.carbs)}</Text>
             
-            <Text style={styles.userBioText}>Carbs: {(global.user.LimCarbs)}</Text>
-            <Text style={styles.userBioText}>Fats: {(userProfile.test.keto.fats)}</Text>
-            <Text style={styles.userBioText}>Fats: {(global.user.Limfat)}</Text>
-            <Text style={styles.userBioText}>Protein: {(userProfile.test.keto.protein)}</Text>
-            <Text style={styles.userBioText}>Pro: {(global.user.LimPro)}</Text>
-            <Text style={styles.userBioText}>Test: {(userProfile.what)}</Text>
+            <Text style={styles.userBioText}>Daily Carbs Limit: {(global.user.LimCarbs)}</Text>
+            <Text style={styles.userBioText}>Daily Fats Limit: {(global.user.Limfat)}</Text>
+            <Text style={styles.userBioText}>Daily Protein Limit: {(global.user.LimPro)}</Text>
+            <Text style={styles.userBioText}>Daily Calories Limit: {(global.user.LimCal)}</Text>
           
           </View>
         </View>

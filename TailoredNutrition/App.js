@@ -123,44 +123,28 @@ export default class App extends Component<{}> {
           //ACTIVITY LEVEL(ACTIVITY) AS INT
           //TARGET WEIGHT(TWEIGHT) AS INT
          
-          'CREATE TABLE IF NOT EXISTS PROFILES ( username text primary key not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer, lcarbs integer, lfats integer, lpro integer,lcal integer,logid integer primary key autoincrement,rememberme bool);'
+          'CREATE TABLE IF NOT EXISTS PROFILES ( username text not null UNIQUE, password text,name text, sex bool, age integer,height integer,weight integer,tweight integear,activity integer, lcarbs integer, lfats integer, lpro integer,lcal integer,rememberme integer);'
       );
-
+    
 
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS LOGS(username text not null,userid integer,date string, time string,food_name text,brand_name text,qty float, serving_unit text, cal float,fat float, carbs float, protein float,img text );'
+        'CREATE TABLE IF NOT EXISTS LOGS(username text not null,date string, time string,food_name text,brand_name text,qty float, serving_unit text, cal float,fat float, carbs float, protein float,img text , dcc integer,dfc integer, dpc integer, dcalc integer);'
       );
 
+
+
      
-       console.log('All tables within our database:')
-       tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
-         console.log(_array) 
-       );
-       console.log('\n')
+    //    console.log('All tables within our database:')
+    //    tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';",[],(_,{rows: {_array}})=>
+    //      console.log(_array) 
+    //    );
+    //    console.log('\n')
 
     
-    // console.log('Current Session values :')
-    // tx.executeSql('SELECT * FROM SESSION;',[],(_,result)=>{
-    //   console.log(result)
-    //    if(result.rows.length != 0){
-    //         if (result.rows._array[0].user != null){
-    //             console.log("Found a session...")
-    //             //Handle default screen here
-    //             //this.props.navigation.navigate('Search')
-    //         }
-    //         else{
-    //             console.log("Did not find a session...")
-    //         }
-    //     }
-    //     else{
-    //         console.log("No session has been logged!")
-    //     }
-    // }
-    // );
-
       console.log('Current values for our table:')
       tx.executeSql('SELECT * FROM PROFILES;',[],(_,{rows: {_array}})=>
         console.log(_array) 
+    
       );
 
 

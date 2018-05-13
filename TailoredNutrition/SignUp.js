@@ -101,7 +101,6 @@ export default class You extends Component<{}> {
       
             
 
-
       //Handle storage here, no touchy please
       db.transaction(
         tx => {
@@ -118,21 +117,7 @@ export default class You extends Component<{}> {
               alert(`Please try again with a different username!`);
             }
             else{
-                console.log("Inserting new user...")
-
-                //Session this new user...
-                  tx.executeSql('UPDATE PROFILES SET rememberme = 0 WHERE rememberme = 1 ;',
-                    [re.username],
-                    ()=>{
-                      console.log("We reset all remember me values!")
-                    },
-                    (Errorlog)=>{
-                      console.log("Unable to clear remember mes")
-                      console.log("Errorlog:",Errorlog)
-                    });
-
-
-
+              
                //Update globals here to act as a cache.
                global.user.name = re.Name
                global.user.user = re.username
@@ -160,11 +145,30 @@ export default class You extends Component<{}> {
                console.log(global.user)
 
 
+                console.log("Inserting new user...")
+
+                //Session this new user...
+                  tx.executeSql('UPDATE PROFILES SET rememberme = 0 WHERE rememberme = 1;',
+                    [],
+                    ()=>{
+                      console.log("We reset all rememberme values!")
+                    },
+                    (Errorlog)=>{
+                      console.log("Unable to clear remember mes")
+                      console.log("Errorlog:",Errorlog)
+                    });
+
+
+
+
+
                 //If we reach here we should insert a new entry
                 tx.executeSql('INSERT INTO PROFILES (username, password ,name , sex, age,height,weight,tweight,activity,lcarbs,lfats,lpro,lcal,rememberme) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,1);',
                 [re.username,re.password,re.Name,re.gender,re.age,re.Height,re.weight,re.DesiredWeight,re.ActivityLevel,ket.carbs,ket.fats,ket.protein,restrict],
                 (tx,result) =>{
                   console.log("Successfull insert, debug info:\n ", result)
+
+
 
                   //this.props.navigation.navigate('userProfile')
   
@@ -177,14 +181,21 @@ export default class You extends Component<{}> {
                   return
                 }
               );
+
+
             }
           },
-          () => {
+          (e) => {
             console.log("Failed to execute SignUp query.")
-            alert("Cannot contact database, pay us more money.")
+
+            console.log(e)
+            alert("Cannot contact database.")
             return
           }
           );
+
+
+
         }
       );
 

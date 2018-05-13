@@ -93,7 +93,7 @@ export default class SignIn extends Component<{}> {
               if(row["password"] == value.password)
               {   //If passwords match
                   //Just add username to session's table for now...
-
+                
                   //Update our global variables so we don't have to make another DB call which is slow
                   global.user.name = row.name
                   global.user.user = row.username
@@ -101,14 +101,33 @@ export default class SignIn extends Component<{}> {
                   global.user.sex = row.sex
                   global.user.height = row.height
                   global.user.activity = row.activity
+                  
+                  global.user.Limfat = row.lfats
+                  global.user.LimCarbs = row.lcarbs
+                  global.user.LimPro = row.lpro
+                  global.user.LimCal = row.lcal
 
+                  console.log("Updated global variables as follows:")
                   console.log(global.user)
 
 
 
                   console.log("Valid user!")
                   if(value.rememberme){
-                    tx.executeSql('INSERT OR REPLACE INTO SESSION(user) VALUES (?)  ;',
+
+                    //Clear other remember me
+                    tx.executeSql('UPDATE PROFILES SET rememberme = 0 WHERE rememberme = 1;',
+                   [],
+                    ()=>{
+                      console.log("We reset all rememberme values!")
+                    },
+                    (Errorlog)=>{
+                      console.log("Unable to clear remember mes")
+                      console.log("Errorlog:",Errorlog)
+                    });
+
+                    //Set the one we want
+                    tx.executeSql('UPDATE PROFILES SET rememberme = 1 WHERE username = (?)  ;',
                     [value.username],
                     ()=>{
                       console.log("Session set to username", value.username)
@@ -134,7 +153,7 @@ export default class SignIn extends Component<{}> {
           },
           () => {
             console.log("Failed to execute SignIn query.")
-            alert("Cannot contact database, pay us more money!")
+            alert("Cannot contact database")
             return
           }
         );
