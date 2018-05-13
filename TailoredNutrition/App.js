@@ -37,7 +37,7 @@ global.user = {
     Limfat: 0,
     LimCarbs: 0,
     LimPro:0,
-    LimCal:0,
+    LimCal:0
     
 }
 
@@ -131,6 +131,7 @@ export default class App extends Component<{}> {
         'CREATE TABLE IF NOT EXISTS LOGS(username text not null,date string, time string,food_name text,brand_name text,qty float, serving_unit text, cal float,fat float, carbs float, protein float,img text , dcc integer,dfc integer, dpc integer, dcalc integer);'
       );
 
+      
 
 
      

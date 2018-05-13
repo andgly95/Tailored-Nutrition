@@ -35,6 +35,10 @@ export default class Welcome extends Component<{}> {
     
  componentWillMount() {
 
+    let today = new Date()
+    let day = String(today).split(' ');
+    let ddate = day[0] +" "+ day[1]+ " " + day[2] + " " + day[3]
+    
     
 
     //See if we have a session to skip to userlogs
@@ -58,6 +62,10 @@ export default class Welcome extends Component<{}> {
                 global.user.LimCarbs = row.lcarbs
                 global.user.LimPro = row.lpro
                 global.user.LimCal = row.lcal
+                
+
+
+
 
 
 

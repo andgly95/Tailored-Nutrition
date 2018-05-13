@@ -112,6 +112,34 @@ const styles = StyleSheet.create({
 //SELECT * FROM tablename ORDER BY column DESC LIMIT 1; 
 
 class userProfile extends Component {
+  
+ componentWillMount() {
+   
+  let today = new Date()
+  let day = String(today).split(' ');
+  let ddate = day[0] +" "+ day[1]+ " " + day[2] + " " + day[3]
+  
+  db.transaction(
+    tx => {
+      tx.executeSql('SELECT * FROM LOGS WHERE date = ? AND username = ?  ORDER BY time DESC limit 1;',
+      [ddate,global.user.user],
+      (_,result)=>{
+        
+           global.user.LimCal = result.rows._array[0].dcalc
+           global.user.LimCarbs = result.rows._array[0].dcc
+           global.user.Limfat = result.rows._array[0].dfc
+           global.user.LimPro = result.rows._array[0].dpc
+           
+           this.renderContactHeader()
+      },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+);
+ }
+
 
 
   static propTypes = {
@@ -217,18 +245,7 @@ class userProfile extends Component {
 
   renderContactHeader = () => {
     const { avatar, name, bio } = this.props
-    //DB calls here?
-    // db.transaction(
-    //   tx => {
-    //     tx.executeSql(
-    //       'SELECT * FROM SESSION LIMIT 1;',[],
-    //       (t,result) => {
-    //         this.name = result.rows._array[0].user;
-    //         console.log(this.name)
-    //       }
-    //     );
-    //   }
-    // );
+  
 
 
     return (

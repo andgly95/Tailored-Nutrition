@@ -107,8 +107,12 @@ export default class SignIn extends Component<{}> {
                   global.user.LimPro = row.lpro
                   global.user.LimCal = row.lcal
 
+
+
+                
                   console.log("Updated global variables as follows:")
                   console.log(global.user)
+
 
 
 
@@ -136,7 +140,10 @@ export default class SignIn extends Component<{}> {
                       console.log("Was not able to complete the session insert/replace")
                     });
                   }
-                
+
+
+
+
                 
                 //this.props.navigation.navigate('userProfile')
                 this.props.navigation.navigate('userProfile')

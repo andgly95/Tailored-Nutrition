@@ -75,24 +75,37 @@ export default class SearchResults extends Component {
     let date = day[0] +" "+ day[1]+ " " + day[2] + " " + day[3]
 
     let name = String(global.user.user)
-    // db.transaction(
-    //   tx => {
-    //     tx.executeSql('INSERT INTO LOGS (username,date,time,food_name,brand_name,qty,serving_unit,cal,fat,carbs,protein,img) values (?,?,?,?,?,?,?,?,?,?,?,?);',
-    //     [name,date,day[4],this.state.result.food_name,this.state.result.brand_name,this.state.result.serving_qty,this.state.result.serving_unit,this.state.result.nf_calories,this.state.result.nf_total_fat,this.state.result.nf_total_carbohydrate,this.state.result.nf_protein,this.state.result.photo.thumb],
-    //     (tx,result) =>{
-    //       console.log("Successfull insert, debug info:\n ", result)
-    //       //Back up to userprofile
-    //       this.props.navigation.navigate('userProfile')
-    //     },(error) => {
-    //       console.log("Error while logging:",error)
-    //       console.log("Failed to log item!")
-    //       alert("Was not able to log item!")
-    //       return
-    //     }
-    //   );
+    db.transaction(
+      tx => {
+        //Update the newest limits for the day
+        global.user.Limfat = Math.round(global.user.Limfat - this.state.result.nf_total_fat)
+        global.user.LimCarbs = Math.round(global.user.LimCarbs - this.state.result.nf_total_carbohydrate)
+        global.user.LimPro = Math.round(global.user.LimPro - this.state.result.nf_protein)
+        global.user.LimCal = Math.round(global.user.LimCal - this.state.result.nf_calories)
+       
 
-    //   }
-    // );
+        tx.executeSql('INSERT INTO LOGS (username,date,time,food_name,brand_name,qty,serving_unit,cal,fat,carbs,protein,img,dcc, dfc ,dpc,dcalc) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+        [name,date,day[4],this.state.result.food_name,this.state.result.brand_name,this.state.result.serving_qty,this.state.result.serving_unit,this.state.result.nf_calories,this.state.result.nf_total_fat,this.state.result.nf_total_carbohydrate,this.state.result.nf_protein,this.state.result.photo.thumb,global.user.Limfat,global.user.LimCarbs,global.user.LimPro,global.user.LimCal],
+        (tx,result) =>{
+          console.log("Successfull insert, debug info:\n ", result)
+          //Back up to userprofile
+          this.props.navigation.navigate('userProfile')
+        },(error) => {
+          //Undo our calcuations
+          global.user.Limfat = Math.round(global.user.Limfat + this.state.result.nf_total_fat)
+          global.user.LimCarbs = Math.round(global.user.LimCarbs + this.state.result.nf_total_carbohydrate)
+          global.user.LimPro = Math.round(global.user.LimPro + this.state.result.nf_protein)
+          global.user.LimCal = Math.round(global.user.LimCal + this.state.result.nf_calories)
+         
+          console.log("Error while logging:",error)
+          console.log("Failed to log item!")
+          alert("Was not able to log item!")
+          return
+        }
+      );
+
+      }
+    );
   }
 
 }
