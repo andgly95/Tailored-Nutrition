@@ -30,6 +30,56 @@ const db = SQLite.openDatabase('db.db'); //Open db here
 
 // This page is for the initial welcome page for the app which appears upon start-up.
 export default class Welcome extends Component<{}> {
+
+
+    
+  componentWillMount() {
+
+    console.log("Welcome page")
+
+    //See if we have a session to skip to userlogs
+    db.transaction(
+        tx => {
+    tx.executeSql('SELECT * FROM PROFILES WHERE rememberme = 1 ;',[],(_,result)=>{
+      console.log(result)
+       if(result.rows.length != 0){
+                console.log("Found a session...Skipping to userlogs")
+                var row = result.rows._array[0]
+                
+                //Update values
+                global.user.name = row.name
+                global.user.user = row.username
+                global.user.age = row.age
+                global.user.sex = row.sex
+                global.user.height = row.height
+                global.user.activity = row.activity
+                
+                global.user.Limfat = row.lfats
+                global.user.LimCarbs = row.lcarbs
+                global.user.LimPro = row.lpro
+                global.user.LimCal = row.lcal
+                
+
+
+
+
+
+
+                this.props.navigation.navigate('userProfile')
+          
+        }
+        else{
+            console.log("No session has been logged!")
+        }
+    },(err) => {
+        console.log("Could not contact db!")
+        console.log(err)
+        alert("Unable to contact database on bootup!")
+    }
+        );
+    });
+  }
+
     constructor(props) {
         super(props);
         this.state = {

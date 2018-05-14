@@ -62,7 +62,11 @@ fetchData = async () => {
 
     render(){
     //console.log('userLogs.render');
+<<<<<<< HEAD
        // console.log("LOGS: ", this.state.log)
+=======
+        //console.log("LOGS: ", this.state.log)
+>>>>>>> master
 
 
         return(

@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { Text, TextInput, View, StyleSheet, Button, Alert } from 'react-native';
 import t from 'tcomb-form-native';
 
+import Expo, { SQLite } from 'expo';//Import SQLite
+
+const db = SQLite.openDatabase('db.db'); //Open db here
 const Form = t.form.Form;
 
 var Activity = t.enums({
@@ -40,8 +43,26 @@ export default class Settings extends Component {
 	};*/
 	
 		Presser = ( ) => {
-		Alert.alert(
-		'Settings saved!',);
+            
+         var update = this._form.getValue();
+         db.transaction(
+            tx => {
+                tx.executeSql(
+                    'UPDATE PROFILES SET age = ?,weight = ?,activity = ? WHERE username = ?;',
+                    [this.state.age,this.state.weight,update,global.user.user],(_,_array)=>{
+                        global.user.age = this.state.age
+                        global.user.weight = this.state.weight
+                        
+                    }
+                ) 
+            }
+        );
+
+
+
+
+        Alert.alert('Settings saved!',);
+        this.props.navigation.navigate('userProfile')
 	};
 	
 	 constructor(props) {
@@ -53,13 +74,13 @@ export default class Settings extends Component {
   render() {
     return (
 		<View style = {styles.container}>
-      <Text style = {styles.description}> Old Age </Text>
+      <Text style = {styles.description}>Current Age: {global.user.age}</Text>
 	  <TextInput 
 	  			value = {this.state.age}
 				onChangeText = {(age) => this.setState({age})}
 		/>
 		<Text> </Text>
-	  <Text style = {styles.description}> Old Weight </Text>
+	  <Text style = {styles.description}> Current Weight: {global.user.weight} </Text>
 	 	<TextInput 
 	  			value = {this.state.weight}
 				onChangeText = {(weight) => this.setState({weight})}

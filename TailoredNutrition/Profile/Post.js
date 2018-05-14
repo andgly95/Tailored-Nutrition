@@ -26,6 +26,8 @@ const SearchForm = t.struct ({
 });
 
 class ListItem extends Component {
+
+
     _onPress = () => {
       this.props.onPressItem(this.props.index);
     }
@@ -75,6 +77,8 @@ export default class Post extends Component {
     
     handleSearchSubmit = () => {
         const value = this._form.getValue(); // use that ref to get the form value
+        if(value == null)
+          return
         var self = this;
         let branded = value.Branded;
         this.setState({isBranded: branded});
