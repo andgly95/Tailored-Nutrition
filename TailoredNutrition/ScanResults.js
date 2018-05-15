@@ -9,7 +9,7 @@ import {
   FlatList,
   Text,
 } from 'react-native';
-
+import { Card } from 'react-native-elements'
 
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 
@@ -28,19 +28,22 @@ export default class ScanResults extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style = {styles.title}> {this.state.result.brand_name} {this.state.result.food_name}</Text>
+      <Card title = {this.state.result.brand_name+' '+this.state.result.food_name}
+            image = {{uri: this.state.result.photo.thumb}}
+            imageStyle = {{width: 250, height: 250},{alignItems: 'center'}}
+            containerStyle={{padding: 5},{flex:1}}>
+            <View style={styles.inner}>
+        {/*<Text style = {styles.title}> {this.state.result.brand_name} {this.state.result.food_name}</Text>
         <Image
           style={{width: 250, height: 250}}
           source={{uri: this.state.result.photo.thumb}}
-        />
+        />*/}
 
-        <Text>Calories: {this.state.result.nf_calories}</Text>
-        <View style = {styles.macrodetails}>
+        <Text style={{padding: 5}}>Calories: {this.state.result.nf_calories}</Text>
           <Text style={{padding: 5}}>Protein: {this.state.result.nf_protein}</Text>
-          <Text style={{padding: 5}}>Fat: {this.state.result.nf_total_fat}</Text>
+          <Text>Fat: {this.state.result.nf_total_fat}</Text>
           <Text style={{padding: 5}}>Carbohydrates: {this.state.result.nf_total_carbohydrate}</Text>
-        </View>
-        <Text>Serving Size: {this.state.result.serving_qty} {this.state.result.serving_unit}</Text>
+        <Text style={{padding: 5}}>Serving Size: {this.state.result.serving_qty} {this.state.result.serving_unit}</Text>
 
         
         <View style = {styles.macrodetails}>
@@ -65,6 +68,8 @@ export default class ScanResults extends Component {
 
         
         </View>
+        </View>
+        </Card>
       </View>
     );
   }
@@ -113,6 +118,10 @@ export default class ScanResults extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
+  },
+  inner: {
+    flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 25,
@@ -123,5 +132,6 @@ const styles = StyleSheet.create({
   macrodetails: {
    flexDirection: 'row',
    justifyContent: 'space-between',
+   padding: 10,
   },
 });
