@@ -118,7 +118,7 @@ export default class Post extends Component {
     };
     _keyExtractor = (item, index) => index;
     
-    _onPressItem = (index) => {
+    onPress = (index) => {
       console.log('INDEX: ', index)
       let entry = this.state.data[index];
       let key = entry.food_name;
@@ -175,20 +175,18 @@ export default class Post extends Component {
     _renderItem = ({item, index}) => {
       let self = this;
       const thumbnail = (item.photo.thumb != undefined) ? item.photo.thumb : 'https://d2xdmhkmkbyw75.cloudfront.net/6131_thumb.jpg';
+      const name = (item.brand_name != undefined) ? (item.brand_name+' '+item.food_name) : item.food_name;
       return (
-        <TouchableHighlight 
-          onPress={(index) => {this._onPressItem}}>
         <ListItem
           roundAvatar
-          title={item.food_name}
+          title={name}
           subtitle={item.serving_qty+' '+item.serving_unit}
           item={item}
           key={index}
-          onPress={() => {this._onPressItem.bind(this)}}
+          onPress={() => {this.onPress(index)}}
           avatar={{ uri: thumbnail }}
           isBranded={this.state.isBranded}
         />
-        </TouchableHighlight>
       );
     };
     

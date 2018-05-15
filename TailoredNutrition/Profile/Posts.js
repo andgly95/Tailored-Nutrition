@@ -70,7 +70,6 @@ _renderItem = ({item, index}) => {
         subtitle={'Calories: '+item.cal+'  Carbs: '+item.carbs+'  Protein: '+item.protein+'  Fat: '+item.fat}
         item={item}
         key={index}
-        onPress={() => {this._onPressItem.bind(this)}}
         //avatar={{ uri: thumbnail }}
         isBranded={this.state.isBranded}
       />
