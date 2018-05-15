@@ -9,22 +9,22 @@
 //export default class NutritionFunctions extends Component<{}> {
     export function dailyBurn(weight, Height, gender, age){ // calories burned by simply existing
         if (gender == 0){
-            return (66 + (6.2 * weight) + (12.7 * Height) - (6.76 * age));
+            return 66 + (6.23 * weight) + (12.7 * Height) - (6.8 * age);
         }
         else{
-            return (655.1 +(4.35 * weight) + (4.7 * Height) - (4.7 * age));
+            return 655 + (4.35 * weight) + (4.7 * Height) - (4.7 * age);
         }
     }
 
     export function actualBurn(dailyBurn, activity){ // calories actually burned according to activity level
         if (activity == 0){
-            return (dailyBurn * 1.2);
+            return (dailyBurn);
         }
         else if (activity == 1){
-            return (dailyBurn * 1.55);
+            return (dailyBurn * 1.1);
         }
         else if (activity == 2){
-            return (dailyBurn * 1.725);
+            return (dailyBurn * 1.15);
         }
     }
 
@@ -36,10 +36,10 @@
         macros.carbs = (actualBurn * .07) / 4;  // grams of carbs
         macros.fats = (actualBurn * .69) / 9;  // grams of fats
         macros.protein = (actualBurn * .24) / 4; // grams of protein
-        macros.carbs = Math.round(macros.carbs)
-        macros.fats = Math.round(macros.fats)
-        macros.protein = Math.round(macros.protein)
-        return macros
+        macros.carbs = Math.round(macros.carbs);
+        macros.fats = Math.round(macros.fats);
+        macros.protein = Math.round(macros.protein);
+        return macros;
     }
 
     export function atkins(actualBurn){
@@ -62,6 +62,6 @@
     }
 
     export function LargeCalorieRestrictive(actualBurn){ // large calorie deficit 
-        return Math.round(actualBurn - (actualBurn * .36));
+        return Math.round(actualBurn - (actualBurn * .50));
     }
 //};
