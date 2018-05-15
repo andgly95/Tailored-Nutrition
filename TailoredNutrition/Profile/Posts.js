@@ -19,7 +19,7 @@ import Expo, { SQLite } from 'expo';//Import SQLite
 
 const db = SQLite.openDatabase('db.db'); //Open db here
 
-export default class Posts extends Component<{}> {
+export default class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -62,11 +62,7 @@ fetchData = async () => {
 
     render(){
     //console.log('userLogs.render');
-<<<<<<< HEAD
-       // console.log("LOGS: ", this.state.log)
-=======
-        //console.log("LOGS: ", this.state.log)
->>>>>>> master
+    //console.log("LOGS: ", this.state.log)
 
 
         return(

@@ -18,10 +18,6 @@ const db = SQLite.openDatabase('db.db'); //Open db here
 
 export default class SearchResults extends Component {
 
-
-
-
-
   
   constructor(props) {
     super(props);
