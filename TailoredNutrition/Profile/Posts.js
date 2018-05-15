@@ -45,7 +45,7 @@ fetchData = async () => {
         tx => {
       tx.executeSql('SELECT * FROM LOGS WHERE username = ?;',[user],(_,{rows: {_array}})=>{
             
-            console.log(_array);
+            //console.log(_array);
             let logData = _array
            this.setState({log:logData});
 
@@ -60,7 +60,7 @@ fetchData = async () => {
 
     render(){
     //console.log('userLogs.render');
-        console.log("LOGS: ", this.state.log)
+        //console.log("LOGS: ", this.state.log)
 
 
         return(

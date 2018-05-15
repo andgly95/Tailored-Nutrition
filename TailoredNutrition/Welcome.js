@@ -33,13 +33,9 @@ export default class Welcome extends Component<{}> {
 
 
     
- componentWillMount() {
+  componentWillMount() {
 
-    let today = new Date()
-    let day = String(today).split(' ');
-    let ddate = day[0] +" "+ day[1]+ " " + day[2] + " " + day[3]
-    
-    
+    console.log("Welcome page")
 
     //See if we have a session to skip to userlogs
     db.transaction(
@@ -75,6 +71,10 @@ export default class Welcome extends Component<{}> {
         else{
             console.log("No session has been logged!")
         }
+    },(err) => {
+        console.log("Could not contact db!")
+        console.log(err)
+        alert("Unable to contact database on bootup!")
     }
         );
     });
