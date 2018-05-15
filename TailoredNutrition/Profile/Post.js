@@ -174,17 +174,17 @@ export default class Post extends Component {
   };
     _renderItem = ({item, index}) => {
       let self = this;
-      let buttonPress = this._onPressItem;
       const thumbnail = (item.photo.thumb != undefined) ? item.photo.thumb : 'https://d2xdmhkmkbyw75.cloudfront.net/6131_thumb.jpg';
       return (
-        <TouchableHighlight >
+        <TouchableHighlight 
+          onPress={(index) => {this._onPressItem}}>
         <ListItem
           roundAvatar
           title={item.food_name}
           subtitle={item.serving_qty+' '+item.serving_unit}
           item={item}
           key={index}
-          onPress={() => {buttonPress}}
+          onPress={() => {this._onPressItem.bind(this)}}
           avatar={{ uri: thumbnail }}
           isBranded={this.state.isBranded}
         />
