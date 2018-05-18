@@ -12,6 +12,7 @@ import {StyleSheet,
 			} from 'react-native';
 import BarCodeScan from '../BarCodeScan';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { List, ListItem } from 'react-native-elements';
 import t from 'tcomb-form-native';
 
 const detailsAPI = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
@@ -25,7 +26,7 @@ const SearchForm = t.struct ({
 	Branded: t.Boolean,
 });
 
-class ListItem extends Component {
+{/*class ListItem extends Component {
 
 
     _onPress = () => {
@@ -54,7 +55,7 @@ class ListItem extends Component {
       );
     }
   
-  }
+  }*/}
 
 
 export default class Post extends Component {
@@ -117,7 +118,8 @@ export default class Post extends Component {
     };
     _keyExtractor = (item, index) => index;
     
-    _onPressItem = (index) => {
+    onPress = (index) => {
+      console.log('INDEX: ', index)
       let entry = this.state.data[index];
       let key = entry.food_name;
       const url = detailsAPI;
@@ -171,11 +173,18 @@ export default class Post extends Component {
       return this.props.navigation.navigate('SearchResults',{item: this.state.item.foods[0]});
   };
     _renderItem = ({item, index}) => {
+      let self = this;
+      const thumbnail = (item.photo.thumb != undefined) ? item.photo.thumb : 'https://d2xdmhkmkbyw75.cloudfront.net/6131_thumb.jpg';
+      const name = (item.brand_name != undefined) ? (item.brand_name+' '+item.food_name) : item.food_name;
       return (
         <ListItem
+          roundAvatar
+          title={name}
+          subtitle={item.serving_qty+' '+item.serving_unit}
           item={item}
-          index={index}
-          onPressItem={this._onPressItem}
+          key={index}
+          onPress={() => {this.onPress(index)}}
+          avatar={{ uri: thumbnail }}
           isBranded={this.state.isBranded}
         />
       );
@@ -196,11 +205,14 @@ render() {
         onPress = {this.handleSearchSubmit.bind(this)}
         title = "Search Entries"
         />
-        <FlatList
-        data={this.state.data}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-        />
+        <List>
+          <FlatList
+          data={this.state.data}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+          
+          />
+        </List>
         </View>
         </KeyboardAvoidingView>
 
