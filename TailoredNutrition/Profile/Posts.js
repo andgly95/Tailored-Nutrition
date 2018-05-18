@@ -10,6 +10,9 @@ import {
     View,
     FlatList,
 } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
+import Log from './Log';
+
 
 
 
@@ -17,7 +20,7 @@ import Expo, { SQLite } from 'expo';//Import SQLite
 
 const db = SQLite.openDatabase('db.db'); //Open db here
 
-export default class Posts extends Component<{}> {
+export default class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,10 +60,24 @@ fetchData = async () => {
 
 };
 
-
+_renderItem = ({item, index}) => {
+    let self = this;
+    //const thumbnail = (item.photo.thumb != undefined) ? item.photo.thumb : 'https://d2xdmhkmkbyw75.cloudfront.net/6131_thumb.jpg';
+    return (
+      <ListItem
+        roundAvatar
+        title={item.brand_name+' '+item.food_name}
+        subtitle={'Calories: '+item.cal+'  Carbs: '+item.carbs+'  Protein: '+item.protein+'  Fat: '+item.fat}
+        item={item}
+        key={index}
+        //avatar={{ uri: thumbnail }}
+        isBranded={this.state.isBranded}
+      />
+    );
+  };
     render(){
     //console.log('userLogs.render');
-        //console.log("LOGS: ", this.state.log)
+    //console.log("LOGS: ", this.state.log)
 
 
         return(
@@ -69,10 +86,7 @@ fetchData = async () => {
                     <FlatList 
                         data={this.state.log}
                         keyExtractor= {(x, i) => i}
-                        renderItem= {({ item }) =>
-                            <Text>
-                                {item.brand_name} {item.food_name} {item.cal} 
-                            </Text>}
+                        renderItem={this._renderItem}
                     />
             </View>
         );
@@ -86,7 +100,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
+        //alignItems: "center",
         backgroundColor: "white",
     },
 

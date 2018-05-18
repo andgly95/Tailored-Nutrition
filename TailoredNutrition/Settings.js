@@ -67,8 +67,8 @@ export default class Settings extends Component {
 	
 	 constructor(props) {
     super(props);
-    this.state = { age: 'Fill Me!',
-							weight:'Fill Me!'};
+    this.state = { age: 'New Age',
+							weight:'New Weight'};
   }
 	
   render() {

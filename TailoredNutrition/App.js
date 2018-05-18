@@ -88,7 +88,7 @@ var RootStack = StackNavigator(
      },
      );
 
-export default class App extends Component<{}> {
+export default class App extends Component {
 
     //Do creation of tables upon start up of app
     componentDidMount() {
